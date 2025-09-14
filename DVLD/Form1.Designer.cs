@@ -57,7 +57,7 @@
             this.applicationToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.applicationToolStripMenuItem.Image = global::DVLD.Properties.Resources.Applications;
             this.applicationToolStripMenuItem.Name = "applicationToolStripMenuItem";
-            this.applicationToolStripMenuItem.Size = new System.Drawing.Size(242, 64);
+            this.applicationToolStripMenuItem.Size = new System.Drawing.Size(230, 52);
             this.applicationToolStripMenuItem.Text = "Applications";
             this.applicationToolStripMenuItem.Click += new System.EventHandler(this.applicationToolStripMenuItem_Click);
             // 
@@ -66,15 +66,16 @@
             this.peopleToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.peopleToolStripMenuItem.Image = global::DVLD.Properties.Resources.people;
             this.peopleToolStripMenuItem.Name = "peopleToolStripMenuItem";
-            this.peopleToolStripMenuItem.Size = new System.Drawing.Size(157, 64);
+            this.peopleToolStripMenuItem.Size = new System.Drawing.Size(145, 52);
             this.peopleToolStripMenuItem.Text = "People";
+            this.peopleToolStripMenuItem.Click += new System.EventHandler(this.peopleToolStripMenuItem_Click);
             // 
             // driversToolStripMenuItem
             // 
             this.driversToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.driversToolStripMenuItem.Image = global::DVLD.Properties.Resources.driversWhite;
             this.driversToolStripMenuItem.Name = "driversToolStripMenuItem";
-            this.driversToolStripMenuItem.Size = new System.Drawing.Size(159, 64);
+            this.driversToolStripMenuItem.Size = new System.Drawing.Size(147, 52);
             this.driversToolStripMenuItem.Text = "Drivers";
             // 
             // uToolStripMenuItem
@@ -82,7 +83,7 @@
             this.uToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.uToolStripMenuItem.Image = global::DVLD.Properties.Resources.users;
             this.uToolStripMenuItem.Name = "uToolStripMenuItem";
-            this.uToolStripMenuItem.Size = new System.Drawing.Size(144, 64);
+            this.uToolStripMenuItem.Size = new System.Drawing.Size(132, 52);
             this.uToolStripMenuItem.Text = "Users";
             // 
             // accountSettingsToolStripMenuItem
@@ -90,13 +91,14 @@
             this.accountSettingsToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.accountSettingsToolStripMenuItem.Image = global::DVLD.Properties.Resources.Settings;
             this.accountSettingsToolStripMenuItem.Name = "accountSettingsToolStripMenuItem";
-            this.accountSettingsToolStripMenuItem.Size = new System.Drawing.Size(261, 64);
+            this.accountSettingsToolStripMenuItem.Size = new System.Drawing.Size(249, 52);
             this.accountSettingsToolStripMenuItem.Text = "Account Settings";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.ClientSize = new System.Drawing.Size(1426, 675);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;

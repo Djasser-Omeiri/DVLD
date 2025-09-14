@@ -22,5 +22,15 @@ namespace DVLD.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=.;Initial Catalog=DVLD;Integrated Security=True;Encrypt=False")]
+        public string DVLDConnectionString {
+            get {
+                return ((string)(this["DVLDConnectionString"]));
+            }
+        }
     }
 }

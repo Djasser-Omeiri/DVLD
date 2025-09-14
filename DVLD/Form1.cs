@@ -21,5 +21,10 @@ namespace DVLD
         {
 
         }
+
+        private void peopleToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new frmManagePeople().ShowDialog();
+        }
     }
 }
