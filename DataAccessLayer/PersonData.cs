@@ -228,7 +228,7 @@ namespace DataAccessLayer
 
                 reader.Close();
             }
-            catch (Exception ex) { Console.WriteLine("getallcustom" + ex.Message); }
+            catch (Exception ex) { Console.WriteLine(ex.Message); }
             finally { connection.Close(); }
             return table;
         }

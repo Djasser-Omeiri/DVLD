@@ -14,5 +14,9 @@ namespace BusinessAccessLayer
         {
             return CountryData.GetAllCountries();
         }
+        public static string GetCountryName(int CountryID)
+        {
+            return CountryData.GetNationalityByNationID(CountryID);
+        }
     }
 }

@@ -13,9 +13,11 @@ namespace DVLD
 {
     public partial class frmManagePeople : Form
     {
+        
         public frmManagePeople()
         {
             InitializeComponent();
+            
         }
 
         private void btnAddPerson_Click(object sender, EventArgs e)
@@ -120,7 +122,7 @@ namespace DVLD
 
         private void MenuShowDetails_Click(object sender, EventArgs e)
         {
-            new frmPersonDetails(clsPerson.FindPersonByID(Convert.ToInt32(dgvPeople.CurrentRow.Cells["PersonID"].Value)), Convert.ToString(dgvPeople.CurrentRow.Cells["Nationality"].Value)).ShowDialog();
+            new frmPersonDetails(clsPerson.FindPersonByID(Convert.ToInt32(dgvPeople.CurrentRow.Cells["PersonID"].Value))).ShowDialog();
         }
     }
 }

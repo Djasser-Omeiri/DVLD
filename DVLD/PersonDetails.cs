@@ -18,7 +18,7 @@ namespace DVLD
             InitializeComponent();
         }
 
-        public void LoadPerson(clsPerson person,string Nationality)
+        public void LoadPerson(clsPerson person)
         {
             if (person == null) return;
             lblinputPersonID.Text = person.PersonID.ToString();
@@ -29,7 +29,7 @@ namespace DVLD
             lblinputAddress.Text = person.Address;
             lblinputEmail.Text = person.Email;
             lblinputPhone.Text = person.Phone;
-            lblinputCountry.Text = Nationality;
+            lblinputCountry.Text = clsCountry.GetCountryName(person.NationalityCountryID);
             PicturePerson.Image = (string.IsNullOrEmpty(person.ImagePath) || !System.IO.File.Exists(person.ImagePath)) ? (person.Gendor) ? Properties.Resources.Male_512 : Properties.Resources.Female_512 : Image.FromFile(person.ImagePath);
         }
 
@@ -37,5 +37,7 @@ namespace DVLD
         {
             new frmPersonInfo(int.Parse(lblinputPersonID.Text)).ShowDialog();
         }
+
+        
     }
 }

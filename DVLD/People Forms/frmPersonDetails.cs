@@ -13,10 +13,11 @@ namespace DVLD
 {
     public partial class frmPersonDetails : Form
     {
-        public frmPersonDetails(clsPerson person,string Nationality)
+        private clsPerson _Person;
+        public frmPersonDetails(clsPerson person)
         {
             InitializeComponent();
-            ucPersonDetails.LoadPerson(person,Nationality);
+            _Person = person;
         }
 
         private void btnClose_Click(object sender, EventArgs e)
@@ -26,7 +27,7 @@ namespace DVLD
 
         private void frmPersonDetails_Load(object sender, EventArgs e)
         {
-
+            ucPersonDetails.LoadPerson(_Person);
         }
     }
 }

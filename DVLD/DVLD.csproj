@@ -47,29 +47,47 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
+    <Compile Include="frmMain.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="frmMain.Designer.cs">
+      <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmManagePeople.cs">
+    <Compile Include="frmLoginScreen.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmManagePeople.Designer.cs">
+    <Compile Include="frmLoginScreen.Designer.cs">
+      <DependentUpon>frmLoginScreen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="People Forms\frmManagePeople.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="People Forms\frmManagePeople.Designer.cs">
       <DependentUpon>frmManagePeople.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmPersonInfo.cs">
+    <Compile Include="Users Forms\frmManageUser.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmPersonInfo.Designer.cs">
+    <Compile Include="Users Forms\frmManageUser.Designer.cs">
+      <DependentUpon>frmManageUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="People Forms\frmPersonInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="People Forms\frmPersonInfo.Designer.cs">
       <DependentUpon>frmPersonInfo.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmPesonDetails.cs">
+    <Compile Include="People Forms\frmPersonDetails.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmPesonDetails.Designer.cs">
-      <DependentUpon>frmPesonDetails.cs</DependentUpon>
+    <Compile Include="People Forms\frmPersonDetails.Designer.cs">
+      <DependentUpon>frmPersonDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Users Forms\frmUserInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Users Forms\frmUserInfo.Designer.cs">
+      <DependentUpon>frmUserInfo.cs</DependentUpon>
     </Compile>
     <Compile Include="PersonDetails.cs">
       <SubType>UserControl</SubType>
@@ -79,17 +97,23 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="frmMain.resx">
+      <DependentUpon>frmMain.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmManagePeople.resx">
+    <EmbeddedResource Include="frmLoginScreen.resx">
+      <DependentUpon>frmLoginScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="People Forms\frmManagePeople.resx">
       <DependentUpon>frmManagePeople.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmPersonInfo.resx">
+    <EmbeddedResource Include="Users Forms\frmManageUser.resx">
+      <DependentUpon>frmManageUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="People Forms\frmPersonInfo.resx">
       <DependentUpon>frmPersonInfo.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmPesonDetails.resx">
-      <DependentUpon>frmPesonDetails.cs</DependentUpon>
+    <EmbeddedResource Include="People Forms\frmPersonDetails.resx">
+      <DependentUpon>frmPersonDetails.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PersonDetails.resx">
       <DependentUpon>PersonDetails.cs</DependentUpon>
@@ -104,6 +128,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Users Forms\frmUserInfo.resx">
+      <DependentUpon>frmUserInfo.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -215,6 +242,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Close 64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Écran de connexion - Application Permis de Conduire.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sign Out 32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Password 32.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

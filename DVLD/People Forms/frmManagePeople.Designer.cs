@@ -32,19 +32,19 @@
             this.label1 = new System.Windows.Forms.Label();
             this.dgvPeople = new System.Windows.Forms.DataGridView();
             this.MenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.MenuShowDetails = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.MenuAddNewPerson = new System.Windows.Forms.ToolStripMenuItem();
-            this.MenuEdit = new System.Windows.Forms.ToolStripMenuItem();
-            this.MenuDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.MenuSendEmail = new System.Windows.Forms.ToolStripMenuItem();
-            this.MenuPhoneCall = new System.Windows.Forms.ToolStripMenuItem();
             this.lblRecord = new System.Windows.Forms.Label();
             this.lblCount = new System.Windows.Forms.Label();
             this.lblFilter = new System.Windows.Forms.Label();
             this.cbFilters = new System.Windows.Forms.ComboBox();
             this.tbFilter = new System.Windows.Forms.TextBox();
+            this.MenuShowDetails = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuAddNewPerson = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuEdit = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuDelete = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuSendEmail = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuPhoneCall = new System.Windows.Forms.ToolStripMenuItem();
             this.btnAddPerson = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPeople)).BeginInit();
@@ -91,64 +91,15 @@
             this.MenuStrip.Name = "contextMenuStrip1";
             this.MenuStrip.Size = new System.Drawing.Size(192, 184);
             // 
-            // MenuShowDetails
-            // 
-            this.MenuShowDetails.Image = global::DVLD.Properties.Resources.profil_de_lutilisateur;
-            this.MenuShowDetails.Name = "MenuShowDetails";
-            this.MenuShowDetails.Size = new System.Drawing.Size(191, 28);
-            this.MenuShowDetails.Text = "Show Details";
-            this.MenuShowDetails.Click += new System.EventHandler(this.MenuShowDetails_Click);
-            // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(188, 6);
             // 
-            // MenuAddNewPerson
-            // 
-            this.MenuAddNewPerson.Image = global::DVLD.Properties.Resources.Add_Person_40;
-            this.MenuAddNewPerson.Name = "MenuAddNewPerson";
-            this.MenuAddNewPerson.Size = new System.Drawing.Size(191, 28);
-            this.MenuAddNewPerson.Text = "Add New Person";
-            this.MenuAddNewPerson.Click += new System.EventHandler(this.MenuAddNewPerson_Click);
-            // 
-            // MenuEdit
-            // 
-            this.MenuEdit.Image = global::DVLD.Properties.Resources.edit_32;
-            this.MenuEdit.Name = "MenuEdit";
-            this.MenuEdit.Size = new System.Drawing.Size(191, 28);
-            this.MenuEdit.Text = "Edit";
-            this.MenuEdit.Click += new System.EventHandler(this.MenuEdit_Click);
-            // 
-            // MenuDelete
-            // 
-            this.MenuDelete.Image = global::DVLD.Properties.Resources.Delete_32;
-            this.MenuDelete.Name = "MenuDelete";
-            this.MenuDelete.Size = new System.Drawing.Size(191, 28);
-            this.MenuDelete.Text = "Delete";
-            this.MenuDelete.Click += new System.EventHandler(this.MenuDelete_Click);
-            // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(188, 6);
-            // 
-            // MenuSendEmail
-            // 
-            this.MenuSendEmail.Image = global::DVLD.Properties.Resources.send_email_32;
-            this.MenuSendEmail.Name = "MenuSendEmail";
-            this.MenuSendEmail.Size = new System.Drawing.Size(191, 28);
-            this.MenuSendEmail.Text = "Send Email";
-            this.MenuSendEmail.Click += new System.EventHandler(this.MenuSendEmail_Click);
-            // 
-            // MenuPhoneCall
-            // 
-            this.MenuPhoneCall.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.MenuPhoneCall.Image = global::DVLD.Properties.Resources.call_32;
-            this.MenuPhoneCall.Name = "MenuPhoneCall";
-            this.MenuPhoneCall.Size = new System.Drawing.Size(191, 28);
-            this.MenuPhoneCall.Text = "Phone Call";
-            this.MenuPhoneCall.Click += new System.EventHandler(this.MenuPhoneCall_Click);
             // 
             // lblRecord
             // 
@@ -213,6 +164,55 @@
             this.tbFilter.Visible = false;
             this.tbFilter.TextChanged += new System.EventHandler(this.tbFilter_TextChanged);
             // 
+            // MenuShowDetails
+            // 
+            this.MenuShowDetails.Image = global::DVLD.Properties.Resources.profil_de_lutilisateur;
+            this.MenuShowDetails.Name = "MenuShowDetails";
+            this.MenuShowDetails.Size = new System.Drawing.Size(191, 28);
+            this.MenuShowDetails.Text = "Show Details";
+            this.MenuShowDetails.Click += new System.EventHandler(this.MenuShowDetails_Click);
+            // 
+            // MenuAddNewPerson
+            // 
+            this.MenuAddNewPerson.Image = global::DVLD.Properties.Resources.Add_Person_40;
+            this.MenuAddNewPerson.Name = "MenuAddNewPerson";
+            this.MenuAddNewPerson.Size = new System.Drawing.Size(191, 28);
+            this.MenuAddNewPerson.Text = "Add New Person";
+            this.MenuAddNewPerson.Click += new System.EventHandler(this.MenuAddNewPerson_Click);
+            // 
+            // MenuEdit
+            // 
+            this.MenuEdit.Image = global::DVLD.Properties.Resources.edit_32;
+            this.MenuEdit.Name = "MenuEdit";
+            this.MenuEdit.Size = new System.Drawing.Size(191, 28);
+            this.MenuEdit.Text = "Edit";
+            this.MenuEdit.Click += new System.EventHandler(this.MenuEdit_Click);
+            // 
+            // MenuDelete
+            // 
+            this.MenuDelete.Image = global::DVLD.Properties.Resources.Delete_32;
+            this.MenuDelete.Name = "MenuDelete";
+            this.MenuDelete.Size = new System.Drawing.Size(191, 28);
+            this.MenuDelete.Text = "Delete";
+            this.MenuDelete.Click += new System.EventHandler(this.MenuDelete_Click);
+            // 
+            // MenuSendEmail
+            // 
+            this.MenuSendEmail.Image = global::DVLD.Properties.Resources.send_email_32;
+            this.MenuSendEmail.Name = "MenuSendEmail";
+            this.MenuSendEmail.Size = new System.Drawing.Size(191, 28);
+            this.MenuSendEmail.Text = "Send Email";
+            this.MenuSendEmail.Click += new System.EventHandler(this.MenuSendEmail_Click);
+            // 
+            // MenuPhoneCall
+            // 
+            this.MenuPhoneCall.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MenuPhoneCall.Image = global::DVLD.Properties.Resources.call_32;
+            this.MenuPhoneCall.Name = "MenuPhoneCall";
+            this.MenuPhoneCall.Size = new System.Drawing.Size(191, 28);
+            this.MenuPhoneCall.Text = "Phone Call";
+            this.MenuPhoneCall.Click += new System.EventHandler(this.MenuPhoneCall_Click);
+            // 
             // btnAddPerson
             // 
             this.btnAddPerson.Image = global::DVLD.Properties.Resources.Add_Person_40;
@@ -249,7 +249,7 @@
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label1);
             this.Name = "frmManagePeople";
-            this.Text = "frmManagePeople";
+            this.Text = "Manage People";
             this.Load += new System.EventHandler(this.frmManagePeople_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvPeople)).EndInit();
             this.MenuStrip.ResumeLayout(false);
