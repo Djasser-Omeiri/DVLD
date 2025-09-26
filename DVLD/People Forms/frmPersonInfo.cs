@@ -123,7 +123,7 @@ namespace DVLD
             else errorProvider1.SetError(tbFirstName, "");
         }
 
-        private void tbPhone_Validated(object sender, EventArgs e)
+        private void tbPhone_Validating(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(tbPhone.Text))
                 errorProvider1.SetError(tbPhone, "This Field is required");

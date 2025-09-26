@@ -37,6 +37,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btnAddPerson = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.cbIsActive = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPeople)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -52,6 +53,7 @@
             // 
             // cbFilters
             // 
+            this.cbFilters.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbFilters.FormattingEnabled = true;
             this.cbFilters.Items.AddRange(new object[] {
             "None",
@@ -130,6 +132,7 @@
             this.btnAddPerson.Size = new System.Drawing.Size(147, 74);
             this.btnAddPerson.TabIndex = 11;
             this.btnAddPerson.UseVisualStyleBackColor = true;
+            this.btnAddPerson.Click += new System.EventHandler(this.btnAddPerson_Click);
             // 
             // pictureBox1
             // 
@@ -142,11 +145,27 @@
             this.pictureBox1.TabIndex = 10;
             this.pictureBox1.TabStop = false;
             // 
+            // cbIsActive
+            // 
+            this.cbIsActive.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbIsActive.FormattingEnabled = true;
+            this.cbIsActive.Items.AddRange(new object[] {
+            "All",
+            "Yes",
+            "No"});
+            this.cbIsActive.Location = new System.Drawing.Point(287, 286);
+            this.cbIsActive.Name = "cbIsActive";
+            this.cbIsActive.Size = new System.Drawing.Size(120, 24);
+            this.cbIsActive.TabIndex = 18;
+            this.cbIsActive.Visible = false;
+            this.cbIsActive.SelectedIndexChanged += new System.EventHandler(this.cbIsActive_SelectedIndexChanged);
+            // 
             // frmManageUser
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1307, 734);
+            this.Controls.Add(this.cbIsActive);
             this.Controls.Add(this.tbFilter);
             this.Controls.Add(this.cbFilters);
             this.Controls.Add(this.lblFilter);
@@ -177,5 +196,6 @@
         private System.Windows.Forms.Button btnAddPerson;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox cbIsActive;
     }
 }

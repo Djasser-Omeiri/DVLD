@@ -1,4 +1,5 @@
 ﻿using BusinessAccessLayer;
+using DVLD.Users_Forms;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -31,10 +32,22 @@ namespace DVLD
 
         private void cbFilters_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cbFilters.SelectedIndex != 0)
-                tbFilter.Visible = true;
-            else
+            if (cbFilters.SelectedIndex == 0)
+            {
                 tbFilter.Visible = false;
+                cbIsActive.Visible = false;
+            }
+            else if (cbFilters.Text == "IsActive")
+            {
+                tbFilter.Visible = false;
+                cbIsActive.Visible = true;
+                cbIsActive.SelectedIndex = 0;
+            }
+            else
+            {
+                tbFilter.Visible = true;
+                cbIsActive.Visible = false;
+            }
         }
         private string GetColumnName(string selected)
         {
@@ -52,7 +65,7 @@ namespace DVLD
 
         private void tbFilter_TextChanged(object sender, EventArgs e)
         {
-            string column =GetColumnName(cbFilters.SelectedItem?.ToString());
+            string column = GetColumnName(cbFilters.SelectedItem?.ToString());
             string value = tbFilter.Text.Trim();
 
             if (column == "None")
@@ -61,9 +74,35 @@ namespace DVLD
             }
             else
             {
-                dgvPeople.DataSource = clsUser.GetAllUsers(column,value);
+                dgvPeople.DataSource = clsUser.GetAllUsers(column, value);
             }
             lblCount.Text = (dgvPeople.Rows.Count).ToString();
+        }
+
+        private void cbIsActive_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+            string column = GetColumnName("IsActive");
+            string value = (cbIsActive.Text == "Yes") ? "1" : "0";
+            switch (cbIsActive.Text)
+            {
+                case "All":
+                    dgvPeople.DataSource = clsUser.GetAllUsers();
+                    break;
+                case "Yes":
+                    dgvPeople.DataSource = clsUser.GetAllUsers(column, value);
+                    break;
+                case "No":
+                    dgvPeople.DataSource = clsUser.GetAllUsers(column, value);
+                    break;
+            }
+            lblCount.Text = (dgvPeople.Rows.Count).ToString();
+        }
+
+        private void btnAddPerson_Click(object sender, EventArgs e)
+        {
+            new frmUserInfo().ShowDialog();
+            _refreshUsersList();
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace DVLD
 {
-    partial class frmUserInfo
+    partial class frmUserDetails
     {
         /// <summary>
         /// Required designer variable.
@@ -33,9 +33,9 @@
             this.lblIsActive = new System.Windows.Forms.Label();
             this.lblUserName = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.lblInputUserName = new System.Windows.Forms.Label();
-            this.lblInputIsActive = new System.Windows.Forms.Label();
             this.lblInputUserID = new System.Windows.Forms.Label();
+            this.lblInputIsActive = new System.Windows.Forms.Label();
+            this.lblInputUserName = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -55,7 +55,6 @@
             this.lblUserID.Size = new System.Drawing.Size(80, 20);
             this.lblUserID.TabIndex = 1;
             this.lblUserID.Text = "UserID :";
-            this.lblUserID.Click += new System.EventHandler(this.lblUserID_Click);
             // 
             // lblIsActive
             // 
@@ -93,15 +92,15 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Login Information";
             // 
-            // lblInputUserName
+            // lblInputUserID
             // 
-            this.lblInputUserName.AutoSize = true;
-            this.lblInputUserName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblInputUserName.Location = new System.Drawing.Point(477, 48);
-            this.lblInputUserName.Name = "lblInputUserName";
-            this.lblInputUserName.Size = new System.Drawing.Size(69, 20);
-            this.lblInputUserName.TabIndex = 4;
-            this.lblInputUserName.Text = "??????";
+            this.lblInputUserID.AutoSize = true;
+            this.lblInputUserID.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblInputUserID.Location = new System.Drawing.Point(232, 48);
+            this.lblInputUserID.Name = "lblInputUserID";
+            this.lblInputUserID.Size = new System.Drawing.Size(49, 20);
+            this.lblInputUserID.TabIndex = 6;
+            this.lblInputUserID.Text = "????";
             // 
             // lblInputIsActive
             // 
@@ -113,25 +112,25 @@
             this.lblInputIsActive.TabIndex = 5;
             this.lblInputIsActive.Text = "???";
             // 
-            // lblInputUserID
+            // lblInputUserName
             // 
-            this.lblInputUserID.AutoSize = true;
-            this.lblInputUserID.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblInputUserID.Location = new System.Drawing.Point(232, 48);
-            this.lblInputUserID.Name = "lblInputUserID";
-            this.lblInputUserID.Size = new System.Drawing.Size(49, 20);
-            this.lblInputUserID.TabIndex = 6;
-            this.lblInputUserID.Text = "????";
+            this.lblInputUserName.AutoSize = true;
+            this.lblInputUserName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblInputUserName.Location = new System.Drawing.Point(477, 48);
+            this.lblInputUserName.Name = "lblInputUserName";
+            this.lblInputUserName.Size = new System.Drawing.Size(69, 20);
+            this.lblInputUserName.TabIndex = 4;
+            this.lblInputUserName.Text = "??????";
             // 
-            // frmUserInfo
+            // frmUserDetails
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(974, 461);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.ucPersonDetails);
-            this.Name = "frmUserInfo";
-            this.Text = "frmUserInfo";
+            this.Name = "frmUserDetails";
+            this.Text = "User Details";
             this.Load += new System.EventHandler(this.frmUserInfo_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

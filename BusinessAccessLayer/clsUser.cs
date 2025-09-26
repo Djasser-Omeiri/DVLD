@@ -11,7 +11,7 @@ namespace BusinessAccessLayer
     public class clsUser
     {
         public enum enMode { AddNew = 0, Update = 1 };
-        enMode Mode = enMode.AddNew;
+        enMode Mode ;
         public int UserID { get; set; }
         public int PersonID { get; set; }
         public string UserName { get; set; }
@@ -39,8 +39,8 @@ namespace BusinessAccessLayer
         }
         private  bool _AddUser()
         {
-            int UserID = UserData.AddUser(this.PersonID, this.UserName, this.Password, this.IsActive);
-            return UserID != -1;
+            this.UserID = UserData.AddUser(this.PersonID, this.UserName, this.Password, this.IsActive);
+            return this.UserID != -1;
         }
         private bool _UpdateUser()
         {
@@ -119,5 +119,9 @@ namespace BusinessAccessLayer
             return UserData.IsUserExistsWithUsername(Username);
         }
 
+        public static bool IsPersonLinkedWithUser(int PersonID)
+        {
+            return UserData.IsPersonLinkedWithUser(PersonID);
+        }
     }
 }

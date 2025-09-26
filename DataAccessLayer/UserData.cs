@@ -14,7 +14,7 @@ namespace DataAccessLayer
         {
             int UserID = -1;
             SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
-            string query = $"INSERT INTO Persons (NationalNo, FirstName, SecondName, ThirdName, LastName, DateOfBirth, Gendor, Address, Phone, Email, NationalityCountryID, ImagePath, UserName, Password, IsActive) VALUES (@NationalNo, @FirstName, @SecondName, @ThirdName, @LastName, @DateOfBirth, @Gendor, @Address, @Phone, @Email, @NationalityCountryID, @ImagePath, @UserName, @Password, @IsActive) SELECT SCOPE_IDENTITY()";
+            string query = $"INSERT INTO Users (UserName, Password, IsActive,PersonID) VALUES (@UserName, @Password, @IsActive,@PersonID) SELECT SCOPE_IDENTITY()";
             SqlCommand command = new SqlCommand(query, connection);
             command.Parameters.AddWithValue("@PersonID", PersonID);
             command.Parameters.AddWithValue("@UserName", UserName);
@@ -30,7 +30,7 @@ namespace DataAccessLayer
                     UserID = interedId;
                 }
             }
-            catch (Exception ex) { Console.WriteLine("add" + ex.Message); }
+            catch (Exception ex) { Console.WriteLine(ex.Message); }
             finally
             {
                 connection.Close();
@@ -100,7 +100,7 @@ namespace DataAccessLayer
             finally { connection.Close(); }
             return rowsaffected > 0;
         }
-        public static DataTable GetAllUsers(string columnName=null,string value=null)
+        public static DataTable GetAllUsers(string columnName = null, string value = null)
         {
             DataTable table = new DataTable();
             SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
@@ -125,28 +125,6 @@ namespace DataAccessLayer
             catch (Exception ex) { Console.WriteLine(ex.Message); }
             finally { connection.Close(); }
             return table;
-        }
-        
-        public static bool IsUserExistsWithUsername(string UserName)
-        {
-            bool isFound = false;
-            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
-            string query = "SELECT 1 FROM Users WHERE UserName=@UserName";
-            SqlCommand command = new SqlCommand(query, connection);
-            command.Parameters.AddWithValue("@UserName", UserName);
-            try
-            {
-                connection.Open();
-                SqlDataReader reader = command.ExecuteReader();
-                if (reader.HasRows)
-                {
-                    isFound = true;
-                }
-                reader.Close();
-            }
-            catch (Exception ex) { Console.WriteLine(ex.Message); }
-            finally { connection.Close(); }
-            return isFound;
         }
         public static bool GetUserByUsername(ref int UserID, ref int PersonID, string UserName, ref string Password, ref bool IsActive)
         {
@@ -173,6 +151,45 @@ namespace DataAccessLayer
             catch (Exception ex) { Console.WriteLine(ex.Message); }
             finally { connection.Close(); }
             return isFound;
+        }
+
+        public static bool IsPersonLinkedWithUser(int PersonID)
+        {
+            bool IsFound = false;
+            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
+            string query = "SELECT 1 FROM Users WHERE PersonID=@PersonID";
+            SqlCommand command = new SqlCommand(query, connection);
+            command.Parameters.AddWithValue("@PersonID", PersonID);
+            try
+            {
+                connection.Open();
+                object result = command.ExecuteScalar();
+                IsFound = (result != null);
+
+            }
+            catch (Exception ex) { Console.WriteLine(ex.Message); }
+            finally { connection.Close(); }
+            return IsFound;
+        }
+        public static bool IsUserExistsWithUsername(string UserName) {
+            bool IsFound = false;
+            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
+            string query = "SELECT 1 FROM Users WHERE UserName=@UserName";
+            SqlCommand command = new SqlCommand(query, connection);
+            command.Parameters.AddWithValue("@UserName", UserName);
+            try
+            {
+                connection.Open();
+                object result = command.ExecuteScalar();
+                IsFound = (result != null);
+
+            }
+            catch (Exception ex) { Console.WriteLine(ex.Message); }
+            finally { connection.Close(); }
+            return IsFound;
+
+
+
         }
     }
 }

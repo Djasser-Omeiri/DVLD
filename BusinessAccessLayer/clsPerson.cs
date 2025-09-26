@@ -122,5 +122,20 @@ namespace BusinessAccessLayer
             else
                 return null;
         }
+        public static clsPerson FindPersonBy(string columnName, string value)
+        {
+            string NationalNo = "", FirstName = "", SecondName = "", ThirdName = "", LastName = "", Address = "", Phone = ""
+                , Email = "", ImagePath = "";
+            DateTime DateOfBirth = DateTime.Now;
+            bool Gendor = true;
+            int NationalityCountryID = -1;
+            int PersonID = -1;
+            if (PersonData.GetPersonCustom(columnName,value, ref PersonID, ref NationalNo, ref FirstName, ref SecondName, ref ThirdName, ref LastName
+                , ref DateOfBirth, ref Gendor, ref Address, ref Phone, ref Email, ref NationalityCountryID, ref ImagePath))
+                return new clsPerson(PersonID, NationalNo, FirstName, SecondName, ThirdName, LastName
+                , DateOfBirth, Gendor, Address, Phone, Email, NationalityCountryID, ImagePath);
+            else
+                return null;
+        }
     }
 }

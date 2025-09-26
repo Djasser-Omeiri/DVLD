@@ -65,6 +65,12 @@
     <Compile Include="People Forms\frmManagePeople.Designer.cs">
       <DependentUpon>frmManagePeople.cs</DependentUpon>
     </Compile>
+    <Compile Include="Users Forms\frmUserInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Users Forms\frmAddUpdateUser.Designer.cs">
+      <DependentUpon>frmUserInfo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Users Forms\frmManageUser.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -83,11 +89,11 @@
     <Compile Include="People Forms\frmPersonDetails.Designer.cs">
       <DependentUpon>frmPersonDetails.cs</DependentUpon>
     </Compile>
-    <Compile Include="Users Forms\frmUserInfo.cs">
+    <Compile Include="Users Forms\frmUserDetails.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Users Forms\frmUserInfo.Designer.cs">
-      <DependentUpon>frmUserInfo.cs</DependentUpon>
+    <Compile Include="Users Forms\frmUserDetails.Designer.cs">
+      <DependentUpon>frmUserDetails.cs</DependentUpon>
     </Compile>
     <Compile Include="PersonDetails.cs">
       <SubType>UserControl</SubType>
@@ -128,6 +134,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Users Forms\frmUserDetails.resx">
+      <DependentUpon>frmUserDetails.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Users Forms\frmUserInfo.resx">
       <DependentUpon>frmUserInfo.cs</DependentUpon>
     </EmbeddedResource>
@@ -251,6 +260,24 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Password 32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Add New User 32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AddPerson 32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SearchPerson.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Next 32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Save 32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Close 321.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

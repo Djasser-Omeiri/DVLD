@@ -69,15 +69,15 @@ namespace DataAccessLayer
                     NationalNo = (string)reader["NationalNo"];
                     FirstName = (string)reader["FirstName"];
                     SecondName = (string)reader["SecondName"];
-                    ThirdName = (reader["ThirdName"]!=DBNull.Value)?(string)reader["ThirdName"]:"";
+                    ThirdName = (reader["ThirdName"] != DBNull.Value) ? (string)reader["ThirdName"] : "";
                     LastName = (string)reader["LastName"];
                     DateOfBirth = (DateTime)reader["DateOfBirth"];
                     Gendor = (bool)reader["Gendor"];
                     Address = (string)reader["Address"];
                     Phone = (string)reader["Phone"];
-                    Email = (reader["Email"]!=DBNull.Value)?(string)reader["Email"]:"";
+                    Email = (reader["Email"] != DBNull.Value) ? (string)reader["Email"] : "";
                     NationalityCountryID = (int)reader["NationalityCountryID"];
-                    ImagePath = (reader["ImagePath"] != DBNull.Value) ?  (string)reader["ImagePath"] : "";
+                    ImagePath = (reader["ImagePath"] != DBNull.Value) ? (string)reader["ImagePath"] : "";
 
                 }
                 else
@@ -231,6 +231,45 @@ namespace DataAccessLayer
             catch (Exception ex) { Console.WriteLine(ex.Message); }
             finally { connection.Close(); }
             return table;
+        }
+
+        public static bool GetPersonCustom(string columnName, string value , ref int PersonID, ref string NationalNo, ref string FirstName, ref string SecondName, ref string ThirdName, ref string LastName, ref DateTime DateOfBirth
+            , ref bool Gendor, ref string Address, ref string Phone, ref string Email, ref int NationalityCountryID, ref string ImagePath)
+        {
+            bool IsFound = false;
+            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
+            string query = $@"Select top 1 p.PersonID ,p.NationalNo,p.FirstName,p.SecondName,p.ThirdName,p.LastName,p.Gendor,p.DateOfBirth,c.CountryName as Nationality, p.Phone, p.Email,p.NationalityCountryID,p.Address,p.ImagePath FROM People p INNER JOIN Countries c ON p.NationalityCountryID=c.CountryID
+                            WHERE {columnName} LIKE @Value";
+
+            SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@Value", $"{value}");
+            try
+            {
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+                if (reader.Read())
+                {
+                    IsFound = true;
+                    PersonID = (int)reader["PersonID"]; 
+                    NationalNo = (string)reader["NationalNo"];
+                    FirstName = (string)reader["FirstName"];
+                    SecondName = (string)reader["SecondName"];
+                    ThirdName = (reader["ThirdName"] != DBNull.Value) ? (string)reader["ThirdName"] : "";
+                    LastName = (string)reader["LastName"];
+                    DateOfBirth = (DateTime)reader["DateOfBirth"];
+                    Gendor = (bool)reader["Gendor"];
+                    Address = (string)reader["Address"];
+                    Phone = (string)reader["Phone"];
+                    Email = (reader["Email"] != DBNull.Value) ? (string)reader["Email"] : "";
+                    NationalityCountryID = (int)reader["NationalityCountryID"];
+                    ImagePath = (reader["ImagePath"] != DBNull.Value) ? (string)reader["ImagePath"] : "";
+                }
+
+                reader.Close();
+            }
+            catch (Exception ex) { Console.WriteLine(ex.Message); }
+            finally { connection.Close(); }
+            return IsFound;
         }
     }
 }
