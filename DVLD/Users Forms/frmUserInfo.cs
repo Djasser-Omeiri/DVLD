@@ -14,9 +14,17 @@ namespace DVLD.Users_Forms
 {
     public partial class frmUserInfo : Form
     {
-        public frmUserInfo()
+        public enum enMode { AddNew = 0, Update = 1 };
+        private enMode _Mode;
+        int _UserID;
+        public frmUserInfo(int UserID)
         {
             InitializeComponent();
+            _UserID = UserID;
+            if (_UserID == -1)
+                _Mode = enMode.AddNew;
+            else _Mode = enMode.Update;
+
         }
         clsPerson _Person;
         clsUser _User;
@@ -58,11 +66,33 @@ namespace DVLD.Users_Forms
             }
             ucPersonInformation.LoadPerson(_Person);
         }
+        private void _loadfrm()
+        {
+            if (_Mode==enMode.AddNew)
+            {
+                cbFilters.SelectedIndex = 0;
+                TabControluser.TabPages[1].Enabled = false;
+                lbltitle.Text = "Add New User";
+                _User = new clsUser();
+                return;
+            }
+            _User= clsUser.GetUserByID(_UserID);
+            _Person=clsPerson.FindPersonByID(_User.PersonID);
+            lbltitle.Text = "Update User";
+            ucPersonInformation.LoadPerson(_Person);
+            TabControluser.TabPages[1].Enabled = true;
+            gbFilter.Enabled = false;
+            lblinputUserID.Text=_User.UserID.ToString();
+            tbUsername.Text = _User.UserName;
+            tbPassword.Text = _User.Password;
+            tbConfirmPassword.Text = _User.Password;
+            cbIsActive.Checked = _User.IsActive;
+
+        }
 
         private void frmUserInfo_Load(object sender, EventArgs e)
         {
-            cbFilters.SelectedIndex = 0;
-            TabControluser.TabPages[1].Enabled = false;
+            _loadfrm();
         }
 
         private void btnNext_Click(object sender, EventArgs e)
@@ -93,8 +123,6 @@ namespace DVLD.Users_Forms
                 MessageBox.Show("Please fix validation errors before saving.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            if (_User == null)
-                _User = new clsUser();
             _User.UserName = tbUsername.Text;
             _User.Password = tbPassword.Text;
             _User.IsActive = cbIsActive.Checked;

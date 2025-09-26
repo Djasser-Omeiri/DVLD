@@ -21,8 +21,8 @@ namespace DVLD
         private void _refreshUsersList()
         {
             cbFilters.SelectedIndex = 0;
-            dgvPeople.DataSource = clsUser.GetAllUsers();
-            lblCount.Text = (dgvPeople.Rows.Count).ToString();
+            dgvUsers.DataSource = clsUser.GetAllUsers();
+            lblCount.Text = (dgvUsers.Rows.Count).ToString();
         }
 
         private void frmManageUser_Load(object sender, EventArgs e)
@@ -70,13 +70,13 @@ namespace DVLD
 
             if (column == "None")
             {
-                dgvPeople.DataSource = clsUser.GetAllUsers();
+                dgvUsers.DataSource = clsUser.GetAllUsers();
             }
             else
             {
-                dgvPeople.DataSource = clsUser.GetAllUsers(column, value);
+                dgvUsers.DataSource = clsUser.GetAllUsers(column, value);
             }
-            lblCount.Text = (dgvPeople.Rows.Count).ToString();
+            lblCount.Text = (dgvUsers.Rows.Count).ToString();
         }
 
         private void cbIsActive_SelectedIndexChanged(object sender, EventArgs e)
@@ -87,22 +87,65 @@ namespace DVLD
             switch (cbIsActive.Text)
             {
                 case "All":
-                    dgvPeople.DataSource = clsUser.GetAllUsers();
+                    dgvUsers.DataSource = clsUser.GetAllUsers();
                     break;
                 case "Yes":
-                    dgvPeople.DataSource = clsUser.GetAllUsers(column, value);
+                    dgvUsers.DataSource = clsUser.GetAllUsers(column, value);
                     break;
                 case "No":
-                    dgvPeople.DataSource = clsUser.GetAllUsers(column, value);
+                    dgvUsers.DataSource = clsUser.GetAllUsers(column, value);
                     break;
             }
-            lblCount.Text = (dgvPeople.Rows.Count).ToString();
+            lblCount.Text = (dgvUsers.Rows.Count).ToString();
         }
 
-        private void btnAddPerson_Click(object sender, EventArgs e)
+        private void btnAddUser_Click(object sender, EventArgs e)
         {
-            new frmUserInfo().ShowDialog();
+            new frmUserInfo(-1).ShowDialog();
             _refreshUsersList();
+        }
+
+        private void MenuAddNewUser_Click(object sender, EventArgs e)
+        {
+            new frmUserInfo(-1).ShowDialog();
+            _refreshUsersList();
+        }
+       
+
+        private void MenuDelete_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Are you sure you want to delete this user?", "Confirm Deletion", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+            {
+                if (clsUser.DeleteUser((int)dgvUsers.CurrentRow.Cells["UserID"].Value))
+                {
+                    _refreshUsersList();
+                    MessageBox.Show("Person deleted successfully.", "Deletion Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                    MessageBox.Show("An error occurred while deleting the person.", "Deletion Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+        }
+
+        private void MenuSendEmail_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Feature not implemented yet.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void MenuPhoneCall_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Feature not implemented yet.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void MenuEdit_Click(object sender, EventArgs e)
+        {
+            new frmUserInfo(Convert.ToInt32(dgvUsers.CurrentRow.Cells["UserID"].Value)).ShowDialog();
+            _refreshUsersList();
+        }
+
+        private void MenuShowDetails_Click(object sender, EventArgs e)
+        {
+            new frmUserDetails(clsUser.GetUserByID(Convert.ToInt32(dgvUsers.CurrentRow.Cells["UserID"].Value))).ShowDialog();
         }
     }
 }

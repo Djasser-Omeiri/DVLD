@@ -14,13 +14,15 @@ namespace DVLD
     public partial class frmMain : Form
     {
         clsUser Currentuser;
+        private bool _isLogout = false;
+
         public frmMain(clsUser user)
         {
             InitializeComponent();
             Currentuser = user;
         }
 
-        
+
 
         private void peopleToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -34,12 +36,20 @@ namespace DVLD
 
         private void signOutToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            _isLogout = true;
             this.Close();
         }
 
         private void currentUserInfoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             new frmUserDetails(Currentuser).ShowDialog();
+        }
+
+        private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (!_isLogout)
+                Application.Exit();
+
         }
     }
 }

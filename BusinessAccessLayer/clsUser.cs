@@ -110,9 +110,9 @@ namespace BusinessAccessLayer
             clsUser LoggedUser=clsUser.GetUserByUserName(UserName);
             if (LoggedUser == null) return null;
             if (LoggedUser.Password != Password) return null;
-            if (!LoggedUser.IsActive) return null;
             return LoggedUser;
         }
+
 
         public static bool IsUserExistsWithUsername(string Username)
         {

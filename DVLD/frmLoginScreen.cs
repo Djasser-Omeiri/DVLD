@@ -20,21 +20,40 @@ namespace DVLD
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            clsUser LoggedUser = clsUser.LoginCheck(tbUsername.Text, tbPassword.Text);
-            if (LoggedUser != null)
+            if (string.IsNullOrWhiteSpace(tbUsername.Text) || string.IsNullOrWhiteSpace(tbPassword.Text))
             {
-                this.Hide();
-                new frmMain(LoggedUser).ShowDialog();
-                this.Show();
-                tbUsername.Clear();
-                tbPassword.Clear();
-                tbUsername.Focus();
+                MessageBox.Show("Please enter both username and password.",
+                                "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
-            }
-            else
+            clsUser loggedUser = clsUser.LoginCheck(tbUsername.Text.Trim(), tbPassword.Text.Trim());
+
+            if (loggedUser == null)
             {
-                MessageBox.Show("Invalid username or password.", "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Invalid username or password.",
+                                "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
+
+            if (!loggedUser.IsActive)
+            {
+                MessageBox.Show("This user is inactive. Please contact the administrator.",
+                                "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            this.Hide();
+            using (var mainForm = new frmMain(loggedUser))
+            {
+                mainForm.ShowDialog();
+            }
+            this.Show();
+
+            tbUsername.Clear();
+            tbPassword.Clear();
+            tbUsername.Focus();
         }
+
     }
 }
