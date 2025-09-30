@@ -119,10 +119,10 @@ namespace DVLD
                 if (clsUser.DeleteUser((int)dgvUsers.CurrentRow.Cells["UserID"].Value))
                 {
                     _refreshUsersList();
-                    MessageBox.Show("Person deleted successfully.", "Deletion Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("User deleted successfully.", "Deletion Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
-                    MessageBox.Show("An error occurred while deleting the person.", "Deletion Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("An error occurred while deleting the User.", "Deletion Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
         }
@@ -146,6 +146,11 @@ namespace DVLD
         private void MenuShowDetails_Click(object sender, EventArgs e)
         {
             new frmUserDetails(clsUser.GetUserByID(Convert.ToInt32(dgvUsers.CurrentRow.Cells["UserID"].Value))).ShowDialog();
+        }
+
+        private void MenuChangePassword_Click(object sender, EventArgs e)
+        {
+            new frmPassword(clsUser.GetUserByID(Convert.ToInt32(dgvUsers.CurrentRow.Cells["UserID"].Value))).ShowDialog();
         }
     }
 }

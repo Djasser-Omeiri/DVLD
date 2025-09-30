@@ -1,6 +1,6 @@
-﻿namespace DVLD.Users_Forms
+﻿namespace DVLD
 {
-    partial class frmUserInfo
+    partial class frmLocalLicenseInfo
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.lbltitle = new System.Windows.Forms.Label();
+            this.btnClose = new System.Windows.Forms.Button();
+            this.btnSave = new System.Windows.Forms.Button();
             this.TabControluser = new System.Windows.Forms.TabControl();
             this.tpPersonalInfo = new System.Windows.Forms.TabPage();
             this.btnNext = new System.Windows.Forms.Button();
@@ -53,10 +55,6 @@
             this.lblConfirmPassword = new System.Windows.Forms.Label();
             this.lblUsername = new System.Windows.Forms.Label();
             this.lblUserID = new System.Windows.Forms.Label();
-            this.btnClose = new System.Windows.Forms.Button();
-            this.btnSave = new System.Windows.Forms.Button();
-            this.lbltitle = new System.Windows.Forms.Label();
-            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.TabControluser.SuspendLayout();
             this.tpPersonalInfo.SuspendLayout();
             this.gbFilter.SuspendLayout();
@@ -65,20 +63,56 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
+            // 
+            // lbltitle
+            // 
+            this.lbltitle.AutoSize = true;
+            this.lbltitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbltitle.ForeColor = System.Drawing.Color.Red;
+            this.lbltitle.Location = new System.Drawing.Point(358, 36);
+            this.lbltitle.Name = "lbltitle";
+            this.lbltitle.Size = new System.Drawing.Size(608, 38);
+            this.lbltitle.TabIndex = 72;
+            this.lbltitle.Text = "New Local Driving License Application";
+            // 
+            // btnClose
+            // 
+            this.btnClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClose.Image = global::DVLD.Properties.Resources.Close_321;
+            this.btnClose.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnClose.Location = new System.Drawing.Point(1018, 704);
+            this.btnClose.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(143, 49);
+            this.btnClose.TabIndex = 70;
+            this.btnClose.Text = "Close";
+            this.btnClose.UseVisualStyleBackColor = true;
+            // 
+            // btnSave
+            // 
+            this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSave.Image = global::DVLD.Properties.Resources.Save_32;
+            this.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSave.Location = new System.Drawing.Point(1166, 704);
+            this.btnSave.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(143, 49);
+            this.btnSave.TabIndex = 71;
+            this.btnSave.Text = "Save";
+            this.btnSave.UseVisualStyleBackColor = true;
             // 
             // TabControluser
             // 
             this.TabControluser.Controls.Add(this.tpPersonalInfo);
             this.TabControluser.Controls.Add(this.tpLoginInfo);
             this.TabControluser.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TabControluser.Location = new System.Drawing.Point(12, 123);
+            this.TabControluser.Location = new System.Drawing.Point(11, 107);
             this.TabControluser.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.TabControluser.Name = "TabControluser";
             this.TabControluser.SelectedIndex = 0;
             this.TabControluser.Size = new System.Drawing.Size(1303, 592);
-            this.TabControluser.TabIndex = 1;
+            this.TabControluser.TabIndex = 69;
             // 
             // tpPersonalInfo
             // 
@@ -107,7 +141,6 @@
             this.btnNext.Text = "   Next";
             this.btnNext.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.btnNext.UseVisualStyleBackColor = true;
-            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
             // 
             // gbFilter
             // 
@@ -134,7 +167,6 @@
             this.btnAdd.Size = new System.Drawing.Size(40, 39);
             this.btnAdd.TabIndex = 22;
             this.btnAdd.UseVisualStyleBackColor = true;
-            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // lblFilter
             // 
@@ -168,7 +200,6 @@
             this.btnSearch.Size = new System.Drawing.Size(40, 39);
             this.btnSearch.TabIndex = 21;
             this.btnSearch.UseVisualStyleBackColor = true;
-            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // tbFilter
             // 
@@ -207,7 +238,7 @@
             this.tpLoginInfo.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tpLoginInfo.Size = new System.Drawing.Size(1295, 559);
             this.tpLoginInfo.TabIndex = 1;
-            this.tpLoginInfo.Text = "Login Info";
+            this.tpLoginInfo.Text = "Application Info";
             this.tpLoginInfo.UseVisualStyleBackColor = true;
             // 
             // cbIsActive
@@ -228,7 +259,6 @@
             this.tbPassword.Name = "tbPassword";
             this.tbPassword.Size = new System.Drawing.Size(185, 27);
             this.tbPassword.TabIndex = 92;
-            this.tbPassword.Validating += new System.ComponentModel.CancelEventHandler(this.tbPassword_Validating);
             // 
             // tbConfirmPassword
             // 
@@ -237,7 +267,6 @@
             this.tbConfirmPassword.Name = "tbConfirmPassword";
             this.tbConfirmPassword.Size = new System.Drawing.Size(185, 27);
             this.tbConfirmPassword.TabIndex = 91;
-            this.tbConfirmPassword.Validating += new System.ComponentModel.CancelEventHandler(this.tbConfirmPassword_Validating);
             // 
             // tbUsername
             // 
@@ -246,7 +275,6 @@
             this.tbUsername.Name = "tbUsername";
             this.tbUsername.Size = new System.Drawing.Size(185, 27);
             this.tbUsername.TabIndex = 90;
-            this.tbUsername.Validating += new System.ComponentModel.CancelEventHandler(this.tbUsername_Validating);
             // 
             // lblinputUserID
             // 
@@ -346,50 +374,7 @@
             this.lblUserID.TabIndex = 81;
             this.lblUserID.Text = "UserID :";
             // 
-            // btnClose
-            // 
-            this.btnClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClose.Image = global::DVLD.Properties.Resources.Close_321;
-            this.btnClose.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnClose.Location = new System.Drawing.Point(1019, 720);
-            this.btnClose.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(143, 49);
-            this.btnClose.TabIndex = 66;
-            this.btnClose.Text = "Close";
-            this.btnClose.UseVisualStyleBackColor = true;
-            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
-            // 
-            // btnSave
-            // 
-            this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSave.Image = global::DVLD.Properties.Resources.Save_32;
-            this.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSave.Location = new System.Drawing.Point(1167, 720);
-            this.btnSave.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(143, 49);
-            this.btnSave.TabIndex = 67;
-            this.btnSave.Text = "Save";
-            this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
-            // 
-            // lbltitle
-            // 
-            this.lbltitle.AutoSize = true;
-            this.lbltitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbltitle.ForeColor = System.Drawing.Color.Red;
-            this.lbltitle.Location = new System.Drawing.Point(517, 52);
-            this.lbltitle.Name = "lbltitle";
-            this.lbltitle.Size = new System.Drawing.Size(241, 38);
-            this.lbltitle.TabIndex = 68;
-            this.lbltitle.Text = "Add New User";
-            // 
-            // errorProvider1
-            // 
-            this.errorProvider1.ContainerControl = this;
-            // 
-            // frmUserInfo
+            // frmLocalLicenseInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -398,10 +383,8 @@
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.TabControluser);
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.Name = "frmUserInfo";
-            this.Text = "frmAddUpdateUser";
-            this.Load += new System.EventHandler(this.frmUserInfo_Load);
+            this.Name = "frmLocalLicenseInfo";
+            this.Text = "frmLocalLicenseInfo";
             this.TabControluser.ResumeLayout(false);
             this.tpPersonalInfo.ResumeLayout(false);
             this.gbFilter.ResumeLayout(false);
@@ -412,7 +395,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -420,20 +402,24 @@
 
         #endregion
 
-        private System.Windows.Forms.TabControl TabControluser;
-        private System.Windows.Forms.TabPage tpPersonalInfo;
-        private System.Windows.Forms.TabPage tpLoginInfo;
-        private PersonDetails ucPersonInformation;
-        private System.Windows.Forms.TextBox tbFilter;
-        private System.Windows.Forms.ComboBox cbFilters;
-        private System.Windows.Forms.Label lblFilter;
-        private System.Windows.Forms.Button btnSearch;
-        private System.Windows.Forms.Button btnAdd;
-        private System.Windows.Forms.GroupBox gbFilter;
-        private System.Windows.Forms.Button btnNext;
+        private System.Windows.Forms.Label lbltitle;
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Button btnSave;
-        private System.Windows.Forms.Label lbltitle;
+        private System.Windows.Forms.TabControl TabControluser;
+        private System.Windows.Forms.TabPage tpPersonalInfo;
+        private System.Windows.Forms.Button btnNext;
+        private System.Windows.Forms.GroupBox gbFilter;
+        private System.Windows.Forms.Button btnAdd;
+        private System.Windows.Forms.Label lblFilter;
+        private System.Windows.Forms.ComboBox cbFilters;
+        private System.Windows.Forms.Button btnSearch;
+        private System.Windows.Forms.TextBox tbFilter;
+        private PersonDetails ucPersonInformation;
+        private System.Windows.Forms.TabPage tpLoginInfo;
+        private System.Windows.Forms.CheckBox cbIsActive;
+        private System.Windows.Forms.TextBox tbPassword;
+        private System.Windows.Forms.TextBox tbConfirmPassword;
+        private System.Windows.Forms.TextBox tbUsername;
         private System.Windows.Forms.Label lblinputUserID;
         private System.Windows.Forms.PictureBox pictureBox9;
         private System.Windows.Forms.PictureBox pictureBox4;
@@ -443,10 +429,5 @@
         private System.Windows.Forms.Label lblConfirmPassword;
         private System.Windows.Forms.Label lblUsername;
         private System.Windows.Forms.Label lblUserID;
-        private System.Windows.Forms.TextBox tbPassword;
-        private System.Windows.Forms.TextBox tbConfirmPassword;
-        private System.Windows.Forms.TextBox tbUsername;
-        private System.Windows.Forms.CheckBox cbIsActive;
-        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }

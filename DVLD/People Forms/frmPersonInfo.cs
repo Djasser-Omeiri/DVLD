@@ -15,11 +15,15 @@ namespace DVLD
 {
     public partial class frmPersonInfo : Form
     {
+        public delegate void DataBackEventHandler(object sender, clsPerson person);
+        public event DataBackEventHandler DataBack;
         public enum enMode { AddNew = 0, Update = 1 };
         private enMode _Mode;
 
         int _PersonID;
         clsPerson _Person;
+        private string _OldImagePath = null;
+        private string _TempImagePath = null;
         public frmPersonInfo(int PersonID)
         {
             InitializeComponent();
@@ -34,6 +38,15 @@ namespace DVLD
             }
 
         }
+        private Image LoadImage(string path)
+        {
+            using (var fs = new FileStream(path, FileMode.Open, FileAccess.Read))
+            {
+                return Image.FromStream(fs);
+            }
+        }
+
+
 
         private void _loadfrm()
         {
@@ -63,9 +76,11 @@ namespace DVLD
             tbAddress.Text = _Person.Address;
             dtpDate.Value = _Person.DateOfBirth;
             cbCountry.SelectedIndex = _Person.NationalityCountryID;
+            _OldImagePath = _Person.ImagePath;
             if (_Person.ImagePath != "")
             {
                 PicturePerson.Image = Image.FromFile(_Person.ImagePath);
+                UpdateRemovebtnVisibility();
             }
 
         }
@@ -140,31 +155,52 @@ namespace DVLD
                 errorProvider1.SetError(tbAddress, "This Field is required");
             else errorProvider1.SetError(tbAddress, "");
         }
+        private void DeletePersonImage(string imagePath)
+        {
+            if (string.IsNullOrEmpty(imagePath) || !File.Exists(imagePath))
+                return;
+
+            try
+            {
+                if (PicturePerson.ImageLocation == imagePath)
+                {
+                    PicturePerson.Image.Dispose();
+                    PicturePerson.Image = null;
+                    PicturePerson.ImageLocation = null;
+                }
+                using (FileStream fs = new FileStream(imagePath, FileMode.Open, FileAccess.Read, FileShare.None))
+                {
+                    // just open & close
+                }
+                File.Delete(imagePath);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Could not delete image: " + ex.Message,
+                    "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+
 
         private void lblRemove_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            if (!string.IsNullOrEmpty(_Person.ImagePath) && File.Exists(_Person.ImagePath))
-            {
-                PicturePerson.Image.Dispose();
-                PicturePerson.Image = null;
+            _OldImagePath = _Person.ImagePath;
+            _TempImagePath = null; 
 
-                try
-                {
-                    File.Delete(_Person.ImagePath);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error deleting image: " + ex.Message);
-                }
-            }
             PicturePerson.Image = rbMale.Checked
                 ? Properties.Resources.Male_512
                 : Properties.Resources.Female_512;
 
-            _Person.ImagePath = null;
+            PicturePerson.ImageLocation = null;
             PicturePerson.Tag = 0;
+
             UpdateRemovebtnVisibility();
         }
+        
+
+
+
 
         private void lblImage_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
@@ -173,25 +209,29 @@ namespace DVLD
             if (!Directory.Exists(imagesFolder))
                 Directory.CreateDirectory(imagesFolder);
 
-            OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp";
-            if (ofd.ShowDialog() == DialogResult.OK)
+            using (OpenFileDialog ofd = new OpenFileDialog())
             {
-                string newFileName = Guid.NewGuid().ToString() + Path.GetExtension(ofd.FileName);
-                string destPath = Path.Combine(imagesFolder, newFileName);
+                ofd.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp";
+                if (ofd.ShowDialog() == DialogResult.OK)
+                {
+                    _OldImagePath = _Person.ImagePath;
 
-                File.Copy(ofd.FileName, destPath);
+                    string newFileName = Guid.NewGuid().ToString() + Path.GetExtension(ofd.FileName);
+                    string destPath = Path.Combine(imagesFolder, newFileName);
 
-                PicturePerson.Image = Image.FromFile(destPath);
+                    File.Copy(ofd.FileName, destPath, true);
 
-                _Person.ImagePath = destPath;
-                PicturePerson.Tag = 1;
-                UpdateRemovebtnVisibility();
+                    PicturePerson.Image = LoadImage(destPath);
+                    PicturePerson.ImageLocation = destPath;
+                    _TempImagePath = destPath;   
+                    PicturePerson.Tag = 1;
 
+                    UpdateRemovebtnVisibility();
+                }
             }
-
-
         }
+
+
 
         private void UpdateRemovebtnVisibility()
         {
@@ -250,9 +290,11 @@ namespace DVLD
             this.ValidateChildren();
             if (HasValidationErrors())
             {
-                MessageBox.Show("Please Fix the errors before saving.", "Saving Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Please Fix the errors before saving.",
+                    "Saving Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+
             _Person.FirstName = tbFirstName.Text;
             _Person.SecondName = tbSecondName.Text;
             _Person.ThirdName = tbThirdName.Text;
@@ -264,17 +306,31 @@ namespace DVLD
             _Person.DateOfBirth = dtpDate.Value;
             _Person.Phone = tbPhone.Text;
             _Person.NationalityCountryID = cbCountry.SelectedIndex;
-            if (PicturePerson.Tag.Equals(0)) _Person.ImagePath = null;
-            else _Person.ImagePath = PicturePerson.ImageLocation;
+
+            if (_OldImagePath != null && _OldImagePath != _TempImagePath)
+            {
+                DeletePersonImage(_OldImagePath);
+            }
+
+            _Person.ImagePath = _TempImagePath;
+
             if (_Person.Save())
+            {
                 MessageBox.Show("Data Saved Successfully.");
-            else { MessageBox.Show("Data is not Saved Successfully.");
+                _OldImagePath = _Person.ImagePath; 
+            }
+            else
+            {
+                MessageBox.Show("Data is not Saved Successfully.");
                 this.Close();
             }
+
             _Mode = enMode.Update;
             lbltitle.Text = "Update Person";
             lblPersonID.Text = _Person.PersonID.ToString();
+            DataBack?.Invoke(this, _Person);
         }
+
         private bool IsValidPhone(string phone)
         {
             string pattern = @"^\+?\d{8,15}$";

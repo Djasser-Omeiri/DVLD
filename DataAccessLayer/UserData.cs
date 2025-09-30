@@ -68,7 +68,7 @@ namespace DataAccessLayer
         {
             int rowsaffected = 0;
             SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
-            string query = "DELETE People WHERE UserID=@UserID";
+            string query = "DELETE Users WHERE UserID=@UserID";
             SqlCommand command = new SqlCommand(query, connection);
             command.Parameters.AddWithValue("@UserID", UserID);
             try
@@ -76,7 +76,7 @@ namespace DataAccessLayer
                 connection.Open();
                 rowsaffected = command.ExecuteNonQuery();
             }
-            catch (Exception ex) { Console.WriteLine(ex.Message); }
+            catch (Exception ex) { Console.WriteLine("Delete func"+ex.Message); }
             finally { connection.Close(); }
             return rowsaffected > 0;
         }
@@ -91,6 +91,23 @@ namespace DataAccessLayer
             command.Parameters.AddWithValue("@UserName", UserName);
             command.Parameters.AddWithValue("@Password", Password);
             command.Parameters.AddWithValue("@IsActive", IsActive);
+            try
+            {
+                connection.Open();
+                rowsaffected = command.ExecuteNonQuery();
+            }
+            catch (Exception ex) { Console.WriteLine("update" + ex.Message); }
+            finally { connection.Close(); }
+            return rowsaffected > 0;
+        }
+        public static bool UpdateUserPassword(int UserID,string Password)
+        {
+            int rowsaffected = 0;
+            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
+            string query = "UPDATE Users SET Password=@Password WHERE UserID=@UserID";
+            SqlCommand command= new SqlCommand(query, connection);  
+            command.Parameters.AddWithValue("@UserID",UserID);
+            command.Parameters.AddWithValue ("@Password", Password);
             try
             {
                 connection.Open();

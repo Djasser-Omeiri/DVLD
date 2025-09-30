@@ -46,6 +46,10 @@ namespace BusinessAccessLayer
         {
             return UserData.UpdateUser(this.UserID, this.PersonID, this.UserName, this.Password, this.IsActive);
         }
+        public bool UpdateUserPassword()
+        {
+            return UserData.UpdateUserPassword(this.UserID, this.Password);
+        }
         public static bool DeleteUser(int UserID)
         {
             return UserData.DeleteUser(UserID);

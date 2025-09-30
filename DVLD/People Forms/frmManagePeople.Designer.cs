@@ -66,11 +66,15 @@
             // dgvPeople
             // 
             this.dgvPeople.AllowUserToAddRows = false;
+            this.dgvPeople.AllowUserToResizeColumns = false;
+            this.dgvPeople.AllowUserToResizeRows = false;
             this.dgvPeople.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvPeople.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable;
             this.dgvPeople.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvPeople.ContextMenuStrip = this.MenuStrip;
             this.dgvPeople.Location = new System.Drawing.Point(11, 327);
             this.dgvPeople.Name = "dgvPeople";
+            this.dgvPeople.ReadOnly = true;
             this.dgvPeople.RowHeadersWidth = 51;
             this.dgvPeople.RowTemplate.Height = 24;
             this.dgvPeople.Size = new System.Drawing.Size(1284, 350);

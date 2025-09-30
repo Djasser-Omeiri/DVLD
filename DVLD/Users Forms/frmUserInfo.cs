@@ -32,28 +32,28 @@ namespace DVLD.Users_Forms
         {
             switch (selected)
             {
-                case "None": return "None";
                 case "PersonID": return "p.PersonID";
                 case "NationalNo": return "p.NationalNo";
-                case "FirstName": return "p.FirstName";
-                case "SecondName": return "p.SecondName";
-                case "ThirdName": return "p.ThirdName";
-                case "LastName": return "p.LastName";
-                case "Nationality": return "c.CountryName";
-                case "Gendor": return "p.Gendor";
-                case "Phone": return "p.Phone";
-                case "Email": return "p.Email";
                 default: return null;
             }
         }
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            new frmPersonInfo(-1).ShowDialog();
+            frmPersonInfo frm=new frmPersonInfo(-1);
+            frm.DataBack += AddPerson_DataBack;
+            frm.ShowDialog();
         }
 
         private void btnClose_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+        private void AddPerson_DataBack(object sender, clsPerson person)
+        {
+            cbFilters.SelectedItem = "PersonID";
+            _Person = person;
+            tbFilter.Text =_Person.PersonID.ToString();
+            ucPersonInformation.LoadPerson(_Person);
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
@@ -68,7 +68,7 @@ namespace DVLD.Users_Forms
         }
         private void _loadfrm()
         {
-            if (_Mode==enMode.AddNew)
+            if (_Mode == enMode.AddNew)
             {
                 cbFilters.SelectedIndex = 0;
                 TabControluser.TabPages[1].Enabled = false;
@@ -76,13 +76,13 @@ namespace DVLD.Users_Forms
                 _User = new clsUser();
                 return;
             }
-            _User= clsUser.GetUserByID(_UserID);
-            _Person=clsPerson.FindPersonByID(_User.PersonID);
+            _User = clsUser.GetUserByID(_UserID);
+            _Person = clsPerson.FindPersonByID(_User.PersonID);
             lbltitle.Text = "Update User";
             ucPersonInformation.LoadPerson(_Person);
             TabControluser.TabPages[1].Enabled = true;
             gbFilter.Enabled = false;
-            lblinputUserID.Text=_User.UserID.ToString();
+            lblinputUserID.Text = _User.UserID.ToString();
             tbUsername.Text = _User.UserName;
             tbPassword.Text = _User.Password;
             tbConfirmPassword.Text = _User.Password;
@@ -97,21 +97,30 @@ namespace DVLD.Users_Forms
 
         private void btnNext_Click(object sender, EventArgs e)
         {
-            if (clsUser.IsPersonLinkedWithUser(_Person.PersonID))
+            if (_Mode == enMode.AddNew)
             {
-                MessageBox.Show("This Person is already linked with a User", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            else if (_Person == null || _Person.PersonID == -1)
-            {
-                MessageBox.Show("Please select a valid Person", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
+
+
+                if (clsUser.IsPersonLinkedWithUser(_Person.PersonID))
+                {
+                    MessageBox.Show("This Person is already linked with a User", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                else if (_Person == null || _Person.PersonID == -1)
+                {
+                    MessageBox.Show("Please select a valid Person", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                else
+                {
+                    TabControluser.TabPages[1].Enabled = true;
+                    TabControluser.SelectedTab = TabControluser.TabPages[1];
+
+                }
             }
             else
             {
-                TabControluser.TabPages[1].Enabled = true;
                 TabControluser.SelectedTab = TabControluser.TabPages[1];
-
             }
         }
 
@@ -137,7 +146,6 @@ namespace DVLD.Users_Forms
                 MessageBox.Show("Error Saving User Information", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             lblinputUserID.Text = _User.UserID.ToString();
-            Console.WriteLine(_User.UserID);
         }
 
         private void tbUsername_Validating(object sender, CancelEventArgs e)

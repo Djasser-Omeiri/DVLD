@@ -124,5 +124,6 @@ namespace DVLD
         {
             new frmPersonDetails(clsPerson.FindPersonByID(Convert.ToInt32(dgvPeople.CurrentRow.Cells["PersonID"].Value))).ShowDialog();
         }
+
     }
 }

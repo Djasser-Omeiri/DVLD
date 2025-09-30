@@ -1,4 +1,7 @@
 ﻿using BusinessAccessLayer;
+using DVLD.ApplicationTypes;
+using DVLD.TestTypes;
+using DVLD.Users_Forms;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -49,6 +52,26 @@ namespace DVLD
         {
             if (!_isLogout)
                 Application.Exit();
+
+        }
+
+        private void changePasswordToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new frmPassword(Currentuser).ShowDialog();
+        }
+
+        private void manageApplicationTypesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new frmManageApplicationTypes().ShowDialog();
+        }
+
+        private void manageTestTypesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new frmManageTestTypes().ShowDialog();
+        }
+
+        private void localLicenseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
 
         }
     }

@@ -116,11 +116,15 @@
             // dgvUsers
             // 
             this.dgvUsers.AllowUserToAddRows = false;
+            this.dgvUsers.AllowUserToResizeColumns = false;
+            this.dgvUsers.AllowUserToResizeRows = false;
             this.dgvUsers.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvUsers.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable;
             this.dgvUsers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvUsers.ContextMenuStrip = this.MenuStrip;
             this.dgvUsers.Location = new System.Drawing.Point(11, 328);
             this.dgvUsers.Name = "dgvUsers";
+            this.dgvUsers.ReadOnly = true;
             this.dgvUsers.RowHeadersWidth = 51;
             this.dgvUsers.RowTemplate.Height = 24;
             this.dgvUsers.Size = new System.Drawing.Size(1284, 350);
@@ -140,26 +144,26 @@
             this.MenuSendEmail,
             this.MenuPhoneCall});
             this.MenuStrip.Name = "contextMenuStrip1";
-            this.MenuStrip.Size = new System.Drawing.Size(215, 240);
+            this.MenuStrip.Size = new System.Drawing.Size(198, 212);
             // 
             // MenuShowDetails
             // 
             this.MenuShowDetails.Image = global::DVLD.Properties.Resources.profil_de_lutilisateur;
             this.MenuShowDetails.Name = "MenuShowDetails";
-            this.MenuShowDetails.Size = new System.Drawing.Size(214, 28);
+            this.MenuShowDetails.Size = new System.Drawing.Size(197, 28);
             this.MenuShowDetails.Text = "Show Details";
             this.MenuShowDetails.Click += new System.EventHandler(this.MenuShowDetails_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(211, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(194, 6);
             // 
             // MenuAddNewUser
             // 
             this.MenuAddNewUser.Image = global::DVLD.Properties.Resources.Add_Person_40;
             this.MenuAddNewUser.Name = "MenuAddNewUser";
-            this.MenuAddNewUser.Size = new System.Drawing.Size(214, 28);
+            this.MenuAddNewUser.Size = new System.Drawing.Size(197, 28);
             this.MenuAddNewUser.Text = "Add New User";
             this.MenuAddNewUser.Click += new System.EventHandler(this.MenuAddNewUser_Click);
             // 
@@ -167,7 +171,7 @@
             // 
             this.MenuEdit.Image = global::DVLD.Properties.Resources.edit_32;
             this.MenuEdit.Name = "MenuEdit";
-            this.MenuEdit.Size = new System.Drawing.Size(214, 28);
+            this.MenuEdit.Size = new System.Drawing.Size(197, 28);
             this.MenuEdit.Text = "Edit";
             this.MenuEdit.Click += new System.EventHandler(this.MenuEdit_Click);
             // 
@@ -175,7 +179,7 @@
             // 
             this.MenuDelete.Image = global::DVLD.Properties.Resources.Delete_32;
             this.MenuDelete.Name = "MenuDelete";
-            this.MenuDelete.Size = new System.Drawing.Size(214, 28);
+            this.MenuDelete.Size = new System.Drawing.Size(197, 28);
             this.MenuDelete.Text = "Delete";
             this.MenuDelete.Click += new System.EventHandler(this.MenuDelete_Click);
             // 
@@ -183,19 +187,20 @@
             // 
             this.MenuChangePassword.Image = global::DVLD.Properties.Resources.Password_32;
             this.MenuChangePassword.Name = "MenuChangePassword";
-            this.MenuChangePassword.Size = new System.Drawing.Size(214, 28);
+            this.MenuChangePassword.Size = new System.Drawing.Size(197, 28);
             this.MenuChangePassword.Text = "Change Password";
+            this.MenuChangePassword.Click += new System.EventHandler(this.MenuChangePassword_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(211, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(194, 6);
             // 
             // MenuSendEmail
             // 
             this.MenuSendEmail.Image = global::DVLD.Properties.Resources.send_email_32;
             this.MenuSendEmail.Name = "MenuSendEmail";
-            this.MenuSendEmail.Size = new System.Drawing.Size(214, 28);
+            this.MenuSendEmail.Size = new System.Drawing.Size(197, 28);
             this.MenuSendEmail.Text = "Send Email";
             this.MenuSendEmail.Click += new System.EventHandler(this.MenuSendEmail_Click);
             // 
@@ -204,7 +209,7 @@
             this.MenuPhoneCall.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MenuPhoneCall.Image = global::DVLD.Properties.Resources.call_32;
             this.MenuPhoneCall.Name = "MenuPhoneCall";
-            this.MenuPhoneCall.Size = new System.Drawing.Size(214, 28);
+            this.MenuPhoneCall.Size = new System.Drawing.Size(197, 28);
             this.MenuPhoneCall.Text = "Phone Call";
             this.MenuPhoneCall.Click += new System.EventHandler(this.MenuPhoneCall_Click);
             // 
