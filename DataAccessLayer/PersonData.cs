@@ -44,7 +44,7 @@ namespace DataAccessLayer
                     PersonID = interedId;
                 }
             }
-            catch (Exception ex) { Console.WriteLine("add" + ex.Message); }
+            catch (Exception ex) { Console.WriteLine(ex.Message); }
             finally
             {
                 connection.Close();
@@ -86,7 +86,7 @@ namespace DataAccessLayer
                 }
                 reader.Close();
             }
-            catch (Exception ex) { Console.WriteLine("getTHIS" + ex.Message); }
+            catch (Exception ex) { Console.WriteLine(ex.Message); }
             finally { connection.Close(); }
             return isFound;
         }
@@ -123,7 +123,7 @@ namespace DataAccessLayer
                 connection.Open();
                 rowsaffected = command.ExecuteNonQuery();
             }
-            catch (Exception ex) { Console.WriteLine("exist" + ex.Message); }
+            catch (Exception ex) { Console.WriteLine(ex.Message); }
             finally { connection.Close(); }
             return rowsaffected > 0;
         }
@@ -172,7 +172,7 @@ namespace DataAccessLayer
                 connection.Open();
                 rowsAffected = command.ExecuteNonQuery();
             }
-            catch (Exception ex) { Console.WriteLine("Update" + ex.Message); }
+            catch (Exception ex) { Console.WriteLine(ex.Message); }
             finally
             {
                 connection.Close();
@@ -196,7 +196,7 @@ namespace DataAccessLayer
 
                 reader.Close();
             }
-            catch (Exception ex) { Console.WriteLine("getall" + ex.Message); }
+            catch (Exception ex) { Console.WriteLine(ex.Message); }
             finally { connection.Close(); }
             return table;
         }

@@ -65,6 +65,24 @@ namespace DataAccessLayer
             finally { connection.Close(); }
             return isFound;
         }
+
+        public static int GetApplicationIDByLDLAppID(int LocalDrivingLicenseApplicationID)
+        {
+            int ApplicationID = -1;
+
+            using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
+            {
+                string query = "SELECT ApplicationID FROM LocalDrivingLicenseApplications WHERE LocalDrivingLicenseApplicationID = @ID";
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@ID", LocalDrivingLicenseApplicationID);
+                connection.Open();
+                object result = command.ExecuteScalar();
+                if (result != null)
+                    ApplicationID = Convert.ToInt32(result);
+            }
+
+            return ApplicationID;
+        }
         public static bool DeleteLDLA(int LocalDrivingLicenseApplicationID)
         {
             int rowsaffected = 0;
@@ -107,12 +125,20 @@ namespace DataAccessLayer
             }
             return rowsAffected > 0;
         }
-        public static DataTable GetAllLDLAs()
+        public static DataTable GetAllLDLAs(string columnName=null,string value=null)
         {
             DataTable table = new DataTable();
             SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
-            string query = "Select * FROM LocalDrivingLicenseApplications";
+            string query = "select LocalDrivingLicenseApplicationID as [L.D.L.AppID] , ClassName,NationalNo,FullName,ApplicationDate,PassedTestCount as [Passed Tests], Status  from LocalDrivingLicenseApplications_View";
+            if (!string.IsNullOrEmpty(columnName) && !string.IsNullOrEmpty(value))
+            {
+                query += $" WHERE {columnName} LIKE @Value";
+            }
             SqlCommand command = new SqlCommand(query, connection);
+            if (!string.IsNullOrEmpty(columnName) && !string.IsNullOrEmpty(value))
+            {
+                command.Parameters.AddWithValue("@Value", $"{value}%");
+            }
             try
             {
                 connection.Open();
@@ -127,6 +153,26 @@ namespace DataAccessLayer
             catch (Exception ex) { Console.WriteLine(ex.Message); }
             finally { connection.Close(); }
             return table;
+        }
+
+        public static bool IsPersonLinkedWithSameClass(int ApplicantPersonID, int LicenseClassID)
+        {
+            bool IsFound = false;
+            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
+            string query = "select top 1 1 from LocalDrivingLicenseFullApplications_View where ApplicantPersonID=@ApplicantPersonID and LicenseClassID=@LicenseClassID and ApplicationStatus <> 2";
+            SqlCommand command = new SqlCommand(query, connection);
+            command.Parameters.AddWithValue("@ApplicantPersonID", ApplicantPersonID);
+            command.Parameters.AddWithValue("@LicenseClassID", LicenseClassID);
+            try
+            {
+                connection.Open();
+                object result = command.ExecuteScalar();
+                IsFound = (result != null);
+
+            }
+            catch (Exception ex) { Console.WriteLine(ex.Message); }
+            finally { connection.Close(); }
+            return IsFound;
         }
 
     }

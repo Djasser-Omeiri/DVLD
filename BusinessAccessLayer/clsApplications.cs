@@ -55,6 +55,10 @@ namespace BusinessAccessLayer
         {
             return ApplicationsData.UpdateApplication(this.ApplicationID, this.ApplicantPersonID, this.ApplicationDate, this.ApplicationTypeID, this.ApplicationStatus, this.LastStatutDate, this.PaidFees, this.CreatedByUserID);
         }
+        public static bool SetStatusToCancelled(int ApplicationID)
+        {
+            return ApplicationsData.SetStatus(ApplicationID, 2, DateTime.Now);
+        }
         public static bool DeleteApplication(int ApplicationID)
         {
             return ApplicationsData.DeleteApplication(ApplicationID);

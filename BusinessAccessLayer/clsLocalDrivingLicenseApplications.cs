@@ -62,9 +62,13 @@ namespace BusinessAccessLayer
             return LocalDrivingLicenseApplicationsData.DeleteLDLA(LocalDrivingLicenseApplicationID);
         }
 
-        public static DataTable GetAllLDLAs()
+        public static DataTable GetAllLDLAs(string columnName=null,string value=null)
         {
-            return LocalDrivingLicenseApplicationsData.GetAllLDLAs();
+            return LocalDrivingLicenseApplicationsData.GetAllLDLAs(columnName,value);
+        }
+        public static int GetApplicationIDByLDLAppID(int LocalDrivingLicenseApplicationID)
+        {
+            return LocalDrivingLicenseApplicationsData.GetApplicationIDByLDLAppID(LocalDrivingLicenseApplicationID);
         }
 
         public bool Save()
@@ -105,6 +109,10 @@ namespace BusinessAccessLayer
             {
                 return null;
             }
+        }
+        public static bool IsPersonLinkedWithSameClass(int PersonID, int LicenseClassID)
+        {
+            return LocalDrivingLicenseApplicationsData.IsPersonLinkedWithSameClass(PersonID, LicenseClassID);
         }
     }
 

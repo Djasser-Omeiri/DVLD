@@ -1,5 +1,6 @@
 ﻿using BusinessAccessLayer;
 using DVLD.ApplicationTypes;
+using DVLD.LocalLicense_Forms;
 using DVLD.TestTypes;
 using DVLD.Users_Forms;
 using System;
@@ -73,6 +74,11 @@ namespace DVLD
         private void localLicenseToolStripMenuItem_Click(object sender, EventArgs e)
         {
             new frmLocalLicenseInfo(_Currentuser).ShowDialog();
+        }
+
+        private void localDdrivingToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new frmManageLDLA(_Currentuser).ShowDialog();
         }
     }
 }

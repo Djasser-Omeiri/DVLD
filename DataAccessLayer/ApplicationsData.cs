@@ -150,5 +150,30 @@ namespace DataAccessLayer
             finally { connection.Close(); }
             return table;
         }
+
+        public static bool SetStatus(int ApplicationID,int ApplicationStatus, DateTime LastStatusDate)
+        {
+            int rowsAffected = 0;
+            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
+            string query = @"UPDATE Applications set
+                           ApplicationStatus=@ApplicationStatus,
+                           LastStatusDate=@LastStatusDate
+                           Where ApplicationID=@ApplicationID";
+            SqlCommand command = new SqlCommand(query, connection);
+            command.Parameters.AddWithValue("@ApplicationID", ApplicationID);
+            command.Parameters.AddWithValue("@ApplicationStatus", ApplicationStatus);
+            command.Parameters.AddWithValue("@LastStatusDate", LastStatusDate);
+            try
+            {
+                connection.Open();
+                rowsAffected = command.ExecuteNonQuery();
+            }
+            catch (Exception ex) { Console.WriteLine(ex.Message); }
+            finally
+            {
+                connection.Close();
+            }
+            return rowsAffected > 0;
+        }
     }
 }
