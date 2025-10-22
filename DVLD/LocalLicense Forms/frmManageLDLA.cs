@@ -79,5 +79,10 @@ namespace DVLD.LocalLicense_Forms
             }
             
         }
+
+        private void scheduleToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new frmVisionTest(Convert.ToInt32(dgvLDLA.CurrentRow.Cells["L.D.L.AppID"].Value),_CurrentUser.UserID).ShowDialog();
+        }
     }
 }

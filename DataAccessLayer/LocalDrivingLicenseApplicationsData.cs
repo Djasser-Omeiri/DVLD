@@ -125,7 +125,7 @@ namespace DataAccessLayer
             }
             return rowsAffected > 0;
         }
-        public static DataTable GetAllLDLAs(string columnName=null,string value=null)
+        public static DataTable GetAllLDLAs(string columnName = null, string value = null)
         {
             DataTable table = new DataTable();
             SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
@@ -173,6 +173,48 @@ namespace DataAccessLayer
             catch (Exception ex) { Console.WriteLine(ex.Message); }
             finally { connection.Close(); }
             return IsFound;
+        }
+        public static bool getAllInfos(int LocalDrivingLicenseApplicationID, ref string ClassName, ref int PassedTestCount, ref int ApplicationID, ref string Status, ref decimal PaidFees, ref string ApplicationTypeTitle, ref string FullName, ref DateTime ApplicationDate, ref DateTime LastStatusDate, ref string UserName,ref int ApplicantPersonID)
+        {
+            bool isFound = false;
+            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
+            string query = @"SELECT fv.LocalDrivingLicenseApplicationID,v.ClassName,v.PassedTestCount,
+                           fv.ApplicationID,v.Status,fv.PaidFees,at.ApplicationTypeTitle,v.FullName,fv.ApplicantPersonID,fv.ApplicationDate,
+                           fv.LastStatusDate,u.UserName from LocalDrivingLicenseFullApplications_View fv 
+                           inner join LocalDrivingLicenseApplications_View v on v.LocalDrivingLicenseApplicationID=fv.LocalDrivingLicenseApplicationID 
+                           inner join ApplicationTypes at on at.ApplicationTypeID=fv.ApplicationTypeID 
+                           inner join Users u on u.UserID=fv.CreatedByUserID where fv.LocalDrivingLicenseApplicationID= @LocalDrivingLicenseApplicationID";
+            SqlCommand command = new SqlCommand(query, connection);
+            command.Parameters.AddWithValue("@LocalDrivingLicenseApplicationID", LocalDrivingLicenseApplicationID);
+            try
+            {
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+                if (reader.Read())
+                {
+                    isFound = true;
+                    ClassName = reader["ClassName"].ToString();
+                    PassedTestCount = (int)reader["PassedTestCount"];
+                    ApplicationID = (int)reader["ApplicationID"];
+                    Status = reader["Status"].ToString();
+                    PaidFees = (decimal)reader["PaidFees"];
+                    ApplicationTypeTitle =reader["ApplicationTypeTitle"].ToString();
+                    FullName = reader["FullName"].ToString();
+                    ApplicationDate = (DateTime)reader["ApplicationDate"];
+                    LastStatusDate = (DateTime)reader["LastStatusDate"];
+                    UserName =reader["UserName"].ToString();
+                    ApplicantPersonID = (int)reader["ApplicantPersonID"];
+                }
+                else
+                {
+                    isFound = false;
+                }
+
+                reader.Close();
+            }
+            catch (Exception ex) { Console.WriteLine(ex.Message); }
+            finally { connection.Close(); }
+            return isFound;
         }
 
     }

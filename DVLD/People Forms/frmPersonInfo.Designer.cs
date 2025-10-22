@@ -153,6 +153,7 @@
             this.btnSave.Size = new System.Drawing.Size(131, 47);
             this.btnSave.TabIndex = 62;
             this.btnSave.Text = "Save";
+            this.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
@@ -534,6 +535,7 @@
             this.btnClose.Size = new System.Drawing.Size(131, 47);
             this.btnClose.TabIndex = 63;
             this.btnClose.Text = "Close";
+            this.btnClose.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 

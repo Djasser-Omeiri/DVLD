@@ -25,10 +25,10 @@ namespace BusinessAccessLayer
             Mode = enMode.AddNew;
         }
 
-        private clsLocalDrivingLicenseApplications(int LocalDrivingLicenseApplicationID, clsApplications application, int LicenseClassID)
+        private clsLocalDrivingLicenseApplications(int LocalDrivingLicenseApplicationID, clsApplications ApplicationInfo, int LicenseClassID)
         {
             this.LocalDrivingLicenseApplicationID = LocalDrivingLicenseApplicationID;
-            this.ApplicationInfo = application;
+            this.ApplicationInfo = ApplicationInfo;
             this.LicenseClassID = LicenseClassID;
             Mode = enMode.Update;
         }

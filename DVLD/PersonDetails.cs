@@ -37,7 +37,5 @@ namespace DVLD
         {
             new frmPersonInfo(int.Parse(lblinputPersonID.Text)).ShowDialog();
         }
-
-        
     }
 }

@@ -49,6 +49,8 @@
     <Compile Include="LocalDrivingLicenseApplicationsData.cs" />
     <Compile Include="PersonData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestAppointmentsData.cs" />
+    <Compile Include="TestData.cs" />
     <Compile Include="TestTypesData.cs" />
     <Compile Include="UserData.cs" />
   </ItemGroup>
