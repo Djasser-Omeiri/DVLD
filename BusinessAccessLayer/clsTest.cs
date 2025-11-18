@@ -36,9 +36,23 @@ namespace BusinessAccessLayer
             clsTestAppointments TestAppointments = new clsTestAppointments();
             TestAppointments=clsTestAppointments.FindTestAppointmentsByID(TestAppointmentID);
             TestAppointments.IsLocked = true;
-            TestAppointments.UpdateAppointment();
+            TestAppointments.Save();
             TestID = TestData.AddTest(this.TestAppointmentID, this.TestResult,this.Notes,this.CreatedByUserID);
             return TestID != -1;
+        }
+
+        public static bool IsPassed(int TestID)
+        {
+            return TestData.GetTestResult(TestID);
+        }
+
+        public static clsTest FindTestByAppointmentID(int TestAppointmentID)
+        {
+            int TestID = -1; bool TestResult = true; string Notes = ""; int CreatedByUserID = -1;
+            if (TestData.GetTestByTestAppointmentID(ref TestID, TestAppointmentID, ref TestResult, ref Notes, ref CreatedByUserID))
+                return new clsTest(TestID, TestAppointmentID, TestResult, Notes, CreatedByUserID);
+            else
+                return null;
         }
     }
 }

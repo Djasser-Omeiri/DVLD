@@ -43,7 +43,7 @@ namespace DataAccessLayer
             }
             return ApplicationID;
         }
-        public static bool GetApplicationByID(int ApplicationID, ref int ApplicantPersonID, ref DateTime ApplicationDate, ref int ApplicationTypeID, ref int ApplicationStatus, ref DateTime LastStatutDate, ref decimal PaidFees
+        public static bool GetApplicationByID(int ApplicationID, ref int ApplicantPersonID, ref DateTime ApplicationDate, ref int ApplicationTypeID, ref int ApplicationStatus, ref DateTime LastStatusDate, ref decimal PaidFees
             , ref int CreatedByUserID)
         {
             bool isFound = false;
@@ -62,7 +62,7 @@ namespace DataAccessLayer
                     ApplicationDate = (DateTime)reader["ApplicationDate"];
                     ApplicationTypeID = (int)reader["ApplicationTypeID"];
                     ApplicationStatus = (int)reader["ApplicationStatus"];
-                    LastStatutDate = (DateTime)reader["LastStatutDate"];
+                    LastStatusDate = (DateTime)reader["LastStatusDate"];
                     PaidFees = (decimal)reader["PaidFees"];
                     CreatedByUserID = (int)reader["CreatedByUserID"];
 
@@ -94,7 +94,7 @@ namespace DataAccessLayer
             return rowsaffected > 0;
         }
 
-        public static bool UpdateApplication(int ApplicationID, int ApplicantPersonID, DateTime ApplicationDate, int ApplicationTypeID, int ApplicationStatus, DateTime LastStatutDate, decimal PaidFees
+        public static bool UpdateApplication(int ApplicationID, int ApplicantPersonID, DateTime ApplicationDate, int ApplicationTypeID, int ApplicationStatus, DateTime LastStatusDate, decimal PaidFees
             , int CreatedByUserID)
         {
             int rowsAffected = 0;
@@ -104,7 +104,7 @@ namespace DataAccessLayer
                            ApplicationDate=@ApplicationDate,
                            ApplicationTypeID=@ApplicationTypeID,
                            ApplicationStatus=@ApplicationStatus,
-                           LastStatutDate=@LastStatutDate,
+                           LastStatusDate=@LastStatusDate,
                            PaidFees=@PaidFees,
                            CreatedByUserID=@CreatedByUserID
                            Where ApplicationID=@ApplicationID";
@@ -114,7 +114,7 @@ namespace DataAccessLayer
             command.Parameters.AddWithValue("@ApplicationDate", ApplicationDate);
             command.Parameters.AddWithValue("@ApplicationTypeID", ApplicationTypeID);
             command.Parameters.AddWithValue("@ApplicationStatus", ApplicationStatus);
-            command.Parameters.AddWithValue("@LastStatutDate", LastStatutDate);
+            command.Parameters.AddWithValue("@LastStatusDate", LastStatusDate);
             command.Parameters.AddWithValue("@PaidFees", PaidFees);
             command.Parameters.AddWithValue("@CreatedByUserID", CreatedByUserID);
             try

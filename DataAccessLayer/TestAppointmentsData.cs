@@ -86,6 +86,37 @@ namespace DataAccessLayer
             }
             return rowsAffected>0;
         }
+
+        /*public static bool UpdateRetakeAppointment(int TestAppointmentID,int? RetakeTestApplicationID)
+        {
+            int rowsAffected = 0;
+            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
+            string query = @"UPDATE TestAppointments 
+                             SET 
+                                 RetakeTestApplicationID = @RetakeTestApplicationID
+                             WHERE TestAppointmentID = @TestAppointmentID";
+            SqlCommand command = new SqlCommand(query, connection);
+            command.Parameters.AddWithValue("@TestAppointmentID", TestAppointmentID);
+            if (RetakeTestApplicationID.HasValue)
+            {
+                command.Parameters.AddWithValue("@RetakeTestApplicationID", RetakeTestApplicationID);
+            }
+            else
+            {
+                command.Parameters.AddWithValue("@RetakeTestApplicationID", DBNull.Value);
+            }
+            try
+            {
+                connection.Open();
+                rowsAffected = command.ExecuteNonQuery();
+            }
+            catch (Exception ex) { Console.WriteLine(ex.Message); }
+            finally
+            {
+                connection.Close();
+            }
+            return rowsAffected > 0;
+        }*/
         public static bool GetAppointmentLockStatus(int TestAppointmentID)
         {
             bool isLocked = false;
@@ -108,6 +139,30 @@ namespace DataAccessLayer
                 connection.Close();
             }
             return isLocked;
+        }
+        public static bool isAppointmentExist(int LocalDrivingLicenseApplicationID, int TestTypeID)
+        {
+            bool IsExist = false;
+            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
+            string query = "SELECT TOP 1 1 FROM TestAppointments WHERE LocalDrivingLicenseApplicationID = @LocalDrivingLicenseApplicationID AND TestTypeID=@TestTypeID";
+            SqlCommand command = new SqlCommand(query, connection);
+            command.Parameters.AddWithValue("@LocalDrivingLicenseApplicationID", LocalDrivingLicenseApplicationID);
+            command.Parameters.AddWithValue("@TestTypeID", TestTypeID);
+            try
+            {
+                connection.Open();
+                int count = (int)command.ExecuteScalar();
+                if (count > 0)
+                {
+                    IsExist = true;
+                }
+            }
+            catch (Exception ex) { Console.WriteLine(ex.Message); }
+            finally
+            {
+                connection.Close();
+            }
+            return IsExist;
         }
         public static bool GetAppointmentByID(int TestAppointmentID, ref int TestTypeID, ref int LocalDrivingLicenseApplicationID, ref DateTime AppointmentDate, ref Decimal PaidFees, ref int CreatedByUserID, ref bool IsLocked
             , ref int? RetakeTestApplicationID)

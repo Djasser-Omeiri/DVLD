@@ -35,7 +35,7 @@ namespace DVLD
             lblinputName.Text=_clsApplicationDetails.FullName;
             lblinputTrial.Text="0";//////Create method to get trial count
             lblinputFees.Text=clsTestTypes.GetTestTypeByID(_clsTestAppointments.TestTypeID).TestTypeFees.ToString();
-            lblinputTestID.Text="Not Taken";//Function here to get TestID if taken
+            lblinputTestID.Text="Not Taken";
             lblinputDate.Text=_clsTestAppointments.AppointmentDate.ToString();
         }
 
@@ -59,6 +59,7 @@ namespace DVLD
             _clsTest.Notes = tbNotes.Text==string.Empty?"":tbNotes.Text;
             _clsTest.CreatedByUserID = _UserID;
             MessageBox.Show(_clsTest.AddTest()?"Test Result Saved Successfully.":"Failed to Save Test Result.","Result",MessageBoxButtons.OK,MessageBoxIcon.Information);
+            lblinputTestID.Text=_clsTest.TestID.ToString();
         }
     }
 }

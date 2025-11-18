@@ -35,7 +35,7 @@
             this.lblCount = new System.Windows.Forms.Label();
             this.lblRecord = new System.Windows.Forms.Label();
             this.dgvLDLA = new System.Windows.Forms.DataGridView();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.menu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.showApplicationDetailsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.editApplicationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -44,9 +44,9 @@
             this.cancelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.sechduleTestsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.scheduleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.scheduleWrittenTestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.scheduleToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.ScheduleVisionTestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ScheduleWrittenTestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ScheduleStreetTestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.issueDrivingLicenseFirstTimeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
@@ -57,7 +57,7 @@
             this.btnAddLDLA = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLDLA)).BeginInit();
-            this.contextMenuStrip1.SuspendLayout();
+            this.menu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -129,7 +129,7 @@
             this.dgvLDLA.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvLDLA.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable;
             this.dgvLDLA.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvLDLA.ContextMenuStrip = this.contextMenuStrip1;
+            this.dgvLDLA.ContextMenuStrip = this.menu;
             this.dgvLDLA.Location = new System.Drawing.Point(11, 330);
             this.dgvLDLA.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dgvLDLA.Name = "dgvLDLA";
@@ -139,10 +139,10 @@
             this.dgvLDLA.Size = new System.Drawing.Size(1284, 350);
             this.dgvLDLA.TabIndex = 12;
             // 
-            // contextMenuStrip1
+            // menu
             // 
-            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menu.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.menu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.showApplicationDetailsToolStripMenuItem,
             this.toolStripSeparator1,
             this.editApplicationToolStripMenuItem,
@@ -157,8 +157,9 @@
             this.showLicenseToolStripMenuItem,
             this.toolStripSeparator6,
             this.showPersonLicenseHistoryToolStripMenuItem});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(297, 276);
+            this.menu.Name = "contextMenuStrip1";
+            this.menu.Size = new System.Drawing.Size(297, 276);
+            this.menu.Opening += new System.ComponentModel.CancelEventHandler(this.menu_Opening);
             // 
             // showApplicationDetailsToolStripMenuItem
             // 
@@ -207,35 +208,36 @@
             // sechduleTestsToolStripMenuItem
             // 
             this.sechduleTestsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.scheduleToolStripMenuItem,
-            this.scheduleWrittenTestToolStripMenuItem,
-            this.scheduleToolStripMenuItem1});
+            this.ScheduleVisionTestToolStripMenuItem,
+            this.ScheduleWrittenTestToolStripMenuItem,
+            this.ScheduleStreetTestToolStripMenuItem});
             this.sechduleTestsToolStripMenuItem.Image = global::DVLD.Properties.Resources.Schedule_Test_32;
             this.sechduleTestsToolStripMenuItem.Name = "sechduleTestsToolStripMenuItem";
             this.sechduleTestsToolStripMenuItem.Size = new System.Drawing.Size(296, 26);
             this.sechduleTestsToolStripMenuItem.Text = "Schedule Tests";
             // 
-            // scheduleToolStripMenuItem
+            // ScheduleVisionTestToolStripMenuItem
             // 
-            this.scheduleToolStripMenuItem.Image = global::DVLD.Properties.Resources.Vision_Test_32;
-            this.scheduleToolStripMenuItem.Name = "scheduleToolStripMenuItem";
-            this.scheduleToolStripMenuItem.Size = new System.Drawing.Size(235, 26);
-            this.scheduleToolStripMenuItem.Text = "Schedule Vision Test";
-            this.scheduleToolStripMenuItem.Click += new System.EventHandler(this.scheduleToolStripMenuItem_Click);
+            this.ScheduleVisionTestToolStripMenuItem.Image = global::DVLD.Properties.Resources.Vision_Test_32;
+            this.ScheduleVisionTestToolStripMenuItem.Name = "ScheduleVisionTestToolStripMenuItem";
+            this.ScheduleVisionTestToolStripMenuItem.Size = new System.Drawing.Size(235, 26);
+            this.ScheduleVisionTestToolStripMenuItem.Text = "Schedule Vision Test";
+            this.ScheduleVisionTestToolStripMenuItem.Click += new System.EventHandler(this.scheduleVisionTestToolStripMenuItem_Click);
             // 
-            // scheduleWrittenTestToolStripMenuItem
+            // ScheduleWrittenTestToolStripMenuItem
             // 
-            this.scheduleWrittenTestToolStripMenuItem.Image = global::DVLD.Properties.Resources.Written_Test_32;
-            this.scheduleWrittenTestToolStripMenuItem.Name = "scheduleWrittenTestToolStripMenuItem";
-            this.scheduleWrittenTestToolStripMenuItem.Size = new System.Drawing.Size(235, 26);
-            this.scheduleWrittenTestToolStripMenuItem.Text = "Schedule Written Test";
+            this.ScheduleWrittenTestToolStripMenuItem.Image = global::DVLD.Properties.Resources.Written_Test_32;
+            this.ScheduleWrittenTestToolStripMenuItem.Name = "ScheduleWrittenTestToolStripMenuItem";
+            this.ScheduleWrittenTestToolStripMenuItem.Size = new System.Drawing.Size(235, 26);
+            this.ScheduleWrittenTestToolStripMenuItem.Text = "Schedule Written Test";
+            this.ScheduleWrittenTestToolStripMenuItem.Click += new System.EventHandler(this.scheduleWrittenTestToolStripMenuItem_Click);
             // 
-            // scheduleToolStripMenuItem1
+            // ScheduleStreetTestToolStripMenuItem
             // 
-            this.scheduleToolStripMenuItem1.Image = global::DVLD.Properties.Resources.Street_Test_32;
-            this.scheduleToolStripMenuItem1.Name = "scheduleToolStripMenuItem1";
-            this.scheduleToolStripMenuItem1.Size = new System.Drawing.Size(235, 26);
-            this.scheduleToolStripMenuItem1.Text = "Schedule Street Test";
+            this.ScheduleStreetTestToolStripMenuItem.Image = global::DVLD.Properties.Resources.Street_Test_32;
+            this.ScheduleStreetTestToolStripMenuItem.Name = "ScheduleStreetTestToolStripMenuItem";
+            this.ScheduleStreetTestToolStripMenuItem.Size = new System.Drawing.Size(235, 26);
+            this.ScheduleStreetTestToolStripMenuItem.Text = "Schedule Street Test";
             // 
             // toolStripSeparator4
             // 
@@ -326,7 +328,7 @@
             this.Text = "frmManageLDLA";
             this.Load += new System.EventHandler(this.frmManageLDLA_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvLDLA)).EndInit();
-            this.contextMenuStrip1.ResumeLayout(false);
+            this.menu.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -344,7 +346,7 @@
         private System.Windows.Forms.Button btnAddLDLA;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ContextMenuStrip menu;
         private System.Windows.Forms.ToolStripMenuItem showApplicationDetailsToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem editApplicationToolStripMenuItem;
@@ -359,8 +361,8 @@
         private System.Windows.Forms.ToolStripMenuItem showLicenseToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
         private System.Windows.Forms.ToolStripMenuItem showPersonLicenseHistoryToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem scheduleToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem scheduleWrittenTestToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem scheduleToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem ScheduleVisionTestToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ScheduleWrittenTestToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ScheduleStreetTestToolStripMenuItem;
     }
 }

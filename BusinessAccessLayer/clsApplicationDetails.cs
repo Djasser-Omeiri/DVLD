@@ -88,5 +88,17 @@ namespace BusinessAccessLayer
                 return null;
             }
         }
+        public static int getPassedTestCountByID(int LocalDrivingLicenseApplicationID)
+        {
+            int PassedTestCount = 0; 
+            if (LocalDrivingLicenseApplicationsData.getPassedTestCount(LocalDrivingLicenseApplicationID,ref PassedTestCount))
+            {
+                return PassedTestCount;
+            }
+            else
+            {
+                return 0 ;
+            }
+        }
     }
 }

@@ -10,6 +10,8 @@ namespace BusinessAccessLayer
 {
     public class clsTestAppointments
     {
+        public enum enMode { AddNew = 0, Update = 1 };
+        enMode Mode = enMode.AddNew;
         public int TestAppointmentID { set; get; }
         public int TestTypeID { set; get; }
         public int LocalDrivingLicenseApplicationID { set; get; }
@@ -28,6 +30,7 @@ namespace BusinessAccessLayer
             CreatedByUserID = -1;
             IsLocked = false;
             RetakeTestApplicationID = -1;
+            Mode = enMode.AddNew;
         }
         private clsTestAppointments(int TestAppointmentID, int TestTypeID, int LocalDrivingLicenseApplicationID, DateTime AppointmentDate, Decimal PaidFees, int CreatedByUserID, bool IsLocked
             , int? RetakeTestApplicationID)
@@ -40,18 +43,23 @@ namespace BusinessAccessLayer
             this.CreatedByUserID = CreatedByUserID;
             this.IsLocked = IsLocked;
             this.RetakeTestApplicationID = RetakeTestApplicationID;
+            Mode = enMode.Update;
         }
-        public bool ScheduleTest()
+        private bool _ScheduleTest()
         {
             TestAppointmentID=TestAppointmentsData.AddAppointment(this.TestTypeID, this.LocalDrivingLicenseApplicationID, this.AppointmentDate, this.PaidFees, this.CreatedByUserID, this.IsLocked
                 , this.RetakeTestApplicationID);
             return TestAppointmentID!= -1;
         }
-        public bool UpdateAppointment()
+        private bool _UpdateAppointment()
         {
             return TestAppointmentsData.UpdateAppointment(this.TestAppointmentID, this.AppointmentDate, this.PaidFees, this.IsLocked
                 , this.RetakeTestApplicationID);
         }
+        /*public bool UpdateRetakeTestApplicationID()
+        {
+            return TestAppointmentsData.UpdateRetakeAppointment(this.TestAppointmentID, this.RetakeTestApplicationID);
+        }*/
         public static clsTestAppointments FindTestAppointmentsByID(int TestAppointmentID)
         {
             int TestTypeID = -1; int LocalDrivingLicenseApplicationID = -1; DateTime AppointmentDate=DateTime.Now;decimal PaidFees = 0;int CreatedByUserID = -1;bool IsLocked = false;
@@ -65,9 +73,40 @@ namespace BusinessAccessLayer
             else
                 return null;
         }
+        public static bool CheckAddAccess(int TestAppointmentID, int LocalDrivingLicenseApplicationID, int TestTypeID)
+        {
+            if(TestAppointmentsData.isAppointmentExist(LocalDrivingLicenseApplicationID, TestTypeID))
+            {
+                return TestAppointmentsData.GetAppointmentLockStatus(TestAppointmentID);
+            }
+            return true;
+        }
         public static DataTable GetAllAppointmentsBy(int LocalDrivingLicenseApplicationID, int TestTypeID)
         {
             return TestAppointmentsData.GetAllAppointmentsBy(LocalDrivingLicenseApplicationID , TestTypeID);
+        }
+        public static bool isLocked(int TestAppointmentID)
+        {
+            return TestAppointmentsData.GetAppointmentLockStatus(TestAppointmentID);
+        }
+        public bool Save()
+        {
+            switch (Mode)
+            {
+                case (enMode.AddNew):
+                    if (_ScheduleTest())
+                    {
+                        Mode = enMode.Update;
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                case (enMode.Update):
+                    return _UpdateAppointment();
+            }
+            return false;
         }
     }
 }

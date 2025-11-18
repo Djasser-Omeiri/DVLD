@@ -217,5 +217,33 @@ namespace DataAccessLayer
             return isFound;
         }
 
+        public static bool getPassedTestCount(int LocalDrivingLicenseApplicationID, ref int PassedTestCount)
+        {
+            bool isFound = false;
+            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
+            string query = @"SELECT PassedTestCount from LocalDrivingLicenseApplications_View where LocalDrivingLicenseApplicationID= @LocalDrivingLicenseApplicationID";
+            SqlCommand command = new SqlCommand(query, connection);
+            command.Parameters.AddWithValue("@LocalDrivingLicenseApplicationID", LocalDrivingLicenseApplicationID);
+            try
+            {
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+                if (reader.Read())
+                {
+                    isFound = true;
+                    PassedTestCount = (int)reader["PassedTestCount"];
+                }
+                else
+                {
+                    isFound = false;
+                }
+
+                reader.Close();
+            }
+            catch (Exception ex) { Console.WriteLine(ex.Message); }
+            finally { connection.Close(); }
+            return isFound;
+        }
+
     }
 }

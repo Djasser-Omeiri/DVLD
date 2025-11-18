@@ -24,6 +24,7 @@ namespace DVLD.LocalLicense_Forms
             cbFilters.SelectedIndex = 0;
             dgvLDLA.DataSource = clsLocalDrivingLicenseApplications.GetAllLDLAs();
             lblCount.Text = (dgvLDLA.Rows.Count).ToString();
+
         }
 
         private void frmManageLDLA_Load(object sender, EventArgs e)
@@ -60,7 +61,7 @@ namespace DVLD.LocalLicense_Forms
             }
             else
             {
-                dgvLDLA.DataSource = clsLocalDrivingLicenseApplications.GetAllLDLAs(column,value);
+                dgvLDLA.DataSource = clsLocalDrivingLicenseApplications.GetAllLDLAs(column, value);
             }
             lblCount.Text = (dgvLDLA.Rows.Count).ToString();
         }
@@ -72,17 +73,50 @@ namespace DVLD.LocalLicense_Forms
 
         private void cancelToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Are you sure you want to cancel this application?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question)==DialogResult.Yes)
+            if (MessageBox.Show("Are you sure you want to cancel this application?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 clsApplications.SetStatusToCancelled(clsLocalDrivingLicenseApplications.GetApplicationIDByLDLAppID(Convert.ToInt32(dgvLDLA.CurrentRow.Cells[0].Value)));
                 _refreshLDLAList();
             }
-            
+
         }
 
-        private void scheduleToolStripMenuItem_Click(object sender, EventArgs e)
+        private void scheduleVisionTestToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new frmVisionTest(Convert.ToInt32(dgvLDLA.CurrentRow.Cells["L.D.L.AppID"].Value),_CurrentUser.UserID).ShowDialog();
+            new frmVisionTest(Convert.ToInt32(dgvLDLA.CurrentRow.Cells["L.D.L.AppID"].Value), _CurrentUser.UserID).ShowDialog();
+            _refreshLDLAList();
+        }
+
+        private void scheduleWrittenTestToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void menu_Opening(object sender, CancelEventArgs e)
+        {
+            switch (Convert.ToInt32(dgvLDLA.CurrentRow.Cells["Passed Tests"].Value))
+            {
+                case 0:
+                    ScheduleVisionTestToolStripMenuItem.Enabled = true;
+                    ScheduleWrittenTestToolStripMenuItem.Enabled = false;
+                    ScheduleStreetTestToolStripMenuItem.Enabled = false;
+                    break;
+                case 1:
+                    ScheduleVisionTestToolStripMenuItem.Enabled = false;
+                    ScheduleWrittenTestToolStripMenuItem.Enabled = true;
+                    ScheduleStreetTestToolStripMenuItem.Enabled = false;
+                    break;
+                case 2:
+                    ScheduleVisionTestToolStripMenuItem.Enabled = false;
+                    ScheduleWrittenTestToolStripMenuItem.Enabled = false;
+                    ScheduleStreetTestToolStripMenuItem.Enabled = true;
+                    break;
+                default:
+                    ScheduleVisionTestToolStripMenuItem.Enabled = false;
+                    ScheduleWrittenTestToolStripMenuItem.Enabled = false;
+                    ScheduleStreetTestToolStripMenuItem.Enabled = false;
+                    break;
+            }
         }
     }
 }
