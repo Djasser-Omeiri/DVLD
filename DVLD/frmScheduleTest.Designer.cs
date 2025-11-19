@@ -30,7 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             this.lblTitle = new System.Windows.Forms.Label();
-            this.gbVisionTest = new System.Windows.Forms.GroupBox();
+            this.gbTest = new System.Windows.Forms.GroupBox();
+            this.lblSubTitle = new System.Windows.Forms.Label();
             this.lblinputid = new System.Windows.Forms.Label();
             this.pictureBox8 = new System.Windows.Forms.PictureBox();
             this.lblid = new System.Windows.Forms.Label();
@@ -49,7 +50,7 @@
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.lblRID = new System.Windows.Forms.Label();
             this.dtpDate = new System.Windows.Forms.DateTimePicker();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.MainPictureBox = new System.Windows.Forms.PictureBox();
             this.lblFees = new System.Windows.Forms.Label();
             this.lblinputFees = new System.Windows.Forms.Label();
             this.pictureBox6 = new System.Windows.Forms.PictureBox();
@@ -63,15 +64,14 @@
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.btnClose = new System.Windows.Forms.Button();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.lblSubTitle = new System.Windows.Forms.Label();
-            this.gbVisionTest.SuspendLayout();
+            this.gbTest.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).BeginInit();
             this.gbRetakeTestInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.MainPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
@@ -89,40 +89,50 @@
             this.lblTitle.Text = "Schedule Test";
             this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // gbVisionTest
+            // gbTest
             // 
-            this.gbVisionTest.Controls.Add(this.lblSubTitle);
-            this.gbVisionTest.Controls.Add(this.lblinputid);
-            this.gbVisionTest.Controls.Add(this.pictureBox8);
-            this.gbVisionTest.Controls.Add(this.lblid);
-            this.gbVisionTest.Controls.Add(this.label4);
-            this.gbVisionTest.Controls.Add(this.pictureBox10);
-            this.gbVisionTest.Controls.Add(this.lblinputClass);
-            this.gbVisionTest.Controls.Add(this.btnSave);
-            this.gbVisionTest.Controls.Add(this.gbRetakeTestInfo);
-            this.gbVisionTest.Controls.Add(this.dtpDate);
-            this.gbVisionTest.Controls.Add(this.pictureBox1);
-            this.gbVisionTest.Controls.Add(this.lblFees);
-            this.gbVisionTest.Controls.Add(this.lblinputFees);
-            this.gbVisionTest.Controls.Add(this.pictureBox6);
-            this.gbVisionTest.Controls.Add(this.lblinputName);
-            this.gbVisionTest.Controls.Add(this.pictureBox2);
-            this.gbVisionTest.Controls.Add(this.lblName);
-            this.gbVisionTest.Controls.Add(this.lblDate);
-            this.gbVisionTest.Controls.Add(this.lblTrial);
-            this.gbVisionTest.Controls.Add(this.pictureBox4);
-            this.gbVisionTest.Controls.Add(this.lblinputTrial);
-            this.gbVisionTest.Controls.Add(this.pictureBox5);
-            this.gbVisionTest.Controls.Add(this.lblTitle);
-            this.gbVisionTest.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gbVisionTest.Location = new System.Drawing.Point(15, 26);
-            this.gbVisionTest.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.gbVisionTest.Name = "gbVisionTest";
-            this.gbVisionTest.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.gbVisionTest.Size = new System.Drawing.Size(621, 741);
-            this.gbVisionTest.TabIndex = 79;
-            this.gbVisionTest.TabStop = false;
-            this.gbVisionTest.Text = "Vision Test";
+            this.gbTest.Controls.Add(this.lblSubTitle);
+            this.gbTest.Controls.Add(this.lblinputid);
+            this.gbTest.Controls.Add(this.pictureBox8);
+            this.gbTest.Controls.Add(this.lblid);
+            this.gbTest.Controls.Add(this.label4);
+            this.gbTest.Controls.Add(this.pictureBox10);
+            this.gbTest.Controls.Add(this.lblinputClass);
+            this.gbTest.Controls.Add(this.btnSave);
+            this.gbTest.Controls.Add(this.gbRetakeTestInfo);
+            this.gbTest.Controls.Add(this.dtpDate);
+            this.gbTest.Controls.Add(this.MainPictureBox);
+            this.gbTest.Controls.Add(this.lblFees);
+            this.gbTest.Controls.Add(this.lblinputFees);
+            this.gbTest.Controls.Add(this.pictureBox6);
+            this.gbTest.Controls.Add(this.lblinputName);
+            this.gbTest.Controls.Add(this.pictureBox2);
+            this.gbTest.Controls.Add(this.lblName);
+            this.gbTest.Controls.Add(this.lblDate);
+            this.gbTest.Controls.Add(this.lblTrial);
+            this.gbTest.Controls.Add(this.pictureBox4);
+            this.gbTest.Controls.Add(this.lblinputTrial);
+            this.gbTest.Controls.Add(this.pictureBox5);
+            this.gbTest.Controls.Add(this.lblTitle);
+            this.gbTest.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gbTest.Location = new System.Drawing.Point(15, 26);
+            this.gbTest.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.gbTest.Name = "gbTest";
+            this.gbTest.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.gbTest.Size = new System.Drawing.Size(621, 741);
+            this.gbTest.TabIndex = 79;
+            this.gbTest.TabStop = false;
+            this.gbTest.Text = "Vision Test";
+            // 
+            // lblSubTitle
+            // 
+            this.lblSubTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSubTitle.ForeColor = System.Drawing.Color.Red;
+            this.lblSubTitle.Location = new System.Drawing.Point(9, 282);
+            this.lblSubTitle.Name = "lblSubTitle";
+            this.lblSubTitle.Size = new System.Drawing.Size(603, 38);
+            this.lblSubTitle.TabIndex = 142;
+            this.lblSubTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblinputid
             // 
@@ -328,17 +338,17 @@
             this.dtpDate.TabIndex = 133;
             this.dtpDate.Validating += new System.ComponentModel.CancelEventHandler(this.dtpDate_Validating);
             // 
-            // pictureBox1
+            // MainPictureBox
             // 
-            this.pictureBox1.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.pictureBox1.Image = global::DVLD.Properties.Resources.Vision_512;
-            this.pictureBox1.Location = new System.Drawing.Point(196, 15);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(228, 228);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 78;
-            this.pictureBox1.TabStop = false;
+            this.MainPictureBox.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.MainPictureBox.Image = global::DVLD.Properties.Resources.Vision_512;
+            this.MainPictureBox.Location = new System.Drawing.Point(196, 15);
+            this.MainPictureBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.MainPictureBox.Name = "MainPictureBox";
+            this.MainPictureBox.Size = new System.Drawing.Size(228, 228);
+            this.MainPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.MainPictureBox.TabIndex = 78;
+            this.MainPictureBox.TabStop = false;
             // 
             // lblFees
             // 
@@ -477,29 +487,19 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
-            // lblSubTitle
-            // 
-            this.lblSubTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSubTitle.ForeColor = System.Drawing.Color.Red;
-            this.lblSubTitle.Location = new System.Drawing.Point(9, 282);
-            this.lblSubTitle.Name = "lblSubTitle";
-            this.lblSubTitle.Size = new System.Drawing.Size(603, 38);
-            this.lblSubTitle.TabIndex = 142;
-            this.lblSubTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // frmScheduleTest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(651, 834);
             this.Controls.Add(this.btnClose);
-            this.Controls.Add(this.gbVisionTest);
+            this.Controls.Add(this.gbTest);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "frmScheduleTest";
             this.Text = "frmScheduleTest";
             this.Load += new System.EventHandler(this.frmScheduleTest_Load);
-            this.gbVisionTest.ResumeLayout(false);
-            this.gbVisionTest.PerformLayout();
+            this.gbTest.ResumeLayout(false);
+            this.gbTest.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).EndInit();
             this.gbRetakeTestInfo.ResumeLayout(false);
@@ -507,7 +507,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.MainPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
@@ -520,8 +520,8 @@
         #endregion
 
         private System.Windows.Forms.Label lblTitle;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.GroupBox gbVisionTest;
+        private System.Windows.Forms.PictureBox MainPictureBox;
+        private System.Windows.Forms.GroupBox gbTest;
         private System.Windows.Forms.Label lblinputName;
         private System.Windows.Forms.Label lblRID;
         private System.Windows.Forms.PictureBox pictureBox2;

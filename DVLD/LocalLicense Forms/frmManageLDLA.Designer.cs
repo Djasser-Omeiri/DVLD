@@ -238,6 +238,7 @@
             this.ScheduleStreetTestToolStripMenuItem.Name = "ScheduleStreetTestToolStripMenuItem";
             this.ScheduleStreetTestToolStripMenuItem.Size = new System.Drawing.Size(235, 26);
             this.ScheduleStreetTestToolStripMenuItem.Text = "Schedule Street Test";
+            this.ScheduleStreetTestToolStripMenuItem.Click += new System.EventHandler(this.ScheduleStreetTestToolStripMenuItem_Click);
             // 
             // toolStripSeparator4
             // 

@@ -83,13 +83,20 @@ namespace DVLD.LocalLicense_Forms
 
         private void scheduleVisionTestToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new frmVisionTest(Convert.ToInt32(dgvLDLA.CurrentRow.Cells["L.D.L.AppID"].Value), _CurrentUser.UserID).ShowDialog();
+            new frmTest(Convert.ToInt32(dgvLDLA.CurrentRow.Cells["L.D.L.AppID"].Value), _CurrentUser.UserID,eTest.Vision).ShowDialog();
             _refreshLDLAList();
         }
 
         private void scheduleWrittenTestToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            new frmTest(Convert.ToInt32(dgvLDLA.CurrentRow.Cells["L.D.L.AppID"].Value), _CurrentUser.UserID, eTest.Written).ShowDialog();
+            _refreshLDLAList();
+        }
 
+        private void ScheduleStreetTestToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new frmTest(Convert.ToInt32(dgvLDLA.CurrentRow.Cells["L.D.L.AppID"].Value), _CurrentUser.UserID, eTest.Street).ShowDialog();
+            _refreshLDLAList();
         }
 
         private void menu_Opening(object sender, CancelEventArgs e)
@@ -118,5 +125,7 @@ namespace DVLD.LocalLicense_Forms
                     break;
             }
         }
+
+        
     }
 }

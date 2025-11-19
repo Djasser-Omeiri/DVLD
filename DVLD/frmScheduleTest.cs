@@ -21,12 +21,14 @@ namespace DVLD
         private clsApplications _application;
         public enum enMode { AddNew = 0, Update = 1, Retake = 2 };
         private enMode _Mode;
-        public frmScheduleTest(clsApplicationDetails ApplicationDetails, int UserID, int testAppointmentID, bool isLocked = false, bool isRetake = false)
+        private eTest _Test;
+        public frmScheduleTest(clsApplicationDetails ApplicationDetails, int UserID, int testAppointmentID, eTest test ,bool isLocked = false, bool isRetake = false)
         {
             InitializeComponent();
             _applicationDetails = ApplicationDetails;
             _UserID = UserID;
             _TestAppointmentID = testAppointmentID;
+            _Test= test;
             if (isRetake)
             {
                 _Mode = enMode.Retake;
@@ -50,11 +52,26 @@ namespace DVLD
 
         private void frmScheduleTest_Load(object sender, EventArgs e)
         {
+            switch (_Test)
+            {
+                case eTest.Vision:
+                    MainPictureBox.Image = Properties.Resources.Vision_512;
+                    gbTest.Text = "Vision Test";
+                    break;
+                case eTest.Written:
+                    MainPictureBox.Image = Properties.Resources.Written_Test_512;
+                    gbTest.Text = "Written Test";
+                    break;
+                case eTest.Street:
+                    MainPictureBox.Image = Properties.Resources.driving_test_512;
+                    gbTest.Text = "Street Test";
+                    break;
+            }
             lblinputid.Text = _applicationDetails.LocalDrivingLicenseApplicationID.ToString();
             lblinputClass.Text = _applicationDetails.ClassName;
             lblinputName.Text = _applicationDetails.FullName;
             lblinputTrial.Text = "0"; // Implement a function
-            lblinputFees.Text = clsTestTypes.GetTestTypeByID(1).TestTypeFees.ToString();
+            lblinputFees.Text = clsTestTypes.GetTestTypeByID((int)_Test).TestTypeFees.ToString();
             lblInputTfees.Text = lblinputFees.Text;
             lblinputRFees.Text = "0";
             lblinputRID.Text = "??";
@@ -66,8 +83,8 @@ namespace DVLD
                 {
                     lblTitle.Text = "Schedule Retake Test";
                     gbRetakeTestInfo.Enabled = true;
-                    lblinputRFees.Text =(clsApplicationTypes.GetApplicationTypeByID(7).ApplicationFees).ToString("0.00");
-                    lblInputTfees.Text = ((decimal.Parse(lblinputRFees.Text) + decimal.Parse(lblinputFees.Text))).ToString("0.00");
+                    lblinputRFees.Text =(clsApplicationTypes.GetApplicationTypeByID(7).ApplicationFees).ToString();
+                    lblInputTfees.Text = (decimal.Parse(lblinputRFees.Text) + decimal.Parse(lblinputFees.Text)).ToString();
                 }
                 return;
             }
@@ -97,7 +114,7 @@ namespace DVLD
             if (_Mode != enMode.Update)
             {
                 _testAppointment.LocalDrivingLicenseApplicationID = _applicationDetails.LocalDrivingLicenseApplicationID;
-                _testAppointment.TestTypeID =1;
+                _testAppointment.TestTypeID =(int)_Test;
                 _testAppointment.PaidFees = decimal.Parse(lblInputTfees.Text);
                 _testAppointment.CreatedByUserID = _UserID;
                 _testAppointment.IsLocked = false;
