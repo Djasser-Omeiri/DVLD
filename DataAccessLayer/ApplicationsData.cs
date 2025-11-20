@@ -43,7 +43,7 @@ namespace DataAccessLayer
             }
             return ApplicationID;
         }
-        public static bool GetApplicationByID(int ApplicationID, ref int ApplicantPersonID, ref DateTime ApplicationDate, ref int ApplicationTypeID, ref int ApplicationStatus, ref DateTime LastStatusDate, ref decimal PaidFees
+        public static bool GetApplicationByID(int ApplicationID, ref int ApplicantPersonID, ref DateTime ApplicationDate, ref int ApplicationTypeID, ref byte ApplicationStatus, ref DateTime LastStatusDate, ref decimal PaidFees
             , ref int CreatedByUserID)
         {
             bool isFound = false;
@@ -61,11 +61,10 @@ namespace DataAccessLayer
                     ApplicantPersonID = (int)reader["ApplicantPersonID"];
                     ApplicationDate = (DateTime)reader["ApplicationDate"];
                     ApplicationTypeID = (int)reader["ApplicationTypeID"];
-                    ApplicationStatus = (int)reader["ApplicationStatus"];
+                    ApplicationStatus = (byte)reader["ApplicationStatus"];
                     LastStatusDate = (DateTime)reader["LastStatusDate"];
                     PaidFees = (decimal)reader["PaidFees"];
                     CreatedByUserID = (int)reader["CreatedByUserID"];
-
                 }
                 else
                 {
@@ -73,7 +72,7 @@ namespace DataAccessLayer
                 }
                 reader.Close();
             }
-            catch (Exception ex) { Console.WriteLine(ex.Message); }
+            catch (Exception ex) { Console.WriteLine("getID"+ex.Message); }
             finally { connection.Close(); }
             return isFound;
         }
@@ -122,7 +121,7 @@ namespace DataAccessLayer
                 connection.Open();
                 rowsAffected = command.ExecuteNonQuery();
             }
-            catch (Exception ex) { Console.WriteLine(ex.Message); }
+            catch (Exception ex) { Console.WriteLine("this update"+ex.Message); }
             finally
             {
                 connection.Close();

@@ -92,7 +92,7 @@ namespace BusinessAccessLayer
             int ApplicantPersonID = -1;
             DateTime ApplicationDate = DateTime.Now;
             int ApplicationTypeID = -1;
-            int ApplicationStatus = 0;
+            byte ApplicationStatus = 0;
             DateTime LastStatutDate = DateTime.Now;
             decimal PaidFees = 0;
             int CreatedByUserID = -1;

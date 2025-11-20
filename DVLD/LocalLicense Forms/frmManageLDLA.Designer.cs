@@ -43,7 +43,7 @@
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.cancelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.sechduleTestsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ScheduleTestsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ScheduleVisionTestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ScheduleWrittenTestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ScheduleStreetTestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -150,7 +150,7 @@
             this.toolStripSeparator2,
             this.cancelToolStripMenuItem,
             this.toolStripSeparator3,
-            this.sechduleTestsToolStripMenuItem,
+            this.ScheduleTestsToolStripMenuItem,
             this.toolStripSeparator4,
             this.issueDrivingLicenseFirstTimeToolStripMenuItem,
             this.toolStripSeparator5,
@@ -205,16 +205,16 @@
             this.toolStripSeparator3.Name = "toolStripSeparator3";
             this.toolStripSeparator3.Size = new System.Drawing.Size(293, 6);
             // 
-            // sechduleTestsToolStripMenuItem
+            // ScheduleTestsToolStripMenuItem
             // 
-            this.sechduleTestsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ScheduleTestsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ScheduleVisionTestToolStripMenuItem,
             this.ScheduleWrittenTestToolStripMenuItem,
             this.ScheduleStreetTestToolStripMenuItem});
-            this.sechduleTestsToolStripMenuItem.Image = global::DVLD.Properties.Resources.Schedule_Test_32;
-            this.sechduleTestsToolStripMenuItem.Name = "sechduleTestsToolStripMenuItem";
-            this.sechduleTestsToolStripMenuItem.Size = new System.Drawing.Size(296, 26);
-            this.sechduleTestsToolStripMenuItem.Text = "Schedule Tests";
+            this.ScheduleTestsToolStripMenuItem.Image = global::DVLD.Properties.Resources.Schedule_Test_32;
+            this.ScheduleTestsToolStripMenuItem.Name = "ScheduleTestsToolStripMenuItem";
+            this.ScheduleTestsToolStripMenuItem.Size = new System.Drawing.Size(296, 26);
+            this.ScheduleTestsToolStripMenuItem.Text = "Schedule Tests";
             // 
             // ScheduleVisionTestToolStripMenuItem
             // 
@@ -251,6 +251,7 @@
             this.issueDrivingLicenseFirstTimeToolStripMenuItem.Name = "issueDrivingLicenseFirstTimeToolStripMenuItem";
             this.issueDrivingLicenseFirstTimeToolStripMenuItem.Size = new System.Drawing.Size(296, 26);
             this.issueDrivingLicenseFirstTimeToolStripMenuItem.Text = "Issue Driving License (First Time)";
+            this.issueDrivingLicenseFirstTimeToolStripMenuItem.Click += new System.EventHandler(this.issueDrivingLicenseFirstTimeToolStripMenuItem_Click);
             // 
             // toolStripSeparator5
             // 
@@ -355,7 +356,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem cancelToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
-        private System.Windows.Forms.ToolStripMenuItem sechduleTestsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ScheduleTestsToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripMenuItem issueDrivingLicenseFirstTimeToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;

@@ -80,10 +80,6 @@ namespace DataAccessLayer
                     ImagePath = (reader["ImagePath"] != DBNull.Value) ? (string)reader["ImagePath"] : "";
 
                 }
-                else
-                {
-                    isFound = false;
-                }
                 reader.Close();
             }
             catch (Exception ex) { Console.WriteLine(ex.Message); }
@@ -92,24 +88,18 @@ namespace DataAccessLayer
         }
         public static bool IsPersonExistsWithNationalNo(string NationalNo)
         {
-            bool isFound = false;
-            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
-            string query = "SELECT 1 FROM People WHERE NationalNo = @NationalNo";
-            SqlCommand command = new SqlCommand(query, connection);
-            command.Parameters.AddWithValue("@NationalNo", NationalNo);
-            try
+            using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
             {
+                string query = "SELECT COUNT(1) FROM People WHERE NationalNo = @NationalNo";
+
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@NationalNo", NationalNo);
+
                 connection.Open();
-                SqlDataReader reader = command.ExecuteReader();
-                if (reader.HasRows)
+                int count = (int)command.ExecuteScalar();
 
-                    isFound = true;
-
-                reader.Close();
+                return count > 0;
             }
-            catch (Exception ex) { Console.WriteLine(ex.Message); }
-            finally { connection.Close(); }
-            return isFound;
         }
         public static bool DeletePerson(int PersonID)
         {
