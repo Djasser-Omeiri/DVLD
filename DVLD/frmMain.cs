@@ -80,5 +80,10 @@ namespace DVLD
         {
             new frmManageLDLA(_Currentuser).ShowDialog();
         }
+
+        private void driversToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new frmManageDrivers().ShowDialog();
+        }
     }
 }

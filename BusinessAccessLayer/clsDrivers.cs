@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -80,6 +81,10 @@ namespace BusinessAccessLayer
             {
                 return null;
             }
+        }
+        public static DataTable GetAllDriversWithPersonInfo(string columnName=null,string value=null)
+        {
+            return DriversData.GetAllDriversWithPersonInfo(columnName, value);
         }
     }
 }

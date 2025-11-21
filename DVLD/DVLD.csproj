@@ -71,6 +71,12 @@
     <Compile Include="frmDrivingLicense.Designer.cs">
       <DependentUpon>frmDrivingLicense.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmManageDrivers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmManageDrivers.Designer.cs">
+      <DependentUpon>frmManageDrivers.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmScheduleTest.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -186,6 +192,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmDrivingLicense.resx">
       <DependentUpon>frmDrivingLicense.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmManageDrivers.resx">
+      <DependentUpon>frmManageDrivers.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmScheduleTest.resx">
       <DependentUpon>frmScheduleTest.cs</DependentUpon>
@@ -542,6 +551,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\New Driving License 321.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Driver Main.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

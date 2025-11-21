@@ -101,8 +101,20 @@ namespace DVLD.LocalLicense_Forms
 
         private void menu_Opening(object sender, CancelEventArgs e)
         {
-            ScheduleTestsToolStripMenuItem.Enabled = false;
+            if (dgvLDLA.CurrentRow.Cells["Status"].Value.ToString() == "Completed")
+            {
+                issueDrivingLicenseFirstTimeToolStripMenuItem.Enabled = false;
+                showLicenseToolStripMenuItem.Enabled = true;
+                editApplicationToolStripMenuItem.Enabled = false;
+                deleteApplicationToolStripMenuItem.Enabled = false;
+                cancelToolStripMenuItem.Enabled = false;
+                return;
+            }
+            issueDrivingLicenseFirstTimeToolStripMenuItem.Enabled = true;
             showLicenseToolStripMenuItem.Enabled = false;
+            editApplicationToolStripMenuItem.Enabled = true;
+            deleteApplicationToolStripMenuItem.Enabled = true;
+            cancelToolStripMenuItem.Enabled = true;
             switch (Convert.ToInt32(dgvLDLA.CurrentRow.Cells["Passed Tests"].Value))
             {
                 case 0:
@@ -121,11 +133,10 @@ namespace DVLD.LocalLicense_Forms
                     ScheduleStreetTestToolStripMenuItem.Enabled = true;
                     break;
                 default:
-                    ScheduleVisionTestToolStripMenuItem.Enabled = false;
-                    ScheduleWrittenTestToolStripMenuItem.Enabled = false;
-                    ScheduleStreetTestToolStripMenuItem.Enabled = false;
+                    ScheduleTestsToolStripMenuItem.Enabled = false;
                     break;
             }
+            
         }
 
         private void issueDrivingLicenseFirstTimeToolStripMenuItem_Click(object sender, EventArgs e)

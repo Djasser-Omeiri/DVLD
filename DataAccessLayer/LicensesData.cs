@@ -181,5 +181,25 @@ namespace DataAccessLayer
             }
             return licensesTable;
         }
+
+        public static bool IsPersonHaveLicenseWithSameClass(int ApplicationID, int LicenseClass)
+        {
+            bool IsFound = false;
+            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
+            string query = "select top 1 1 from Licenses where ApplicationID=@ApplicationID and LicenseClass=@LicenseClass ";
+            SqlCommand command = new SqlCommand(query, connection);
+            command.Parameters.AddWithValue("@ApplicationID", ApplicationID);
+            command.Parameters.AddWithValue("@LicenseClass", LicenseClass);
+            try
+            {
+                connection.Open();
+                object result = command.ExecuteScalar();
+                IsFound = (result != null);
+
+            }
+            catch (Exception ex) { Console.WriteLine(ex.Message); }
+            finally { connection.Close(); }
+            return IsFound;
+        }
     }
 }

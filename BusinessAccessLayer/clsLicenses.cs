@@ -109,6 +109,10 @@ namespace BusinessAccessLayer
                 return null;
             }
         }
+        public static bool isPersonHaveLicenseWithSameClass(int PersonID, int LicenseClassID)
+        {
+            return LicensesData.IsPersonHaveLicenseWithSameClass(PersonID, LicenseClassID);
+        }
 
     }
 }

@@ -60,7 +60,7 @@ namespace DataAccessLayer
             }
             catch (Exception ex) { Console.WriteLine(ex.Message); }
             finally { connection.Close(); }
-            return rowsAffected> 0; 
+            return rowsAffected > 0;
         }
         public static bool DeleteDriver(int DriverID)
         {
@@ -82,15 +82,20 @@ namespace DataAccessLayer
             {
                 connection.Close();
             }
-            return rowsAffected>0;
+            return rowsAffected > 0;
         }
 
-        public static DataTable GetAllDrivers()
+        public static DataTable GetAllDrivers(string columnName = null, string value = null)
         {
             DataTable driversTable = new DataTable();
             SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
             string query = "SELECT * FROM Drivers";
+
+            if (!string.IsNullOrEmpty(columnName) && !string.IsNullOrEmpty(value))
+                query += $" WHERE {columnName} LIKE @Value";
             SqlCommand command = new SqlCommand(query, connection);
+            if (!string.IsNullOrEmpty(columnName) && !string.IsNullOrEmpty(value))
+                command.Parameters.AddWithValue("@Value", $"{value}%");
             try
             {
                 connection.Open();
@@ -139,5 +144,31 @@ namespace DataAccessLayer
             return isFound;
         }
 
+        public static DataTable GetAllDriversWithPersonInfo(string columnName=null, string value=null)
+        {
+            DataTable driversTable = new DataTable();
+            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
+            string query = "SELECT * FROM Drivers_View";
+            if (!string.IsNullOrEmpty(columnName) && !string.IsNullOrEmpty(value))
+                query += $" WHERE {columnName} LIKE @Value";
+            SqlCommand command = new SqlCommand(query, connection);
+            if (!string.IsNullOrEmpty(columnName) && !string.IsNullOrEmpty(value))
+                command.Parameters.AddWithValue("@Value", $"{value}%");
+            try
+            {
+                connection.Open();
+                SqlDataAdapter adapter = new SqlDataAdapter(command);
+                adapter.Fill(driversTable);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return driversTable;
+        }
     }
 }

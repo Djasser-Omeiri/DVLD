@@ -112,9 +112,14 @@ namespace DVLD
                     "Saving Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            if (clsLocalDrivingLicenseApplications.IsPersonLinkedWithSameClass(_Person.PersonID,cbLicenseClasses.SelectedIndex))
+            if (clsLocalDrivingLicenseApplications.IsPersonLinkedWithSameClass(_Person.PersonID, cbLicenseClasses.SelectedIndex))
             {
-                MessageBox.Show("Choose another License Class,the selected Person already have an active application with the selected class ","Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                MessageBox.Show("Choose another License Class,the selected Person already have an active application with the selected class ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (clsLicenses.isPersonHaveLicenseWithSameClass(_Person.PersonID, cbLicenseClasses.SelectedIndex))
+            {
+                MessageBox.Show("Person already have a license with the same applied driving class, choose different driving class", "Not Allowed", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             _LocalDrivingLicenseApplications.ApplicationInfo.ApplicantPersonID = _Person.PersonID;
@@ -133,7 +138,7 @@ namespace DVLD
             {
                 MessageBox.Show("Data is not Saved Successfully.");
             }
-            lblinputIDApplication.Text=_LocalDrivingLicenseApplications.LocalDrivingLicenseApplicationID.ToString();
+            lblinputIDApplication.Text = _LocalDrivingLicenseApplications.LocalDrivingLicenseApplicationID.ToString();
         }
 
         private void cbLicenseClasses_Validating(object sender, CancelEventArgs e)
