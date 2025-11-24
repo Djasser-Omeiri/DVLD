@@ -47,10 +47,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ApplicationDetails.cs">
+    <Compile Include="frmLicenseInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmLicenseInfo.Designer.cs">
+      <DependentUpon>frmLicenseInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="User Control\ApplicationDetails.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ApplicationDetails.Designer.cs">
+    <Compile Include="User Control\ApplicationDetails.Designer.cs">
       <DependentUpon>ApplicationDetails.cs</DependentUpon>
     </Compile>
     <Compile Include="ApplicationTypes\frmManageApplicationTypes.cs">
@@ -65,10 +71,10 @@
     <Compile Include="ApplicationTypes\frmUpdateApplicationType.Designer.cs">
       <DependentUpon>frmUpdateApplicationType.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmDrivingLicense.cs">
+    <Compile Include="Test Forms\frmDrivingLicense.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmDrivingLicense.Designer.cs">
+    <Compile Include="Test Forms\frmDrivingLicense.Designer.cs">
       <DependentUpon>frmDrivingLicense.cs</DependentUpon>
     </Compile>
     <Compile Include="frmManageDrivers.cs">
@@ -77,22 +83,22 @@
     <Compile Include="frmManageDrivers.Designer.cs">
       <DependentUpon>frmManageDrivers.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmScheduleTest.cs">
+    <Compile Include="Test Forms\frmScheduleTest.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmScheduleTest.Designer.cs">
+    <Compile Include="Test Forms\frmScheduleTest.Designer.cs">
       <DependentUpon>frmScheduleTest.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmTakeTest.cs">
+    <Compile Include="Test Forms\frmTakeTest.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmTakeTest.Designer.cs">
+    <Compile Include="Test Forms\frmTakeTest.Designer.cs">
       <DependentUpon>frmTakeTest.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmTest.cs">
+    <Compile Include="Test Forms\frmTest.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmTest.Designer.cs">
+    <Compile Include="Test Forms\frmTest.Designer.cs">
       <DependentUpon>frmTest.cs</DependentUpon>
     </Compile>
     <Compile Include="LocalLicense Forms\frmLocalLicenseInfo.cs">
@@ -137,6 +143,12 @@
     <Compile Include="TestTypes\frmUpdateTestType.Designer.cs">
       <DependentUpon>frmUpdateTestType.cs</DependentUpon>
     </Compile>
+    <Compile Include="User Control\LicenseInfoDetails.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="User Control\LicenseInfoDetails.Designer.cs">
+      <DependentUpon>LicenseInfoDetails.cs</DependentUpon>
+    </Compile>
     <Compile Include="Users Forms\frmPassword.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -173,15 +185,18 @@
     <Compile Include="Users Forms\frmUserDetails.Designer.cs">
       <DependentUpon>frmUserDetails.cs</DependentUpon>
     </Compile>
-    <Compile Include="PersonDetails.cs">
+    <Compile Include="User Control\PersonDetails.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="PersonDetails.Designer.cs">
+    <Compile Include="User Control\PersonDetails.Designer.cs">
       <DependentUpon>PersonDetails.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="ApplicationDetails.resx">
+    <EmbeddedResource Include="frmLicenseInfo.resx">
+      <DependentUpon>frmLicenseInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="User Control\ApplicationDetails.resx">
       <DependentUpon>ApplicationDetails.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ApplicationTypes\frmManageApplicationTypes.resx">
@@ -190,19 +205,19 @@
     <EmbeddedResource Include="ApplicationTypes\frmUpdateApplicationType.resx">
       <DependentUpon>frmUpdateApplicationType.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmDrivingLicense.resx">
+    <EmbeddedResource Include="Test Forms\frmDrivingLicense.resx">
       <DependentUpon>frmDrivingLicense.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmManageDrivers.resx">
       <DependentUpon>frmManageDrivers.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmScheduleTest.resx">
+    <EmbeddedResource Include="Test Forms\frmScheduleTest.resx">
       <DependentUpon>frmScheduleTest.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmTakeTest.resx">
+    <EmbeddedResource Include="Test Forms\frmTakeTest.resx">
       <DependentUpon>frmTakeTest.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmTest.resx">
+    <EmbeddedResource Include="Test Forms\frmTest.resx">
       <DependentUpon>frmTest.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LocalLicense Forms\frmLocalLicenseInfo.resx">
@@ -226,6 +241,9 @@
     <EmbeddedResource Include="TestTypes\frmUpdateTestType.resx">
       <DependentUpon>frmUpdateTestType.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="User Control\LicenseInfoDetails.resx">
+      <DependentUpon>LicenseInfoDetails.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Users Forms\frmManageUser.resx">
       <DependentUpon>frmManageUser.cs</DependentUpon>
     </EmbeddedResource>
@@ -235,7 +253,7 @@
     <EmbeddedResource Include="People Forms\frmPersonDetails.resx">
       <DependentUpon>frmPersonDetails.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PersonDetails.resx">
+    <EmbeddedResource Include="User Control\PersonDetails.resx">
       <DependentUpon>PersonDetails.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -554,6 +572,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Driver Main.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Man 32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Question 32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LicenseView 400.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

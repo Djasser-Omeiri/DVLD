@@ -59,6 +59,9 @@ namespace BusinessAccessLayer
 
         public static bool DeleteLDLA(int LocalDrivingLicenseApplicationID)
         {
+            clsLocalDrivingLicenseApplications LDLA=clsLocalDrivingLicenseApplications.GetLDLAByID(LocalDrivingLicenseApplicationID);
+            clsTestAppointments testAppointments = clsTestAppointments.FindTestAppointmentsByID(LDLA.ApplicationInfo.ApplicationID);
+            TestData.DeleteTestByTestAppointmentID(LocalDrivingLicenseApplicationID.);
             return LocalDrivingLicenseApplicationsData.DeleteLDLA(LocalDrivingLicenseApplicationID);
         }
 

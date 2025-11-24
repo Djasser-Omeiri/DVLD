@@ -108,13 +108,15 @@ namespace DVLD.LocalLicense_Forms
                 editApplicationToolStripMenuItem.Enabled = false;
                 deleteApplicationToolStripMenuItem.Enabled = false;
                 cancelToolStripMenuItem.Enabled = false;
+                ScheduleTestsToolStripMenuItem.Enabled = false;
                 return;
             }
-            issueDrivingLicenseFirstTimeToolStripMenuItem.Enabled = true;
+            issueDrivingLicenseFirstTimeToolStripMenuItem.Enabled = false;
             showLicenseToolStripMenuItem.Enabled = false;
             editApplicationToolStripMenuItem.Enabled = true;
             deleteApplicationToolStripMenuItem.Enabled = true;
             cancelToolStripMenuItem.Enabled = true;
+            ScheduleTestsToolStripMenuItem.Enabled = true;
             switch (Convert.ToInt32(dgvLDLA.CurrentRow.Cells["Passed Tests"].Value))
             {
                 case 0:
@@ -132,16 +134,34 @@ namespace DVLD.LocalLicense_Forms
                     ScheduleWrittenTestToolStripMenuItem.Enabled = false;
                     ScheduleStreetTestToolStripMenuItem.Enabled = true;
                     break;
+                case 3:
+                    ScheduleTestsToolStripMenuItem.Enabled = false;
+                    issueDrivingLicenseFirstTimeToolStripMenuItem.Enabled = true;
+                    break;
                 default:
                     ScheduleTestsToolStripMenuItem.Enabled = false;
                     break;
             }
-            
+
         }
 
         private void issueDrivingLicenseFirstTimeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             new frmDrivingLicense(Convert.ToInt32(dgvLDLA.CurrentRow.Cells["L.D.L.AppID"].Value), _CurrentUser).ShowDialog();
+            _refreshLDLAList();
+        }
+
+        private void showLicenseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new frmLicenseInfo(Convert.ToInt32(dgvLDLA.CurrentRow.Cells["L.D.L.AppID"].Value)).ShowDialog();
+        }
+
+        private void deleteApplicationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Are you sure you want to delete this application? This action cannot be undone.", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+            {
+                clsLocalDrivingLicenseApplications.DeleteLDLA(Convert.ToInt32(dgvLDLA.CurrentRow.Cells["L.D.L.AppID"].Value));
+            }
             _refreshLDLAList();
         }
     }

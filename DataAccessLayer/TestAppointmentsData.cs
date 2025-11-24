@@ -51,6 +51,25 @@ namespace DataAccessLayer
             return TestAppointmentID;
         }
 
+        public static bool DeleteAppointment(int LocalDrivingLicenseApplicationID)
+        {
+            int rowsAffected = 0;
+            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
+            string query = "DELETE FROM TestAppointments WHERE LocalDrivingLicenseApplicationID = @LocalDrivingLicenseApplicationID";
+            SqlCommand command = new SqlCommand(query, connection);
+            command.Parameters.AddWithValue("@LocalDrivingLicenseApplicationID", LocalDrivingLicenseApplicationID);
+            try
+            {
+                connection.Open();
+                rowsAffected = command.ExecuteNonQuery();
+            }
+            catch (Exception ex) { Console.WriteLine(ex.Message); }
+            finally
+            {
+                connection.Close();
+            }
+            return rowsAffected > 0;
+        }
         public static bool UpdateAppointment(int TestAppointmentID, DateTime AppointmentDate, Decimal PaidFees, bool IsLocked, int? RetakeTestApplicationID)
         {
             int rowsAffected = 0;
@@ -203,8 +222,6 @@ namespace DataAccessLayer
             }
             return IsFound;
         }
-
-
         public static DataTable GetAllAppointmentsBy(int LocalDrivingLicenseApplicationID, int TestTypeID)
         {
             DataTable dt = new DataTable();

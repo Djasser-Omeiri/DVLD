@@ -181,6 +181,64 @@ namespace DataAccessLayer
             }
             return licensesTable;
         }
+        public static bool GetLicenseAllInfosByID(
+            int ApplicationID,
+            ref string className,
+            ref string fullName,
+            ref int licenseID,
+            ref int nationalityCountryID,
+            ref bool gendor,
+            ref DateTime issueDate,
+            ref string issueReason,
+            ref string notes,
+            ref bool isActive,
+            ref DateTime dateOfBirth,
+            ref int driverID,
+            ref DateTime expirationDate,
+            ref bool isDetained)
+        {
+            bool isFound = false;
+            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
+            string query = @"select lc.ClassName,(p.FirstName + ' ' + p.SecondName + ' ' + p.ThirdName + ' ' + p.LastName)as FullName ,
+                           l.LicenseID,p.NationalityCountryID,p.Gendor,l.IssueDate,l.IssueReason,l.Notes,l.IsActive,p.DateOfBirth,l.DriverID,l.ExpirationDate,
+                           CASE WHEN exists (select 1 from DetainedLicenses dl where dl.LicenseID=l.LicenseID) then 1 else 0 end as IsDetained 
+                           from Licenses l inner join LicenseClasses lc on lc.LicenseClassID=l.LicenseClass inner join Drivers d on d.DriverID=l.DriverID 
+                           inner join People p on p.PersonID=d.PersonID Where l.ApplicationID=@ApplicationID";
+            SqlCommand command = new SqlCommand(query, connection);
+            command.Parameters.AddWithValue("@ApplicationID", ApplicationID);
+            try
+            {
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+                if (reader.Read())
+                {
+                    className = reader["ClassName"].ToString();
+                    fullName = reader["FullName"].ToString();
+                    licenseID = Convert.ToInt32(reader["LicenseID"]);
+                    nationalityCountryID = Convert.ToInt32(reader["NationalityCountryID"]);
+                    gendor = Convert.ToBoolean(reader["Gendor"]);
+                    issueDate = Convert.ToDateTime(reader["IssueDate"]);
+                    issueReason = reader["IssueReason"].ToString();
+                    notes = reader["Notes"].ToString();
+                    isActive = Convert.ToBoolean(reader["IsActive"]);
+                    dateOfBirth = Convert.ToDateTime(reader["DateOfBirth"]);
+                    driverID = Convert.ToInt32(reader["DriverID"]);
+                    expirationDate = Convert.ToDateTime(reader["ExpirationDate"]);
+                    isDetained = Convert.ToBoolean(reader["IsDetained"]);
+                    isFound = true;
+                }
+                reader.Close();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return isFound;
+        }
 
         public static bool IsPersonHaveLicenseWithSameClass(int ApplicationID, int LicenseClass)
         {

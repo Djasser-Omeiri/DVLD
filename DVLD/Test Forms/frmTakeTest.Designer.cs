@@ -349,11 +349,11 @@
             // 
             this.lblTitle.AutoSize = true;
             this.lblTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTitle.Location = new System.Drawing.Point(159, 245);
+            this.lblTitle.Location = new System.Drawing.Point(168, 245);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(244, 38);
+            this.lblTitle.Size = new System.Drawing.Size(226, 38);
             this.lblTitle.TabIndex = 77;
-            this.lblTitle.Text = "Scheduled Test";
+            this.lblTitle.Text = "Schedule Test";
             this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblResult

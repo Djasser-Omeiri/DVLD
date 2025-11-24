@@ -117,11 +117,7 @@ namespace DVLD
                 MessageBox.Show("Choose another License Class,the selected Person already have an active application with the selected class ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            if (clsLicenses.isPersonHaveLicenseWithSameClass(_Person.PersonID, cbLicenseClasses.SelectedIndex))
-            {
-                MessageBox.Show("Person already have a license with the same applied driving class, choose different driving class", "Not Allowed", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
+
             _LocalDrivingLicenseApplications.ApplicationInfo.ApplicantPersonID = _Person.PersonID;
             _LocalDrivingLicenseApplications.ApplicationInfo.ApplicationDate = DateTime.Now;
             _LocalDrivingLicenseApplications.ApplicationInfo.ApplicationTypeID = 1;

@@ -99,5 +99,26 @@ namespace DataAccessLayer
             }
             return IsFound;
         }
+
+        public static bool DeleteTestByTestAppointmentID(int TestAppointmentID)
+        {
+            int rowsAffected = 0;
+            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
+            string query = "DELETE FROM Tests WHERE TestAppointmentID = @TestAppointmentID";
+            SqlCommand command = new SqlCommand(query, connection);
+            command.Parameters.AddWithValue("@TestAppointmentID", TestAppointmentID);
+            try
+            {
+                connection.Open();
+                rowsAffected = command.ExecuteNonQuery();
+
+            }
+            catch (Exception ex) { Console.WriteLine(ex.Message); }
+            finally
+            {
+                connection.Close();
+            }
+            return rowsAffected > 0;
+        }
     }
 }

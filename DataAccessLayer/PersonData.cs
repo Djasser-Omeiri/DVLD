@@ -196,8 +196,8 @@ namespace DataAccessLayer
             DataTable table = new DataTable();
             SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
             string query = @"Select p.PersonID ,p.NationalNo,p.FirstName,p.SecondName,p.ThirdName,p.LastName,CASE 
-                            WHEN p.Gendor = 1 THEN 'Male'
-                            ELSE 'Female'
+                            WHEN p.Gendor = 1 THEN 'Female'
+                            ELSE 'Male'
                             END AS Gendor ,p.DateOfBirth,c.CountryName as Nationality, p.Phone, p.Email FROM People p INNER JOIN Countries c ON p.NationalityCountryID=c.CountryID";
 
             if (!string.IsNullOrEmpty(columnName) && !string.IsNullOrEmpty(value))
