@@ -122,7 +122,7 @@ namespace DataAccessLayer
         }
 
         public static bool GetLicenseByID(int LicenseID, ref int ApplicationID, ref int DriverID, ref int LicenseClass, ref DateTime IssueDate
-            , ref DateTime ExpiraionDate, ref string Notes, ref decimal PaidFees, ref bool IsActive, ref byte IssueReason, ref int CreatedByUserID)
+            , ref DateTime ExpirationDate, ref string Notes, ref decimal PaidFees, ref bool IsActive, ref byte IssueReason, ref int CreatedByUserID)
         {
             bool exists = false;
             SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
@@ -140,7 +140,7 @@ namespace DataAccessLayer
                     DriverID = (int)reader["DriverID"];
                     LicenseClass = (int)reader["LicenseClass"];
                     IssueDate = (DateTime)reader["IssueDate"];
-                    ExpiraionDate = (DateTime)reader["ExpiraionDate"];
+                    ExpirationDate = (DateTime)reader["ExpirationDate"];
                     Notes = reader["Notes"] == DBNull.Value ? string.Empty : (string)reader["Notes"];
                     PaidFees = (decimal)reader["PaidFees"];
                     IsActive = (bool)reader["IsActive"];
@@ -258,6 +258,34 @@ namespace DataAccessLayer
             catch (Exception ex) { Console.WriteLine(ex.Message); }
             finally { connection.Close(); }
             return IsFound;
+        }
+        public static DataTable GetAllLicensesForHistory(int PersonID)
+        {
+            DataTable licensesTable = new DataTable();
+            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
+            string query = @"select l.LicenseID as [Lic.ID],ApplicationID as [App.ID],lc.ClassName,IssueDate as[Issue Date],
+                           ExpirationDate as [Expiration Date],IsActive as [Is Active] from Licenses l 
+                           join LicenseClasses lc on lc.LicenseClassID=l.LicenseClass join Drivers d on d.DriverID=l.DriverID where d.PersonID=@PersonID";
+            SqlCommand command = new SqlCommand(query, connection);
+            command.Parameters.AddWithValue("@PersonID", PersonID);   
+            try
+            {
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    licensesTable.Load(reader);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error retrieving licenses for history: " + ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return licensesTable;
         }
     }
 }

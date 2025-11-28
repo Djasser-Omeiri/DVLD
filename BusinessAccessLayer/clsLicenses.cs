@@ -91,6 +91,10 @@ namespace BusinessAccessLayer
         {
             return LicensesData.GetAllLicenses();
         }
+        public static DataTable GetAllLicensesForHistory(int PersonID)
+        {
+            return LicensesData.GetAllLicensesForHistory(PersonID);
+        }
         public static clsLicenses GetLicenseById(int LicenseID)
         {
             int ApplicationID = -1, DriverID = -1, LicenseClass = -1, CreatedByUserID = -1;

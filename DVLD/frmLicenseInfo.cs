@@ -14,7 +14,7 @@ namespace DVLD
     public partial class frmLicenseInfo : Form
     {
         private int _LDLAID;
-        private clsLicenseDetails _clsLicenseDetails;
+        //private clsLicenseDetails _clsLicenseDetails;
         public frmLicenseInfo(int LDLAID)
         {
             InitializeComponent();

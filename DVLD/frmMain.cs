@@ -85,5 +85,15 @@ namespace DVLD
         {
             new frmManageDrivers().ShowDialog();
         }
+
+        private void internationalLicenseApplicationsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new frmManageIDLA().ShowDialog();
+        }
+
+        private void internationalLicenseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new frmIDLA(_Currentuser).ShowDialog();
+        }
     }
 }

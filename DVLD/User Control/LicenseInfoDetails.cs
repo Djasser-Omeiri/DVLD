@@ -29,7 +29,7 @@ namespace DVLD.User_Control
             lblinputGendor.Text = (licenseDetails.Gendor==false) ? "Male" : "Female";
             lblInputIssueDate.Text = licenseDetails.IssueDate.ToShortDateString();
             lblInputIssueReason.Text = licenseDetails.IssueReason;
-            lblInputNotes.Text = licenseDetails.Notes;
+            lblInputNotes.Text = (string.IsNullOrEmpty(licenseDetails.Notes)? "No Notes": licenseDetails.Notes);
             lblInputIsActive.Text=(licenseDetails.IsActive==true)? "Yes":"No";
             lblinputDateOfBirth.Text = licenseDetails.DateOfBirth.ToShortDateString();
             lblinputDriverID.Text = licenseDetails.DriverID.ToString();

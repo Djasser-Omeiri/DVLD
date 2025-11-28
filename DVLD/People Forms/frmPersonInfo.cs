@@ -69,8 +69,8 @@ namespace DVLD
             tbThirdName.Text = _Person.ThirdName;
             tbLastName.Text = _Person.LastName;
             tbNationalNo.Text = _Person.NationalNo;
-            rbMale.Checked = _Person.Gendor;
-            rbFemale.Checked = !_Person.Gendor;
+            rbMale.Checked = !_Person.Gendor;
+            rbFemale.Checked = _Person.Gendor;
             tbEmail.Text = _Person.Email;
             tbPhone.Text = _Person.Phone;
             tbAddress.Text = _Person.Address;
@@ -300,7 +300,7 @@ namespace DVLD
             _Person.ThirdName = tbThirdName.Text;
             _Person.LastName = tbLastName.Text;
             _Person.NationalNo = tbNationalNo.Text;
-            _Person.Gendor = rbMale.Checked;
+            _Person.Gendor = rbFemale.Checked;
             _Person.Email = tbEmail.Text;
             _Person.Address = tbAddress.Text;
             _Person.DateOfBirth = dtpDate.Value;
