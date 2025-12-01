@@ -17,7 +17,7 @@ namespace BusinessAccessLayer
         public int DriverID { get; set; }
         public int LicenseClass { get; set; }
         public DateTime IssueDate { get; set; }
-        public DateTime ExpiraionDate { get; set; }
+        public DateTime ExpirationDate { get; set; }
         public string Notes { get; set; }
         public decimal PaidFees { get; set; }
         public bool IsActive { get; set; }
@@ -31,7 +31,7 @@ namespace BusinessAccessLayer
             this.DriverID = -1;
             this.LicenseClass = -1;
             this.IssueDate = DateTime.Now;
-            this.ExpiraionDate = DateTime.Now;
+            this.ExpirationDate = DateTime.Now;
             this.Notes = "";
             this.PaidFees = 0;
             this.IsActive = true;
@@ -41,14 +41,14 @@ namespace BusinessAccessLayer
         }
 
         private clsLicenses(int LicenseID, int ApplicationID, int DriverID, int LicenseClass, DateTime IssueDate
-            , DateTime ExpiraionDate, string Notes, decimal PaidFees, bool IsActive, byte IssueReason, int CreatedByUserID)
+            , DateTime ExpirationDate, string Notes, decimal PaidFees, bool IsActive, byte IssueReason, int CreatedByUserID)
         {
             this.LicenseID = LicenseID;
             this.ApplicationID = ApplicationID;
             this.DriverID = DriverID;
             this.LicenseClass = LicenseClass;
             this.IssueDate = IssueDate;
-            this.ExpiraionDate = ExpiraionDate;
+            this.ExpirationDate = ExpirationDate;
             this.Notes = Notes;
             this.PaidFees = PaidFees;
             this.IsActive = IsActive;
@@ -60,13 +60,13 @@ namespace BusinessAccessLayer
         private bool _AddLicense()
         {
             this.LicenseID = LicensesData.AddLicense(this.ApplicationID, this.DriverID, this.LicenseClass, this.IssueDate
-                , this.ExpiraionDate, this.Notes, this.PaidFees, this.IsActive, this.IssueReason, this.CreatedByUserID);
+                , this.ExpirationDate, this.Notes, this.PaidFees, this.IsActive, this.IssueReason, this.CreatedByUserID);
             return this.LicenseID != -1;
         }
         private bool _UpdateLicense()
         {
             return LicensesData.UpdateLicense(this.LicenseID, this.ApplicationID, this.DriverID, this.LicenseClass, this.IssueDate
-                , this.ExpiraionDate, this.Notes, this.PaidFees, this.IsActive, this.IssueReason, this.CreatedByUserID);
+                , this.ExpirationDate, this.Notes, this.PaidFees, this.IsActive, this.IssueReason, this.CreatedByUserID);
         }
         public bool Save()
         {
@@ -103,8 +103,8 @@ namespace BusinessAccessLayer
             decimal PaidFees = 0;
             bool IsActive = false;
             byte IssueReason = 0;
-            if (LicensesData.GetLicenseByID(LicenseID,ref  ApplicationID,ref  DriverID, ref  LicenseClass, ref  IssueDate
-            , ref  ExpiraionDate, ref  Notes, ref  PaidFees, ref  IsActive, ref  IssueReason, ref  CreatedByUserID))
+            if (LicensesData.GetLicenseByID(LicenseID, ref ApplicationID, ref DriverID, ref LicenseClass, ref IssueDate
+            , ref ExpiraionDate, ref Notes, ref PaidFees, ref IsActive, ref IssueReason, ref CreatedByUserID))
             {
                 return new clsLicenses(LicenseID, ApplicationID, DriverID, LicenseClass, IssueDate, ExpiraionDate, Notes, PaidFees, IsActive, IssueReason, CreatedByUserID);
             }
@@ -116,6 +116,46 @@ namespace BusinessAccessLayer
         public static bool isPersonHaveLicenseWithSameClass(int ApplicationID, int LicenseClassID)
         {
             return LicensesData.IsPersonHaveLicenseWithSameClass(ApplicationID, LicenseClassID);
+        }
+        public static clsLicenses RenewLicense(clsLicenses oldLicense, clsUser _CurrentUser, string Notes)
+        {
+            int PersonID = clsDrivers.GetDriverByID(oldLicense.DriverID).PersonID;
+            clsApplications RenewApp = new clsApplications();
+            RenewApp.ApplicantPersonID = PersonID;
+            RenewApp.ApplicationDate = DateTime.Now;
+            RenewApp.ApplicationTypeID = 2;
+            RenewApp.ApplicationStatus = 3;
+            RenewApp.LastStatutDate = DateTime.Now;
+            RenewApp.PaidFees = clsApplicationTypes.GetApplicationTypeByID(2).ApplicationFees;
+            RenewApp.CreatedByUserID = _CurrentUser.UserID;
+            if (!RenewApp.Save())
+            {
+                return null;
+            }
+            clsLicenses NewLicense = new clsLicenses();
+            clsLicenseClasses LicenseCls = clsLicenseClasses.GetLicenseClsByID(oldLicense.LicenseClass);
+            NewLicense.ApplicationID = RenewApp.ApplicationID;
+            NewLicense.DriverID = oldLicense.DriverID;
+            NewLicense.LicenseClass = oldLicense.LicenseClass;
+            NewLicense.IssueDate = DateTime.Now;
+            NewLicense.ExpirationDate = DateTime.Now.AddYears(LicenseCls.DefaultValidityLength);
+            NewLicense.Notes = Notes;
+            NewLicense.PaidFees = LicenseCls.ClassFees;
+            NewLicense.IsActive = true;
+            NewLicense.IssueReason = 2;
+            NewLicense.CreatedByUserID = _CurrentUser.UserID;
+            if (NewLicense.Save())
+            {
+                oldLicense.IsActive = false;
+                oldLicense.Save();
+                return NewLicense;
+            }
+            else
+            {
+                clsApplications.DeleteApplication(RenewApp.ApplicationID);
+                return null;
+            }
+
         }
 
     }

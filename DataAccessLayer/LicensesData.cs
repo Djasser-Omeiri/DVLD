@@ -189,7 +189,7 @@ namespace DataAccessLayer
             ref int nationalityCountryID,
             ref bool gendor,
             ref DateTime issueDate,
-            ref string issueReason,
+            ref int issueReason,
             ref string notes,
             ref bool isActive,
             ref DateTime dateOfBirth,
@@ -218,7 +218,7 @@ namespace DataAccessLayer
                     nationalityCountryID = Convert.ToInt32(reader["NationalityCountryID"]);
                     gendor = Convert.ToBoolean(reader["Gendor"]);
                     issueDate = Convert.ToDateTime(reader["IssueDate"]);
-                    issueReason = reader["IssueReason"].ToString();
+                    issueReason = (int)reader["IssueReason"];
                     notes = reader["Notes"].ToString();
                     isActive = Convert.ToBoolean(reader["IsActive"]);
                     dateOfBirth = Convert.ToDateTime(reader["DateOfBirth"]);

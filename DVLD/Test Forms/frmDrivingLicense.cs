@@ -43,7 +43,7 @@ namespace DVLD
             _License.DriverID = _Driver.DriverID;
             _License.LicenseClass = _LDLA.LicenseClassID;
             _License.IssueDate = DateTime.Now;
-            _License.ExpiraionDate = DateTime.Now.AddYears(_LicenseClasse.DefaultValidityLength);
+            _License.ExpirationDate = DateTime.Now.AddYears(_LicenseClasse.DefaultValidityLength);
             _License.Notes = tbNotes.Text;
             _License.PaidFees = _LicenseClasse.ClassFees;
             _License.IsActive = true;

@@ -93,6 +93,8 @@ namespace DVLD
                 linklblShowLicenseInfo.Enabled = true;
                 btnIssue.Enabled = false;
                 gbFilter.Enabled = false;
+                lblInputinternationalLicenseID.Text = _InternationalLicenses.InternationalLicenseID.ToString();
+                lblinputApplicationID.Text= _InternationalLicenses.Application.ApplicationID.ToString();
             }
             else
             {

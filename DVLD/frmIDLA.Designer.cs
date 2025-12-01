@@ -31,7 +31,6 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmIDLA));
             this.gbFilter = new System.Windows.Forms.GroupBox();
-            this.bntSearch = new System.Windows.Forms.Button();
             this.txtLicenseID = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -54,6 +53,8 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.linklblShowLicenseHistory = new System.Windows.Forms.LinkLabel();
             this.linklblShowLicenseInfo = new System.Windows.Forms.LinkLabel();
+            this.uclicenseInfoDetails = new DVLD.User_Control.LicenseInfoDetails();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.btnClose = new System.Windows.Forms.Button();
             this.btnIssue = new System.Windows.Forms.Button();
             this.pictureBox11 = new System.Windows.Forms.PictureBox();
@@ -64,9 +65,9 @@
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.uclicenseInfoDetails = new DVLD.User_Control.LicenseInfoDetails();
-            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.bntSearch = new System.Windows.Forms.Button();
             this.gbFilter.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
@@ -75,7 +76,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // gbFilter
@@ -92,18 +92,6 @@
             this.gbFilter.TabIndex = 5;
             this.gbFilter.TabStop = false;
             this.gbFilter.Text = "Filter";
-            // 
-            // bntSearch
-            // 
-            this.bntSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.bntSearch.Image = ((System.Drawing.Image)(resources.GetObject("bntSearch.Image")));
-            this.bntSearch.Location = new System.Drawing.Point(463, 15);
-            this.bntSearch.Margin = new System.Windows.Forms.Padding(4);
-            this.bntSearch.Name = "bntSearch";
-            this.bntSearch.Size = new System.Drawing.Size(74, 68);
-            this.bntSearch.TabIndex = 3;
-            this.bntSearch.UseVisualStyleBackColor = true;
-            this.bntSearch.Click += new System.EventHandler(this.bntSearch_Click);
             // 
             // txtLicenseID
             // 
@@ -350,6 +338,17 @@
             this.linklblShowLicenseInfo.Text = "Show License Info";
             this.linklblShowLicenseInfo.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linklblShowLicenseInfo_LinkClicked);
             // 
+            // uclicenseInfoDetails
+            // 
+            this.uclicenseInfoDetails.Location = new System.Drawing.Point(12, 200);
+            this.uclicenseInfoDetails.Name = "uclicenseInfoDetails";
+            this.uclicenseInfoDetails.Size = new System.Drawing.Size(939, 372);
+            this.uclicenseInfoDetails.TabIndex = 0;
+            // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
             // btnClose
             // 
             this.btnClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -466,16 +465,17 @@
             this.pictureBox1.TabIndex = 165;
             this.pictureBox1.TabStop = false;
             // 
-            // uclicenseInfoDetails
+            // bntSearch
             // 
-            this.uclicenseInfoDetails.Location = new System.Drawing.Point(12, 200);
-            this.uclicenseInfoDetails.Name = "uclicenseInfoDetails";
-            this.uclicenseInfoDetails.Size = new System.Drawing.Size(939, 372);
-            this.uclicenseInfoDetails.TabIndex = 0;
-            // 
-            // errorProvider1
-            // 
-            this.errorProvider1.ContainerControl = this;
+            this.bntSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.bntSearch.Image = ((System.Drawing.Image)(resources.GetObject("bntSearch.Image")));
+            this.bntSearch.Location = new System.Drawing.Point(463, 15);
+            this.bntSearch.Margin = new System.Windows.Forms.Padding(4);
+            this.bntSearch.Name = "bntSearch";
+            this.bntSearch.Size = new System.Drawing.Size(74, 68);
+            this.bntSearch.TabIndex = 3;
+            this.bntSearch.UseVisualStyleBackColor = true;
+            this.bntSearch.Click += new System.EventHandler(this.bntSearch_Click);
             // 
             // frmIDLA
             // 
@@ -519,6 +519,7 @@
             this.Load += new System.EventHandler(this.frmIDLA_Load);
             this.gbFilter.ResumeLayout(false);
             this.gbFilter.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
@@ -527,7 +528,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

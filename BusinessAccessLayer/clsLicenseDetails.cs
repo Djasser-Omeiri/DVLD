@@ -15,7 +15,7 @@ namespace BusinessAccessLayer
         public int NationalityCountryID { get; set; }
         public bool Gendor { get; set; }
         public DateTime IssueDate { get; set; }
-        public string IssueReason { get; set; }
+        public int IssueReason { get; set; }
         public string Notes { get; set; }
         public bool IsActive { get; set; }
         public DateTime DateOfBirth { get; set; }
@@ -31,7 +31,7 @@ namespace BusinessAccessLayer
             this.NationalityCountryID = -1;
             this.Gendor = false;
             this.IssueDate = DateTime.MinValue;
-            this.IssueReason = "";
+            this.IssueReason = 0;
             this.Notes = "";
             this.IsActive = false;
             this.DateOfBirth = DateTime.MinValue;
@@ -46,7 +46,7 @@ namespace BusinessAccessLayer
             int nationalityCountryID,
             bool gendor,
             DateTime issueDate,
-            string issueReason,
+            int issueReason,
             string notes,
             bool isActive,
             DateTime dateOfBirth,
@@ -76,7 +76,7 @@ namespace BusinessAccessLayer
             int NationalityCountryID = -1;
             bool Gendor = false;
             DateTime IssueDate = DateTime.MinValue;
-            string IssueReason = "";
+            int IssueReason = 0;
             string Notes = "";
             bool IsActive = false;
             DateTime DateOfBirth = DateTime.MinValue;

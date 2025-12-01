@@ -83,6 +83,12 @@
     <Compile Include="frmManageIDLA.Designer.cs">
       <DependentUpon>frmManageIDLA.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmRenewLicense.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmRenewLicense.Designer.cs">
+      <DependentUpon>frmRenewLicense.cs</DependentUpon>
+    </Compile>
     <Compile Include="User Control\ApplicationDetails.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -246,6 +252,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmManageIDLA.resx">
       <DependentUpon>frmManageIDLA.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmRenewLicense.resx">
+      <DependentUpon>frmRenewLicense.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="User Control\ApplicationDetails.resx">
       <DependentUpon>ApplicationDetails.cs</DependentUpon>
@@ -647,6 +656,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\PersonLicenseHistory 512.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Renew Driving License 321.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

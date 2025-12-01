@@ -28,7 +28,10 @@ namespace DVLD.User_Control
             lblinputNationalNo.Text = licenseDetails.NationalityCountryID.ToString();
             lblinputGendor.Text = (licenseDetails.Gendor==false) ? "Male" : "Female";
             lblInputIssueDate.Text = licenseDetails.IssueDate.ToShortDateString();
-            lblInputIssueReason.Text = licenseDetails.IssueReason;
+            lblInputIssueReason.Text = (licenseDetails.IssueReason==1) ? "New License" :
+                                       (licenseDetails.IssueReason==2) ? "Renewal" :
+                                       (licenseDetails.IssueReason==3) ? "Replacement for Damaged" : 
+                                       (licenseDetails.IssueReason==4) ? "Replacement for Lost":"" ;
             lblInputNotes.Text = (string.IsNullOrEmpty(licenseDetails.Notes)? "No Notes": licenseDetails.Notes);
             lblInputIsActive.Text=(licenseDetails.IsActive==true)? "Yes":"No";
             lblinputDateOfBirth.Text = licenseDetails.DateOfBirth.ToShortDateString();
