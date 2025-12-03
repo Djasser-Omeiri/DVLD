@@ -13,17 +13,17 @@ namespace DVLD
 {
     public partial class frmLicenseInfo : Form
     {
-        private int _LDLAID;
+        private int _ApplicationID;
         //private clsLicenseDetails _clsLicenseDetails;
-        public frmLicenseInfo(int LDLAID)
+        public frmLicenseInfo(int ApplicationID)
         {
             InitializeComponent();
-            _LDLAID = LDLAID;
+            _ApplicationID = ApplicationID;
         }
 
         private void frmLicenseInfo_Load(object sender, EventArgs e)
         {
-            uclicenseInfoDetails.LoadLicenseInfo(clsLicenseDetails.getAllLicenseDetails(clsLocalDrivingLicenseApplications.GetApplicationIDByLDLAppID(_LDLAID)));
+            uclicenseInfoDetails.LoadLicenseInfo(clsLicenseDetails.getAllLicenseDetails(_ApplicationID));
         }
 
         private void btnClose_Click(object sender, EventArgs e)

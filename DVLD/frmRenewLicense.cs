@@ -51,7 +51,7 @@ namespace DVLD
         {
             lblInputApplicationDate.Text = DateTime.Now.ToString();
             lblinputIssueDate.Text = DateTime.Now.ToString();
-            lblinputAFees.Text = clsApplicationTypes.GetApplicationTypeByID(2).ApplicationFees.ToString();
+            lblinputAFees.Text = clsApplicationTypes.GetApplicationTypeByID((int)eApplicationType.Renew).ApplicationFees.ToString();
             lblinputCreatedBy.Text = _CurrentUser.UserName;
             btnRenew.Enabled = false;
             linklblShowLicenseHistory.Enabled = false;
@@ -65,15 +65,24 @@ namespace DVLD
 
             _license = clsLicenses.GetLicenseById(Int32.Parse(txtLicenseID.Text));
 
+            if (_license.ExpirationDate>DateTime.Now )
+            {
+                MessageBox.Show($"This License is not expired, the expiration date is: {_license.ExpirationDate}", "Not Expired", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }else if (!_license.IsActive)
+            {
+                MessageBox.Show($"This License is not active anymore.", "Not Active", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             if (_license != null)
             {
                 clsLicenseClasses licenseClass = clsLicenseClasses.GetLicenseClsByID(_license.LicenseClass);
                 uclicenseInfoDetails.LoadLicenseInfo(clsLicenseDetails.getAllLicenseDetails(_license.ApplicationID));
                 lblinputOldLicenseID.Text = _license.LicenseID.ToString();
-                lblinputExpirationDate.Text =DateTime.Now.AddYears(licenseClass.DefaultValidityLength).ToString();
+                lblinputExpirationDate.Text = DateTime.Now.AddYears(licenseClass.DefaultValidityLength).ToString();
                 linklblShowLicenseHistory.Enabled = true;
-                lblInputlicenseFees.Text= licenseClass.ClassFees.ToString();
-                lblInputTFees.Text= (Int32.Parse(lblinputAFees.Text) + licenseClass.ClassFees).ToString();
+                lblInputlicenseFees.Text = licenseClass.ClassFees.ToString();
+                lblInputTFees.Text = (decimal.Parse(lblinputAFees.Text) + licenseClass.ClassFees).ToString();
                 btnRenew.Enabled = true;
             }
             else
@@ -94,7 +103,7 @@ namespace DVLD
 
         private void btnRenew_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Are you sure you want to issue this International Driving License?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) { return; };
+            if (MessageBox.Show("Are you sure you want to renew this Driving License?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) { return; };
             _newlicense = clsLicenses.RenewLicense(_license, _CurrentUser, tbNotes.Text);
             if (_newlicense != null)
             {
@@ -104,13 +113,13 @@ namespace DVLD
                 btnRenew.Enabled = false;
                 gbFilter.Enabled = false;
                 lblinputRLApplicationID.Text = _newlicense.ApplicationID.ToString();
-                lblinputRLicenseID.Text = _newlicense.ApplicationID.ToString();
+                lblinputRLicenseID.Text = _newlicense.LicenseID.ToString();
             }
         }
 
         private void linklblShowLicenseInfo_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            new frmLicenseInfo(_newlicense.LicenseID).ShowDialog();
+            new frmLicenseInfo(_newlicense.ApplicationID).ShowDialog();
         }
     }
 }

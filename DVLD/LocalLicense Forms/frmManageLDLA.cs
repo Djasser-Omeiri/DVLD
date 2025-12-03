@@ -152,7 +152,7 @@ namespace DVLD.LocalLicense_Forms
 
         private void showLicenseToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new frmLicenseInfo(Convert.ToInt32(dgvLDLA.CurrentRow.Cells["L.D.L.AppID"].Value)).ShowDialog();
+            new frmLicenseInfo(clsLocalDrivingLicenseApplications.GetApplicationIDByLDLAppID(Convert.ToInt32(dgvLDLA.CurrentRow.Cells["L.D.L.AppID"].Value))).ShowDialog();
         }
 
         private void deleteApplicationToolStripMenuItem_Click(object sender, EventArgs e)

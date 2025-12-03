@@ -83,7 +83,7 @@ namespace DVLD
                 {
                     lblTitle.Text = "Schedule Retake Test";
                     gbRetakeTestInfo.Enabled = true;
-                    lblinputRFees.Text =(clsApplicationTypes.GetApplicationTypeByID(7).ApplicationFees).ToString();
+                    lblinputRFees.Text =(clsApplicationTypes.GetApplicationTypeByID((int)eApplicationType.RetakeTest).ApplicationFees).ToString();
                     lblInputTfees.Text = (decimal.Parse(lblinputRFees.Text) + decimal.Parse(lblinputFees.Text)).ToString();
                 }
                 return;
@@ -127,10 +127,10 @@ namespace DVLD
                 _application = new clsApplications();
                 _application.ApplicantPersonID = _applicationDetails.ApplicantPersonID;
                 _application.ApplicationDate = DateTime.Now;
-                _application.ApplicationTypeID = 7;
+                _application.ApplicationTypeID = (int)eApplicationType.RetakeTest;
                 _application.ApplicationStatus = 1;
                 _application.LastStatutDate = DateTime.Now;
-                _application.PaidFees = clsApplicationTypes.GetApplicationTypeByID(7).ApplicationFees;
+                _application.PaidFees = clsApplicationTypes.GetApplicationTypeByID((int)eApplicationType.RetakeTest).ApplicationFees;
                 _application.CreatedByUserID = _UserID;
                 if (!_application.Save())
                 {

@@ -8,6 +8,7 @@ using DataAccessLayer;
 
 namespace BusinessAccessLayer
 {
+    
     public class clsLicenses
     {
         public enum enMode { AddNew = 0, Update = 1 };
@@ -98,15 +99,15 @@ namespace BusinessAccessLayer
         public static clsLicenses GetLicenseById(int LicenseID)
         {
             int ApplicationID = -1, DriverID = -1, LicenseClass = -1, CreatedByUserID = -1;
-            DateTime IssueDate = DateTime.Now, ExpiraionDate = DateTime.Now;
+            DateTime IssueDate = DateTime.Now, ExpirationDate = DateTime.Now;
             string Notes = "";
             decimal PaidFees = 0;
             bool IsActive = false;
             byte IssueReason = 0;
             if (LicensesData.GetLicenseByID(LicenseID, ref ApplicationID, ref DriverID, ref LicenseClass, ref IssueDate
-            , ref ExpiraionDate, ref Notes, ref PaidFees, ref IsActive, ref IssueReason, ref CreatedByUserID))
+            , ref ExpirationDate, ref Notes, ref PaidFees, ref IsActive, ref IssueReason, ref CreatedByUserID))
             {
-                return new clsLicenses(LicenseID, ApplicationID, DriverID, LicenseClass, IssueDate, ExpiraionDate, Notes, PaidFees, IsActive, IssueReason, CreatedByUserID);
+                return new clsLicenses(LicenseID, ApplicationID, DriverID, LicenseClass, IssueDate, ExpirationDate, Notes, PaidFees, IsActive, IssueReason, CreatedByUserID);
             }
             else
             {
@@ -126,7 +127,7 @@ namespace BusinessAccessLayer
             RenewApp.ApplicationTypeID = 2;
             RenewApp.ApplicationStatus = 3;
             RenewApp.LastStatutDate = DateTime.Now;
-            RenewApp.PaidFees = clsApplicationTypes.GetApplicationTypeByID(2).ApplicationFees;
+            RenewApp.PaidFees = clsApplicationTypes.GetApplicationTypeByID((int)eApplicationType.Renew).ApplicationFees;
             RenewApp.CreatedByUserID = _CurrentUser.UserID;
             if (!RenewApp.Save())
             {
@@ -147,12 +148,63 @@ namespace BusinessAccessLayer
             if (NewLicense.Save())
             {
                 oldLicense.IsActive = false;
-                oldLicense.Save();
+                if (!oldLicense.Save())
+                {
+                    clsLicenses.DeleteLicense(NewLicense.LicenseID); 
+                    clsApplications.DeleteApplication(RenewApp.ApplicationID);
+                    return null;
+                }
                 return NewLicense;
             }
             else
             {
                 clsApplications.DeleteApplication(RenewApp.ApplicationID);
+                return null;
+            }
+
+        }
+
+        public static clsLicenses ReplaceLicense(clsLicenses oldLicense, clsUser _CurrentUser, eApplicationType ReplacementFor)
+        {
+            int PersonID = clsDrivers.GetDriverByID(oldLicense.DriverID).PersonID;
+            clsApplications ReplaceApp = new clsApplications();
+            ReplaceApp.ApplicantPersonID = PersonID;
+            ReplaceApp.ApplicationDate = DateTime.Now;
+            ReplaceApp.ApplicationTypeID = (int)ReplacementFor;
+            ReplaceApp.ApplicationStatus = 3;
+            ReplaceApp.LastStatutDate = DateTime.Now;
+            ReplaceApp.PaidFees = clsApplicationTypes.GetApplicationTypeByID((int)ReplacementFor).ApplicationFees;
+            ReplaceApp.CreatedByUserID = _CurrentUser.UserID;
+            if (!ReplaceApp.Save())
+            {
+                return null;
+            }
+            clsLicenses NewLicense = new clsLicenses();
+            clsLicenseClasses LicenseCls = clsLicenseClasses.GetLicenseClsByID(oldLicense.LicenseClass);
+            NewLicense.ApplicationID = ReplaceApp.ApplicationID;
+            NewLicense.DriverID = oldLicense.DriverID;
+            NewLicense.LicenseClass = oldLicense.LicenseClass;
+            NewLicense.IssueDate = DateTime.Now;
+            NewLicense.ExpirationDate = DateTime.Now.AddYears(LicenseCls.DefaultValidityLength);
+            NewLicense.Notes = oldLicense.Notes;
+            NewLicense.PaidFees = LicenseCls.ClassFees;
+            NewLicense.IsActive = true;
+            NewLicense.IssueReason = (byte)((ReplacementFor==eApplicationType.Damaged)?3:4);
+            NewLicense.CreatedByUserID = _CurrentUser.UserID;
+            if (NewLicense.Save())
+            {
+                oldLicense.IsActive = false;
+                if (!oldLicense.Save())
+                {
+                    clsLicenses.DeleteLicense(NewLicense.LicenseID);
+                    clsApplications.DeleteApplication(ReplaceApp.ApplicationID);
+                    return null;
+                }
+                return NewLicense;
+            }
+            else
+            {
+                clsApplications.DeleteApplication(ReplaceApp.ApplicationID);
                 return null;
             }
 

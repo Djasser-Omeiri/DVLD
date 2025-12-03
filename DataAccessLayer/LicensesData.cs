@@ -58,7 +58,7 @@ namespace DataAccessLayer
             return LicenseID;
         }
         public static bool UpdateLicense(int LicenseID, int ApplicationID, int DriverID, int LicenseClass, DateTime IssueDate
-            , DateTime ExpiraionDate, string Notes, decimal PaidFees, bool IsActive, byte IssueReason, int CreatedByUserID)
+            , DateTime ExpirationDate, string Notes, decimal PaidFees, bool IsActive, byte IssueReason, int CreatedByUserID)
         {
             int rowsAffected = 0;
             SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
@@ -67,7 +67,7 @@ namespace DataAccessLayer
                                DriverID = @DriverID, 
                                LicenseClass = @LicenseClass, 
                                IssueDate = @IssueDate,
-                               ExpiraionDate= @ExpiraionDate,
+                               ExpirationDate= @ExpirationDate,
                                Notes= @Notes, PaidFees= @PaidFees,
                                IsActive= @IsActive,
                                IssueReason= @IssueReason,
@@ -79,7 +79,7 @@ namespace DataAccessLayer
             command.Parameters.AddWithValue("@DriverID", DriverID);
             command.Parameters.AddWithValue("@LicenseClass", LicenseClass);
             command.Parameters.AddWithValue("@IssueDate", IssueDate);
-            command.Parameters.AddWithValue("@ExpiraionDate", ExpiraionDate);
+            command.Parameters.AddWithValue("@ExpirationDate", ExpirationDate);
             command.Parameters.AddWithValue("@Notes", string.IsNullOrWhiteSpace(Notes) ? (object)DBNull.Value : Notes);
             command.Parameters.AddWithValue("@PaidFees", PaidFees);
             command.Parameters.AddWithValue("@IsActive", IsActive);
@@ -189,7 +189,7 @@ namespace DataAccessLayer
             ref int nationalityCountryID,
             ref bool gendor,
             ref DateTime issueDate,
-            ref int issueReason,
+            ref byte issueReason,
             ref string notes,
             ref bool isActive,
             ref DateTime dateOfBirth,
@@ -218,7 +218,7 @@ namespace DataAccessLayer
                     nationalityCountryID = Convert.ToInt32(reader["NationalityCountryID"]);
                     gendor = Convert.ToBoolean(reader["Gendor"]);
                     issueDate = Convert.ToDateTime(reader["IssueDate"]);
-                    issueReason = (int)reader["IssueReason"];
+                    issueReason = (byte)reader["IssueReason"];
                     notes = reader["Notes"].ToString();
                     isActive = Convert.ToBoolean(reader["IsActive"]);
                     dateOfBirth = Convert.ToDateTime(reader["DateOfBirth"]);

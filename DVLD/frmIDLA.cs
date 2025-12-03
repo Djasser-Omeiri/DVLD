@@ -55,7 +55,7 @@ namespace DVLD
             lblinputApplicationDate.Text = DateTime.Now.ToString();
             lblinputIssueDate.Text = DateTime.Now.ToString();
             lblinputExpirationDate.Text = DateTime.Now.AddYears(1).ToString();
-            lblInputFees.Text = clsApplicationTypes.GetApplicationTypeByID(6).ApplicationFees.ToString();
+            lblInputFees.Text = clsApplicationTypes.GetApplicationTypeByID((int)eApplicationType.NewInternational).ApplicationFees.ToString();
             lblinputCreatedBy.Text = _CurrentUser.UserName;
             btnIssue.Enabled = false;
             linklblShowLicenseHistory.Enabled = false;
@@ -75,7 +75,7 @@ namespace DVLD
             _InternationalLicenses = new clsInternationalLicenses();
             _InternationalLicenses.Application.ApplicantPersonID = clsDrivers.GetDriverByID(_license.DriverID).PersonID;
             _InternationalLicenses.Application.ApplicationDate = DateTime.Parse(lblinputApplicationDate.Text);
-            _InternationalLicenses.Application.ApplicationTypeID = 6;
+            _InternationalLicenses.Application.ApplicationTypeID = (int)eApplicationType.NewInternational;
             _InternationalLicenses.Application.ApplicationStatus = 1;
             _InternationalLicenses.Application.LastStatutDate = DateTime.Parse(lblinputApplicationDate.Text);
             _InternationalLicenses.Application.PaidFees = decimal.Parse(lblInputFees.Text);

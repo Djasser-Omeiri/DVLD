@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -81,6 +82,18 @@ namespace DVLD
         private void frmLicenseHistory_Load(object sender, EventArgs e)
         {
             _load();
+        }
+
+        private void showLicenseInfoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (LicensetabControl.SelectedIndex == 0)
+            {
+                new frmLicenseInfo(Convert.ToInt32(dgvLocal.CurrentRow.Cells["App.ID"].Value)).ShowDialog();
+            }
+            else
+            {
+                new frmIntLicenseInfo(clsInternationalLicenseDetails.GetInternationalLicenseDetailsByID(Convert.ToInt32(dgvInt.CurrentRow.Cells["Int.License ID"].Value))).ShowDialog();
+            }
         }
     }
 }

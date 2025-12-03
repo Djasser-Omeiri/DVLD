@@ -95,7 +95,7 @@ namespace DVLD
             _filllicenseclassesincb();
             cbLicenseClasses.SelectedIndex = 0;
             lblinputcreator.Text = _User.UserName;
-            lblinputFees.Text = clsApplicationTypes.GetApplicationTypeByID(1).ApplicationFees.ToString();
+            lblinputFees.Text = clsApplicationTypes.GetApplicationTypeByID((int)eApplicationType.New).ApplicationFees.ToString();
             _LocalDrivingLicenseApplications = new clsLocalDrivingLicenseApplications();
         }
         private bool HasValidationErrors()
@@ -120,7 +120,7 @@ namespace DVLD
 
             _LocalDrivingLicenseApplications.ApplicationInfo.ApplicantPersonID = _Person.PersonID;
             _LocalDrivingLicenseApplications.ApplicationInfo.ApplicationDate = DateTime.Now;
-            _LocalDrivingLicenseApplications.ApplicationInfo.ApplicationTypeID = 1;
+            _LocalDrivingLicenseApplications.ApplicationInfo.ApplicationTypeID = (int)eApplicationType.New;
             _LocalDrivingLicenseApplications.ApplicationInfo.ApplicationStatus = 1;
             _LocalDrivingLicenseApplications.ApplicationInfo.LastStatutDate = DateTime.Now;
             _LocalDrivingLicenseApplications.ApplicationInfo.PaidFees = Convert.ToDecimal(lblinputFees.Text);

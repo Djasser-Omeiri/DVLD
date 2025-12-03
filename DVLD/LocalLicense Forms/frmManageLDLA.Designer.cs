@@ -156,7 +156,7 @@
             this.toolStripSeparator6,
             this.showPersonLicenseHistoryToolStripMenuItem});
             this.menu.Name = "contextMenuStrip1";
-            this.menu.Size = new System.Drawing.Size(297, 250);
+            this.menu.Size = new System.Drawing.Size(297, 222);
             this.menu.Opening += new System.ComponentModel.CancelEventHandler(this.menu_Opening);
             // 
             // showApplicationDetailsToolStripMenuItem

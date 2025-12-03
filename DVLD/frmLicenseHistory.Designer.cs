@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmLicenseHistory));
             this.gbFilter = new System.Windows.Forms.GroupBox();
             this.btnAdd = new System.Windows.Forms.Button();
@@ -43,20 +44,23 @@
             this.lblLocalCount = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.dgvLocal = new System.Windows.Forms.DataGridView();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.showLicenseInfoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.InternationaltabPage = new System.Windows.Forms.TabPage();
             this.lblInternationalhistory = new System.Windows.Forms.Label();
             this.lblIntCount = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.dgvInt = new System.Windows.Forms.DataGridView();
             this.btnClose = new System.Windows.Forms.Button();
-            this.ucPersonInformation = new DVLD.PersonDetails();
             this.label3 = new System.Windows.Forms.Label();
+            this.ucPersonInformation = new DVLD.PersonDetails();
             this.gbFilter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.LicensetabControl.SuspendLayout();
             this.LocaltabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLocal)).BeginInit();
+            this.contextMenuStrip1.SuspendLayout();
             this.InternationaltabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvInt)).BeginInit();
             this.SuspendLayout();
@@ -215,6 +219,7 @@
             this.dgvLocal.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvLocal.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable;
             this.dgvLocal.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvLocal.ContextMenuStrip = this.contextMenuStrip1;
             this.dgvLocal.Location = new System.Drawing.Point(6, 37);
             this.dgvLocal.Name = "dgvLocal";
             this.dgvLocal.ReadOnly = true;
@@ -222,6 +227,22 @@
             this.dgvLocal.RowTemplate.Height = 24;
             this.dgvLocal.Size = new System.Drawing.Size(1086, 230);
             this.dgvLocal.TabIndex = 13;
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.showLicenseInfoToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(201, 30);
+            // 
+            // showLicenseInfoToolStripMenuItem
+            // 
+            this.showLicenseInfoToolStripMenuItem.Image = global::DVLD.Properties.Resources.License_View_32;
+            this.showLicenseInfoToolStripMenuItem.Name = "showLicenseInfoToolStripMenuItem";
+            this.showLicenseInfoToolStripMenuItem.Size = new System.Drawing.Size(200, 26);
+            this.showLicenseInfoToolStripMenuItem.Text = "Show License Info";
+            this.showLicenseInfoToolStripMenuItem.Click += new System.EventHandler(this.showLicenseInfoToolStripMenuItem_Click);
             // 
             // InternationaltabPage
             // 
@@ -277,6 +298,7 @@
             this.dgvInt.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvInt.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable;
             this.dgvInt.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvInt.ContextMenuStrip = this.contextMenuStrip1;
             this.dgvInt.Location = new System.Drawing.Point(6, 37);
             this.dgvInt.Name = "dgvInt";
             this.dgvInt.ReadOnly = true;
@@ -299,14 +321,6 @@
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
-            // ucPersonInformation
-            // 
-            this.ucPersonInformation.Location = new System.Drawing.Point(207, 198);
-            this.ucPersonInformation.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.ucPersonInformation.Name = "ucPersonInformation";
-            this.ucPersonInformation.Size = new System.Drawing.Size(949, 362);
-            this.ucPersonInformation.TabIndex = 2;
-            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -317,6 +331,14 @@
             this.label3.TabIndex = 74;
             this.label3.Text = "License History";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // ucPersonInformation
+            // 
+            this.ucPersonInformation.Location = new System.Drawing.Point(207, 198);
+            this.ucPersonInformation.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.ucPersonInformation.Name = "ucPersonInformation";
+            this.ucPersonInformation.Size = new System.Drawing.Size(949, 362);
+            this.ucPersonInformation.TabIndex = 2;
             // 
             // frmLicenseHistory
             // 
@@ -340,6 +362,7 @@
             this.LocaltabPage.ResumeLayout(false);
             this.LocaltabPage.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLocal)).EndInit();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.InternationaltabPage.ResumeLayout(false);
             this.InternationaltabPage.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvInt)).EndInit();
@@ -372,5 +395,7 @@
         private System.Windows.Forms.DataGridView dgvLocal;
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem showLicenseInfoToolStripMenuItem;
     }
 }

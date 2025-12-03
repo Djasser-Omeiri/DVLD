@@ -95,5 +95,15 @@ namespace DVLD
         {
             new frmIDLA(_Currentuser).ShowDialog();
         }
+
+        private void renewDrivingToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new frmRenewLicense(_Currentuser).ShowDialog();
+        }
+
+        private void replacementOfToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new frmReplacementDamagedLicense(_Currentuser).ShowDialog();
+        }
     }
 }

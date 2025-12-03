@@ -89,6 +89,12 @@
     <Compile Include="frmRenewLicense.Designer.cs">
       <DependentUpon>frmRenewLicense.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmReplacementDamagedLicense.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmReplacementDamagedLicense.Designer.cs">
+      <DependentUpon>frmReplacementDamagedLicense.cs</DependentUpon>
+    </Compile>
     <Compile Include="User Control\ApplicationDetails.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -255,6 +261,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmRenewLicense.resx">
       <DependentUpon>frmRenewLicense.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmReplacementDamagedLicense.resx">
+      <DependentUpon>frmReplacementDamagedLicense.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="User Control\ApplicationDetails.resx">
       <DependentUpon>ApplicationDetails.cs</DependentUpon>

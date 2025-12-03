@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace BusinessAccessLayer
 {
+    public enum eApplicationType { New=1,Renew,Lost,Damaged,Detained,NewInternational,RetakeTest }
     public class clsApplications
     {
         public enum enMode { AddNew = 0, Update = 1 };
