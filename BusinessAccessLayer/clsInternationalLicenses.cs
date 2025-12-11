@@ -1,10 +1,12 @@
-﻿using System;
+﻿using DataAccessLayer;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
-using DataAccessLayer;
 
 namespace BusinessAccessLayer
 {
@@ -26,22 +28,22 @@ namespace BusinessAccessLayer
             bool IsActive = false;
             if (InternationalLicensesData.GetIDLAByID(InternationalLicenseID, ref ApplicationID, ref DriverID, ref IssuedUsingLocalLicenseID, ref IssueDate, ref ExpirationDate, ref IsActive, ref CreatedByUserID))
             {
-                clsApplications app =clsApplications.GetApplicationByID(ApplicationID);
+                clsApplications app = clsApplications.GetApplicationByID(ApplicationID);
                 return new clsInternationalLicenses(InternationalLicenseID, app, DriverID, IssuedUsingLocalLicenseID, IssueDate, ExpirationDate, IsActive, CreatedByUserID);
-            
+
             }
             else return null;
         }
         public clsInternationalLicenses()
         {
             this.InternationalLicenseID = -1;
-            this.Application= new clsApplications();
+            this.Application = new clsApplications();
             this.DriverID = -1;
-            this.IssuedUsingLocalLicenseID= -1;
-            this.CreatedByUserID = -1; 
+            this.IssuedUsingLocalLicenseID = -1;
+            this.CreatedByUserID = -1;
             this.IsActive = false;
-            this.IssueDate= DateTime.MinValue;
-            this.ExpirationDate= DateTime.MinValue;
+            this.IssueDate = DateTime.MinValue;
+            this.ExpirationDate = DateTime.MinValue;
         }
 
         private clsInternationalLicenses(int InternationalLicenseID, clsApplications Application, int DriverID, int IssuedUsingLocalLicenseID, DateTime IssueDate, DateTime ExpirationDate, bool IsActive, int CreatedByUserID)
@@ -78,9 +80,9 @@ namespace BusinessAccessLayer
                 return false;
             }
         }
-        public static DataTable GetAllIDLA(string columnName=null,string value=null)
+        public static DataTable GetAllIDLA(string columnName = null, string value = null)
         {
-            return InternationalLicensesData.GetAllIDLAs(columnName,value);
+            return InternationalLicensesData.GetAllIDLAs(columnName, value);
         }
         public static DataTable GetAllIDLAsForHistory(int PersonID)
         {
@@ -88,8 +90,37 @@ namespace BusinessAccessLayer
         }
         public static bool IsInternationalLicenseExists(int LicenseID)
         {
-            return InternationalLicensesData.isInternationalLicenseExists(LicenseID);   
+            return InternationalLicensesData.isInternationalLicenseExists(LicenseID);
         }
 
+        public static clsInternationalLicenses CreateNewIDLA(clsLicenses _license,clsUser _CurrentUser)
+        {
+            clsInternationalLicenses _InternationalLicenses = new clsInternationalLicenses();
+            _InternationalLicenses.Application.ApplicantPersonID = clsDrivers.GetDriverByID(_license.DriverID).PersonID;
+            _InternationalLicenses.Application.ApplicationDate = DateTime.Now;
+            _InternationalLicenses.Application.ApplicationTypeID = (int)eApplicationType.NewInternational;
+            _InternationalLicenses.Application.ApplicationStatus = 1;
+            _InternationalLicenses.Application.LastStatutDate = DateTime.Now;
+            _InternationalLicenses.Application.PaidFees = clsApplicationTypes.GetApplicationTypeByID((int)eApplicationType.NewInternational).ApplicationFees;
+            _InternationalLicenses.Application.CreatedByUserID = _CurrentUser.UserID;
+            _InternationalLicenses.DriverID = _license.DriverID;
+            _InternationalLicenses.IssuedUsingLocalLicenseID = _license.LicenseID;
+            _InternationalLicenses.IssueDate = DateTime.Now;
+            _InternationalLicenses.ExpirationDate = DateTime.Now.AddYears(1);
+            _InternationalLicenses.IsActive = true;
+            _InternationalLicenses.CreatedByUserID = _CurrentUser.UserID;
+            if (_InternationalLicenses.Save())
+            {
+                return _InternationalLicenses;
+            }
+            else
+            {
+                return null;
+            }
+        }
     }
 }
+
+
+
+

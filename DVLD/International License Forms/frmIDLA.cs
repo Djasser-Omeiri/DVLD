@@ -71,22 +71,8 @@ namespace DVLD
         {
             if (MessageBox.Show("Are you sure you want to issue this International Driving License?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) { return; }
 
-
-            _InternationalLicenses = new clsInternationalLicenses();
-            _InternationalLicenses.Application.ApplicantPersonID = clsDrivers.GetDriverByID(_license.DriverID).PersonID;
-            _InternationalLicenses.Application.ApplicationDate = DateTime.Parse(lblinputApplicationDate.Text);
-            _InternationalLicenses.Application.ApplicationTypeID = (int)eApplicationType.NewInternational;
-            _InternationalLicenses.Application.ApplicationStatus = 1;
-            _InternationalLicenses.Application.LastStatutDate = DateTime.Parse(lblinputApplicationDate.Text);
-            _InternationalLicenses.Application.PaidFees = decimal.Parse(lblInputFees.Text);
-            _InternationalLicenses.Application.CreatedByUserID = _CurrentUser.UserID;
-            _InternationalLicenses.DriverID = _license.DriverID;
-            _InternationalLicenses.IssuedUsingLocalLicenseID = _license.LicenseID;
-            _InternationalLicenses.IssueDate = DateTime.Parse(lblinputIssueDate.Text);
-            _InternationalLicenses.ExpirationDate = DateTime.Parse(lblinputExpirationDate.Text);
-            _InternationalLicenses.IsActive = true;
-            _InternationalLicenses.CreatedByUserID = _CurrentUser.UserID;
-            if (_InternationalLicenses.Save())
+            _InternationalLicenses = clsInternationalLicenses.CreateNewIDLA(_license, _CurrentUser);
+            if (_InternationalLicenses != null)
             {
                 MessageBox.Show($"International Driving License Issued Successfully With ID={_InternationalLicenses.InternationalLicenseID}", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
@@ -94,7 +80,7 @@ namespace DVLD
                 btnIssue.Enabled = false;
                 gbFilter.Enabled = false;
                 lblInputinternationalLicenseID.Text = _InternationalLicenses.InternationalLicenseID.ToString();
-                lblinputApplicationID.Text= _InternationalLicenses.Application.ApplicationID.ToString();
+                lblinputApplicationID.Text = _InternationalLicenses.Application.ApplicationID.ToString();
             }
             else
             {

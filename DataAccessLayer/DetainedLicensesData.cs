@@ -9,12 +9,12 @@ namespace DataAccessLayer
 {
     public class DetainedLicensesData
     {
-        public static int AddDetainedLicense(int LicenseID, DateTime DetainDate, Decimal FineFees, int CreatedByUserID, bool IsReleased, DateTime? ReleaseDate, int? ReleaseByUserID, int? ReleaseApplicationID)
+        public static int AddDetainedLicense(int LicenseID, DateTime DetainDate, Decimal FineFees, int CreatedByUserID, bool IsReleased, DateTime? ReleaseDate, int? ReleasedByUserID, int? ReleaseApplicationID)
         {
             int DetainID = -1;
             SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
-            string query = @"INSERT INTO DetainedLicenses (LicenseID,DetainDate,FineFees,CreatedByUserID,IsReleased,ReleaseDate,ReleaseByUserID,ReleaseApplicationID)
-                            VALUES (@LicenseID,@DetainDate,@FineFees,@CreatedByUserID,@IsReleased,@ReleaseDate,@ReleaseByUserID,@ReleaseApplicationID);
+            string query = @"INSERT INTO DetainedLicenses (LicenseID,DetainDate,FineFees,CreatedByUserID,IsReleased,ReleaseDate,ReleasedByUserID,ReleaseApplicationID)
+                            VALUES (@LicenseID,@DetainDate,@FineFees,@CreatedByUserID,@IsReleased,@ReleaseDate,@ReleasedByUserID,@ReleaseApplicationID);
                             SELECT SCOPE_IDENTITY();";
             SqlCommand command = new SqlCommand(query, connection);
             command.Parameters.AddWithValue("@LicenseID", LicenseID);
@@ -30,13 +30,13 @@ namespace DataAccessLayer
             {
                 command.Parameters.AddWithValue("@ReleaseDate", DBNull.Value);
             }
-            if (ReleaseByUserID.HasValue)
+            if (ReleasedByUserID.HasValue)
             {
-                command.Parameters.AddWithValue("@ReleaseByUserID", ReleaseByUserID);
+                command.Parameters.AddWithValue("@ReleasedByUserID", ReleasedByUserID);
             }
             else
             {
-                command.Parameters.AddWithValue("@ReleaseByUserID", DBNull.Value);
+                command.Parameters.AddWithValue("@ReleasedByUserID", DBNull.Value);
             }
             if (ReleaseApplicationID.HasValue)
             {
@@ -61,7 +61,7 @@ namespace DataAccessLayer
             return DetainID;
         }
 
-        public static bool UpdateDetainedLicense(int DetainID, int LicenseID, DateTime DetainDate, Decimal FineFees, int CreatedByUserID, bool IsReleased, DateTime? ReleaseDate, int? ReleaseByUserID, int? ReleaseApplicationID)
+        public static bool UpdateDetainedLicense(int DetainID, int LicenseID, DateTime DetainDate, Decimal FineFees, int CreatedByUserID, bool IsReleased, DateTime? ReleaseDate, int? ReleasedByUserID, int? ReleaseApplicationID)
         {
             int rowsAffected = 0;
             SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
@@ -84,13 +84,13 @@ namespace DataAccessLayer
             {
                 command.Parameters.AddWithValue("@ReleaseDate", DBNull.Value);
             }
-            if (ReleaseByUserID.HasValue)
+            if (ReleasedByUserID.HasValue)
             {
-                command.Parameters.AddWithValue("@ReleaseByUserID", ReleaseByUserID);
+                command.Parameters.AddWithValue("@ReleasedByUserID", ReleasedByUserID);
             }
             else
             {
-                command.Parameters.AddWithValue("@ReleaseByUserID", DBNull.Value);
+                command.Parameters.AddWithValue("@ReleasedByUserID", DBNull.Value);
             }
             if (ReleaseApplicationID.HasValue)
             {
@@ -113,5 +113,24 @@ namespace DataAccessLayer
             return rowsAffected > 0;
 
         }
+
+        public static bool IsDetainedLicenseExists(int LicenseID)
+        {
+            bool isFound = false;
+            SqlConnection connection= new SqlConnection(clsDataAccessSettings.ConnectionString);
+            string query = $"SELECT top 1 1 from DetainedLicenses where LicenseID=@LicenseID";
+            SqlCommand command = new SqlCommand(query, connection);
+            command.Parameters.AddWithValue("@LicenseID", LicenseID);
+            try
+            {
+                connection.Open();
+                object result = command.ExecuteScalar();
+                isFound = (result != null);
+            } catch (Exception ex) { Console.WriteLine(ex.Message); }
+            finally { connection.Close();}
+            return isFound;
+        }
+
+
     }
 }
