@@ -201,7 +201,8 @@ namespace DataAccessLayer
             SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
             string query = @"select lc.ClassName,(p.FirstName + ' ' + p.SecondName + ' ' + p.ThirdName + ' ' + p.LastName)as FullName ,
                            l.LicenseID,p.NationalityCountryID,p.Gendor,l.IssueDate,l.IssueReason,l.Notes,l.IsActive,p.DateOfBirth,l.DriverID,l.ExpirationDate,
-                           CASE WHEN exists (select 1 from DetainedLicenses dl where dl.LicenseID=l.LicenseID) then 1 else 0 end as IsDetained 
+                           CASE WHEN exists (select top 1 1 from DetainedLicenses dl where dl.LicenseID=l.LicenseID and dl.IsReleased=0 ) 
+                           then 1 else 0 end as IsDetained 
                            from Licenses l inner join LicenseClasses lc on lc.LicenseClassID=l.LicenseClass inner join Drivers d on d.DriverID=l.DriverID 
                            inner join People p on p.PersonID=d.PersonID Where l.ApplicationID=@ApplicationID";
             SqlCommand command = new SqlCommand(query, connection);

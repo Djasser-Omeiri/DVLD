@@ -105,6 +105,55 @@ namespace BusinessAccessLayer
                 return null;
             }
         }
+
+        public static clsDetainedLicenses GetDetainedLicenseByID(int LicenseID)
+        {
+            int DetainID = -1, CreatedByUserID = -1;
+            int? ReleaseApplicationID = -1, ReleasedByUserID = -1;
+            DateTime DetainDate=DateTime.MinValue, ReleaseDate=DateTime.MinValue;
+            Decimal FineFees = 0;
+            bool IsReleased = false;
+            if (DetainedLicensesData.GetDetainedLicenseByID(ref DetainID, LicenseID,ref DetainDate,ref FineFees,ref CreatedByUserID,ref IsReleased,ref ReleaseDate,ref ReleasedByUserID,ref ReleaseApplicationID))
+            {
+                return new clsDetainedLicenses(DetainID, LicenseID, DetainDate, FineFees, CreatedByUserID, IsReleased, ReleaseDate, ReleasedByUserID, ReleaseApplicationID);
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public static clsApplications ReleaseLicense(clsLicenses License,clsUser _CurrentUser)
+        {
+            int PersonID=clsDrivers.GetDriverByID(License.DriverID).PersonID;
+            clsApplications RelApp=new clsApplications();
+            RelApp.ApplicantPersonID = PersonID;
+            RelApp.ApplicationDate = DateTime.Now;
+            RelApp.ApplicationTypeID = (int)eApplicationType.ReleaseDetained;
+            RelApp.ApplicationStatus = 3;
+            RelApp.LastStatutDate = DateTime.Now;
+            RelApp.PaidFees = clsApplicationTypes.GetApplicationTypeByID((int)eApplicationType.ReleaseDetained).ApplicationFees;
+            RelApp.CreatedByUserID = _CurrentUser.UserID;
+            if (!RelApp.Save())
+            {
+                return null;
+            }
+            clsDetainedLicenses DetainedLicense = clsDetainedLicenses.GetDetainedLicenseByID(License.LicenseID);
+            DetainedLicense.IsReleased = true;
+            DetainedLicense.ReleaseDate = DateTime.Now;
+            DetainedLicense.ReleasedByUserID= _CurrentUser.UserID;
+            DetainedLicense.ReleasedApplicationID= RelApp.ApplicationID;
+            if (DetainedLicense.Save())
+            {
+                return RelApp;
+            }
+            else
+            {
+                clsApplications.DeleteApplication(RelApp.ApplicationID);
+                return null;
+            }
+
+        }
     }
 
 

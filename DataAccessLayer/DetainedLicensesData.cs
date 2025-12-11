@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -117,8 +118,8 @@ namespace DataAccessLayer
         public static bool IsDetainedLicenseExists(int LicenseID)
         {
             bool isFound = false;
-            SqlConnection connection= new SqlConnection(clsDataAccessSettings.ConnectionString);
-            string query = $"SELECT top 1 1 from DetainedLicenses where LicenseID=@LicenseID";
+            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
+            string query = $"select top 1 1 from DetainedLicenses where LicenseID=@LicenseID and IsReleased=0 ";
             SqlCommand command = new SqlCommand(query, connection);
             command.Parameters.AddWithValue("@LicenseID", LicenseID);
             try
@@ -126,11 +127,40 @@ namespace DataAccessLayer
                 connection.Open();
                 object result = command.ExecuteScalar();
                 isFound = (result != null);
-            } catch (Exception ex) { Console.WriteLine(ex.Message); }
-            finally { connection.Close();}
+            }
+            catch (Exception ex) { Console.WriteLine(ex.Message); }
+            finally { connection.Close(); }
             return isFound;
         }
 
+        public static bool GetDetainedLicenseByID(ref int DetainID, int LicenseID, ref DateTime DetainDate, ref Decimal FineFees, ref int CreatedByUserID, ref bool IsReleased, ref DateTime ReleaseDate, ref int? ReleasedByUserID, ref int? ReleaseApplicationID)
+        {
+            bool isFound = false;
+            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
+            string query = $"SELECT * from DetainedLicenses where LicenseID=@LicenseID and IsReleased=0";
+            SqlCommand command = new SqlCommand(query, connection);
+            command.Parameters.AddWithValue("@LicenseID", LicenseID);
+            try
+            {
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+                if (reader.Read())
+                {
+                    isFound = true;
+                    DetainID = Convert.ToInt32(reader["DetainID"]);
+                    DetainDate = Convert.ToDateTime(reader["DetainDate"]);
+                    FineFees = Convert.ToDecimal(reader["FineFees"]);
+                    CreatedByUserID = Convert.ToInt32(reader["CreatedByUserID"]);
+                    IsReleased = Convert.ToBoolean(reader["IsReleased"]);
+                    ReleaseDate = reader["ReleaseDate"] != DBNull.Value ? Convert.ToDateTime(reader["ReleaseDate"]) : DateTime.MinValue;
+                    ReleasedByUserID = reader["ReleasedByUserID"] != DBNull.Value ? (int?)reader["ReleasedByUserID"] : null;
+                    ReleaseApplicationID = reader["ReleaseApplicationID"] != DBNull.Value ? (int?)reader["ReleaseApplicationID"] : null;
+                }
+            }
+            catch (Exception ex) { Console.WriteLine(ex.Message); }
+            finally { connection.Close(); }
+            return isFound;
 
+        }
     }
 }

@@ -110,5 +110,10 @@ namespace DVLD
         {
             new frmDetainLicense(_Currentuser).ShowDialog();
         }
+
+        private void releaseDetainedLicenseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new frmReleaseDetainedLicense(_Currentuser).ShowDialog();
+        }
     }
 }

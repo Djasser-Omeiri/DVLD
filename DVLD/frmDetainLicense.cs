@@ -101,6 +101,7 @@ namespace DVLD
                 gbFilter.Enabled = false;
                 lblinputDetainID.Text = _DetainedLicenses.DetainID.ToString();
                 tbFineFees.Enabled = false;
+                uclicenseInfoDetails.LoadLicenseInfo(clsLicenseDetails.getAllLicenseDetails(_license.ApplicationID));
             }
             else
             {
