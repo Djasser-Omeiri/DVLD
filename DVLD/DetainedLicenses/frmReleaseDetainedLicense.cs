@@ -17,11 +17,16 @@ namespace DVLD
         private clsDetainedLicenses _DetainedLicenses;
         private clsApplications _RelApp;
         private clsLicenses _license;
-        private Decimal _AppFees= clsApplicationTypes.GetApplicationTypeByID((int)eApplicationType.ReleaseDetained).ApplicationFees;
-        public frmReleaseDetainedLicense(clsUser User)
+        private int? _licenseID = null;
+        private Decimal _AppFees = clsApplicationTypes.GetApplicationTypeByID((int)eApplicationType.ReleaseDetained).ApplicationFees;
+        public frmReleaseDetainedLicense(clsUser User, int? LicenseID = null)
         {
             InitializeComponent();
             _CurrentUser = User;
+            if (LicenseID.HasValue)
+            {
+                _licenseID = LicenseID;
+            }
         }
 
         private void txtLicenseID_Validating(object sender, CancelEventArgs e)
@@ -50,13 +55,19 @@ namespace DVLD
             linklblShowLicenseHistory.Enabled = false;
             linklblShowLicenseInfo.Enabled = false;
             lblInputApplicationFees.Text = _AppFees.ToString();
+            if (_licenseID.HasValue)
+            {
+                txtLicenseID.Text = _licenseID.Value.ToString();
+                btnSearch.PerformClick();
+                gbFilter.Enabled = false;
+            }
         }
         private bool HasValidationErrors()
         {
             return !string.IsNullOrEmpty(errorProvider1.GetError(txtLicenseID));
         }
 
-        private void bntSearch_Click(object sender, EventArgs e)
+        private void btnSearch_Click(object sender, EventArgs e)
         {
             ValidateChildren();
             if (HasValidationErrors()) return;
@@ -74,11 +85,11 @@ namespace DVLD
                 }
                 _DetainedLicenses = clsDetainedLicenses.GetDetainedLicenseByID(_license.LicenseID);
                 lblinputDetainID.Text = _DetainedLicenses.DetainID.ToString();
-                lblInputLicenseID.Text=_DetainedLicenses.LicenseID.ToString();
+                lblInputLicenseID.Text = _DetainedLicenses.LicenseID.ToString();
                 lblinputDetainDate.Text = _DetainedLicenses.DetainDate.ToString();
                 lblinputCreatedBy.Text = clsUser.GetUserByID(_DetainedLicenses.CreatedByUserID).UserName;
                 lblInputFineFees.Text = _DetainedLicenses.FineFees.ToString();
-                lblInputTotalFees.Text = (_DetainedLicenses.FineFees+_AppFees).ToString();
+                lblInputTotalFees.Text = (_DetainedLicenses.FineFees + _AppFees).ToString();
                 btnRelease.Enabled = true;
             }
             else

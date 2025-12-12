@@ -24,7 +24,6 @@ namespace DVLD.LocalLicense_Forms
             cbFilters.SelectedIndex = 0;
             dgvLDLA.DataSource = clsLocalDrivingLicenseApplications.GetAllLDLAs();
             lblCount.Text = (dgvLDLA.Rows.Count).ToString();
-
         }
 
         private void frmManageLDLA_Load(object sender, EventArgs e)

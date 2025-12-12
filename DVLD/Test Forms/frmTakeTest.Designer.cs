@@ -477,7 +477,7 @@
             this.Controls.Add(this.gbTest);
             this.Controls.Add(this.lblResult);
             this.Name = "frmTakeTest";
-            this.Text = "frmTakeTest";
+            this.Text = "Take Test";
             this.Load += new System.EventHandler(this.frmTakeTest_Load);
             this.gbTest.ResumeLayout(false);
             this.gbTest.PerformLayout();

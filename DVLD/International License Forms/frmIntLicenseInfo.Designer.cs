@@ -90,7 +90,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.ucidlAinfoDetails);
             this.Name = "frmIntLicenseInfo";
-            this.Text = "frmIntLicenseInfo";
+            this.Text = "International License Info";
             this.Load += new System.EventHandler(this.frmIntLicenseInfo_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -153,6 +154,11 @@ namespace BusinessAccessLayer
                 return null;
             }
 
+        }
+
+        public static DataTable GetAllDetainedLicenses(string columnName = null, string value = null)
+        {
+            return DetainedLicensesData.GetAllDetainedLicenses(columnName, value);
         }
     }
 

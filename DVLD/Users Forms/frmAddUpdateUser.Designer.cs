@@ -400,7 +400,7 @@
             this.Controls.Add(this.TabControluser);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "frmUserInfo";
-            this.Text = "frmAddUpdateUser";
+            this.Text = "Add/Update User";
             this.Load += new System.EventHandler(this.frmUserInfo_Load);
             this.TabControluser.ResumeLayout(false);
             this.tpPersonalInfo.ResumeLayout(false);

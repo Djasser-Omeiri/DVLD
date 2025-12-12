@@ -395,7 +395,7 @@
             this.Controls.Add(this.gbFilter);
             this.Controls.Add(this.uclicenseInfoDetails);
             this.Name = "frmDetainLicense";
-            this.Text = "frmDetainLicense";
+            this.Text = "Detain License";
             this.Load += new System.EventHandler(this.frmDetainLicense_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();

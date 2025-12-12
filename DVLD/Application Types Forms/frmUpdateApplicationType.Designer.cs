@@ -187,7 +187,7 @@
             this.Controls.Add(this.lblID);
             this.Controls.Add(this.label1);
             this.Name = "frmUpdateApplicationType";
-            this.Text = "UpdateApplicationType";
+            this.Text = "Update Application Type";
             this.Load += new System.EventHandler(this.UpdateApplicationType_Load);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

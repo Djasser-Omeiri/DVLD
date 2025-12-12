@@ -31,9 +31,9 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmRenewLicense));
             this.gbFilter = new System.Windows.Forms.GroupBox();
+            this.bntSearch = new System.Windows.Forms.Button();
             this.txtLicenseID = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.bntSearch = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.tbNotes = new System.Windows.Forms.TextBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
@@ -106,6 +106,18 @@
             this.gbFilter.TabStop = false;
             this.gbFilter.Text = "Filter";
             // 
+            // bntSearch
+            // 
+            this.bntSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.bntSearch.Image = ((System.Drawing.Image)(resources.GetObject("bntSearch.Image")));
+            this.bntSearch.Location = new System.Drawing.Point(463, 15);
+            this.bntSearch.Margin = new System.Windows.Forms.Padding(4);
+            this.bntSearch.Name = "bntSearch";
+            this.bntSearch.Size = new System.Drawing.Size(74, 68);
+            this.bntSearch.TabIndex = 3;
+            this.bntSearch.UseVisualStyleBackColor = true;
+            this.bntSearch.Click += new System.EventHandler(this.bntSearch_Click);
+            // 
             // txtLicenseID
             // 
             this.txtLicenseID.Location = new System.Drawing.Point(171, 38);
@@ -126,18 +138,6 @@
             this.label1.Size = new System.Drawing.Size(100, 20);
             this.label1.TabIndex = 1;
             this.label1.Text = "LicenseID:";
-            // 
-            // bntSearch
-            // 
-            this.bntSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.bntSearch.Image = ((System.Drawing.Image)(resources.GetObject("bntSearch.Image")));
-            this.bntSearch.Location = new System.Drawing.Point(463, 15);
-            this.bntSearch.Margin = new System.Windows.Forms.Padding(4);
-            this.bntSearch.Name = "bntSearch";
-            this.bntSearch.Size = new System.Drawing.Size(74, 68);
-            this.bntSearch.TabIndex = 3;
-            this.bntSearch.UseVisualStyleBackColor = true;
-            this.bntSearch.Click += new System.EventHandler(this.bntSearch_Click);
             // 
             // groupBox1
             // 
@@ -600,7 +600,7 @@
             this.Controls.Add(this.gbFilter);
             this.Controls.Add(this.uclicenseInfoDetails);
             this.Name = "frmRenewLicense";
-            this.Text = "frmRenewLicense";
+            this.Text = "Renew License";
             this.Load += new System.EventHandler(this.frmRenewLicense_Load);
             this.gbFilter.ResumeLayout(false);
             this.gbFilter.PerformLayout();

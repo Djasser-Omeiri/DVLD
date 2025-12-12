@@ -35,10 +35,10 @@
             this.dgvTestTypes = new System.Windows.Forms.DataGridView();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.editTestTypeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btnClose = new System.Windows.Forms.Button();
-            this.editTestTypeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTestTypes)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -107,12 +107,20 @@
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(211, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(170, 6);
+            // 
+            // editTestTypeToolStripMenuItem
+            // 
+            this.editTestTypeToolStripMenuItem.Image = global::DVLD.Properties.Resources.edit_32;
+            this.editTestTypeToolStripMenuItem.Name = "editTestTypeToolStripMenuItem";
+            this.editTestTypeToolStripMenuItem.Size = new System.Drawing.Size(173, 26);
+            this.editTestTypeToolStripMenuItem.Text = "Edit Test Type";
+            this.editTestTypeToolStripMenuItem.Click += new System.EventHandler(this.editTestTypeToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(211, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(170, 6);
             // 
             // pictureBox1
             // 
@@ -139,14 +147,6 @@
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
-            // editTestTypeToolStripMenuItem
-            // 
-            this.editTestTypeToolStripMenuItem.Image = global::DVLD.Properties.Resources.edit_32;
-            this.editTestTypeToolStripMenuItem.Name = "editTestTypeToolStripMenuItem";
-            this.editTestTypeToolStripMenuItem.Size = new System.Drawing.Size(214, 26);
-            this.editTestTypeToolStripMenuItem.Text = "Edit Test Type";
-            this.editTestTypeToolStripMenuItem.Click += new System.EventHandler(this.editTestTypeToolStripMenuItem_Click);
-            // 
             // frmManageTestTypes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -159,7 +159,7 @@
             this.Controls.Add(this.lblRecord);
             this.Controls.Add(this.dgvTestTypes);
             this.Name = "frmManageTestTypes";
-            this.Text = "frmManageTestTypes";
+            this.Text = "Manage Test Types";
             this.Load += new System.EventHandler(this.frmManageTestTypes_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvTestTypes)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);

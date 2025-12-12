@@ -352,7 +352,7 @@
             this.Controls.Add(this.gbFilter);
             this.Controls.Add(this.ucPersonInformation);
             this.Name = "frmLicenseHistory";
-            this.Text = "frmLicenseHistory";
+            this.Text = "License History";
             this.Load += new System.EventHandler(this.frmLicenseHistory_Load);
             this.gbFilter.ResumeLayout(false);
             this.gbFilter.PerformLayout();

@@ -90,7 +90,7 @@
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.uclicenseInfoDetails);
             this.Name = "frmLicenseInfo";
-            this.Text = "frmLicenseInfo";
+            this.Text = "License Info";
             this.Load += new System.EventHandler(this.frmLicenseInfo_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);

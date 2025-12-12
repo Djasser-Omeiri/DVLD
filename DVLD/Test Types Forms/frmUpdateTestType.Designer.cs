@@ -224,7 +224,7 @@
             this.Controls.Add(this.lblID);
             this.Controls.Add(this.label1);
             this.Name = "frmUpdateTestType";
-            this.Text = "frmUpdateTestType";
+            this.Text = "Update Test Type";
             this.Load += new System.EventHandler(this.frmUpdateTestType_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

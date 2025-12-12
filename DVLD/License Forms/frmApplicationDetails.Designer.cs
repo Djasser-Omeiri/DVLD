@@ -75,7 +75,7 @@
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.ucapplicationDetails);
             this.Name = "frmApplicationDetails";
-            this.Text = "frmApplicationDetails";
+            this.Text = "Application Details";
             this.Load += new System.EventHandler(this.frmApplicationDetails_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

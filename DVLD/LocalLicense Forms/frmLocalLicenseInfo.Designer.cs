@@ -425,7 +425,7 @@
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.TabControluser);
             this.Name = "frmLocalLicenseInfo";
-            this.Text = "frmLocalLicenseInfo";
+            this.Text = " Local License Info";
             this.Load += new System.EventHandler(this.frmLocalLicenseInfo_Load);
             this.TabControluser.ResumeLayout(false);
             this.tpPersonalInfo.ResumeLayout(false);

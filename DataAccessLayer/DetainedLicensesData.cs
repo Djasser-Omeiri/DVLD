@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -161,6 +162,35 @@ namespace DataAccessLayer
             finally { connection.Close(); }
             return isFound;
 
+        }
+
+        public static DataTable GetAllDetainedLicenses(string columnName = null, string value = null)
+        {
+            DataTable table = new DataTable();
+            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
+            string query = "select DetainID as [D.ID],LicenseID as [L.ID],DetainDate as [D.Date],IsReleased as [Is Released],FineFees as [Fine Fees],ReleaseDate as [Release Date],NationalNo as [N.No],FullName as [Full Name],ReleaseApplicationID as [Release App.ID] from DetainedLicenses_View ";
+            if (!string.IsNullOrEmpty(columnName) && !string.IsNullOrEmpty(value))
+            {
+                query += $" WHERE {columnName} LIKE @Value";
+            }
+            SqlCommand command = new SqlCommand(query, connection);
+            if (!string.IsNullOrEmpty(columnName) && !string.IsNullOrEmpty(value))
+                command.Parameters.AddWithValue("@Value", $"{value}%");
+            try
+            {
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    table.Load(reader);
+                }
+            }
+            catch (Exception ex) { Console.WriteLine(ex.Message); }
+            finally
+            {
+                connection.Close();
+            }
+            return table;
         }
     }
 }

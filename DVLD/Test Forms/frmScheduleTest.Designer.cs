@@ -496,7 +496,7 @@
             this.Controls.Add(this.gbTest);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "frmScheduleTest";
-            this.Text = "frmScheduleTest";
+            this.Text = "Schedule Test";
             this.Load += new System.EventHandler(this.frmScheduleTest_Load);
             this.gbTest.ResumeLayout(false);
             this.gbTest.PerformLayout();

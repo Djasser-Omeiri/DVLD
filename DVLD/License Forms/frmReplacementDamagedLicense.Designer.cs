@@ -475,7 +475,7 @@
             this.Controls.Add(this.gbFilter);
             this.Controls.Add(this.uclicenseInfoDetails);
             this.Name = "frmReplacementDamagedLicense";
-            this.Text = "frmReplacementDamagedLicense";
+            this.Text = "Replacement Damaged License";
             this.Load += new System.EventHandler(this.frmReplacementDamagedLicense_Load);
             this.gbFilter.ResumeLayout(false);
             this.gbFilter.PerformLayout();

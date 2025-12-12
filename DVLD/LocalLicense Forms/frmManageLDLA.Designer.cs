@@ -322,7 +322,7 @@
             this.Controls.Add(this.label1);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "frmManageLDLA";
-            this.Text = "frmManageLDLA";
+            this.Text = "Manage LDLA";
             this.Load += new System.EventHandler(this.frmManageLDLA_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvLDLA)).EndInit();
             this.menu.ResumeLayout(false);

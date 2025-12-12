@@ -55,7 +55,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.gbFilter = new System.Windows.Forms.GroupBox();
-            this.bntSearch = new System.Windows.Forms.Button();
+            this.btnSearch = new System.Windows.Forms.Button();
             this.txtLicenseID = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.uclicenseInfoDetails = new DVLD.User_Control.LicenseInfoDetails();
@@ -363,7 +363,7 @@
             // 
             // gbFilter
             // 
-            this.gbFilter.Controls.Add(this.bntSearch);
+            this.gbFilter.Controls.Add(this.btnSearch);
             this.gbFilter.Controls.Add(this.txtLicenseID);
             this.gbFilter.Controls.Add(this.label1);
             this.gbFilter.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -376,17 +376,17 @@
             this.gbFilter.TabStop = false;
             this.gbFilter.Text = "Filter";
             // 
-            // bntSearch
+            // btnSearch
             // 
-            this.bntSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.bntSearch.Image = ((System.Drawing.Image)(resources.GetObject("bntSearch.Image")));
-            this.bntSearch.Location = new System.Drawing.Point(463, 15);
-            this.bntSearch.Margin = new System.Windows.Forms.Padding(4);
-            this.bntSearch.Name = "bntSearch";
-            this.bntSearch.Size = new System.Drawing.Size(74, 68);
-            this.bntSearch.TabIndex = 3;
-            this.bntSearch.UseVisualStyleBackColor = true;
-            this.bntSearch.Click += new System.EventHandler(this.bntSearch_Click);
+            this.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSearch.Image = ((System.Drawing.Image)(resources.GetObject("btnSearch.Image")));
+            this.btnSearch.Location = new System.Drawing.Point(463, 15);
+            this.btnSearch.Margin = new System.Windows.Forms.Padding(4);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(74, 68);
+            this.btnSearch.TabIndex = 3;
+            this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // txtLicenseID
             // 
@@ -530,7 +530,7 @@
             this.Controls.Add(this.gbFilter);
             this.Controls.Add(this.uclicenseInfoDetails);
             this.Name = "frmReleaseDetainedLicense";
-            this.Text = "frmReleaseDetainedLicense";
+            this.Text = "Release Detained License";
             this.Load += new System.EventHandler(this.frmReleaseDetainedLicense_Load);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
@@ -573,7 +573,7 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.GroupBox gbFilter;
-        private System.Windows.Forms.Button bntSearch;
+        private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.TextBox txtLicenseID;
         private System.Windows.Forms.Label label1;
         private User_Control.LicenseInfoDetails uclicenseInfoDetails;

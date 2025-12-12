@@ -116,7 +116,7 @@
             this.Controls.Add(this.lblNotes);
             this.Controls.Add(this.ucApplicationDetails);
             this.Name = "frmDrivingLicense";
-            this.Text = "frmDrivingLicense";
+            this.Text = "Driving License";
             this.Load += new System.EventHandler(this.frmDrivingLicense_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).EndInit();
             this.ResumeLayout(false);
