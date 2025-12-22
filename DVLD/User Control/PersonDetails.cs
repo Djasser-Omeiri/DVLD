@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +14,7 @@ namespace DVLD
 {
     public partial class PersonDetails : UserControl
     {
+        private clsPerson _Person;
         public PersonDetails()
         {
             InitializeComponent();
@@ -21,6 +23,7 @@ namespace DVLD
         public void LoadPerson(clsPerson person)
         {
             if (person == null) return;
+            _Person = person;
             lblinputPersonID.Text = person.PersonID.ToString();
             lblinputName.Text = $"{person.FirstName} {person.SecondName} {person.ThirdName} {person.LastName}";
             lblinputNationalNo.Text = person.NationalNo;
@@ -30,12 +33,28 @@ namespace DVLD
             lblinputEmail.Text = person.Email;
             lblinputPhone.Text = person.Phone;
             lblinputCountry.Text = clsCountry.GetCountryName(person.NationalityCountryID);
-            PicturePerson.Image = (string.IsNullOrEmpty(person.ImagePath) || !System.IO.File.Exists(person.ImagePath)) ? (person.Gendor) ? Properties.Resources.Female_512 : Properties.Resources.Male_512 : Image.FromFile(person.ImagePath);
+            _LoadPersonImage();
         }
 
         private void linklbl_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             new frmPersonInfo(int.Parse(lblinputPersonID.Text)).ShowDialog();
+            LoadPerson(clsPerson.FindPersonByID(int.Parse(lblinputPersonID.Text)));
+        }
+        private void _LoadPersonImage()
+        {
+            if (!_Person.Gendor)
+                PicturePerson.Image = Resources.Male_512;
+            else
+                PicturePerson.Image = Resources.Female_512;
+
+            string ImagePath = _Person.ImagePath;
+            if (ImagePath != "")
+                if (File.Exists(ImagePath))
+                    PicturePerson.ImageLocation = ImagePath;
+                else
+                    MessageBox.Show("Could not find this image: = " + ImagePath, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
         }
     }
 }

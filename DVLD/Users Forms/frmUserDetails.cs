@@ -13,22 +13,20 @@ namespace DVLD
 {
     public partial class frmUserDetails : Form
     {
-        private clsUser _CurrentUser;
-        public frmUserDetails(clsUser currentUser)
+        public frmUserDetails()
         {
             InitializeComponent();
-            _CurrentUser = currentUser;
         }
        
         private void loaduser()
         {
-            lblInputUserID.Text=_CurrentUser.UserID.ToString();
-            lblInputUserName.Text=_CurrentUser.UserName.ToString();
-            lblInputIsActive.Text = (_CurrentUser.IsActive) ? "Yes" : "No";
+            lblInputUserID.Text=clsGlobal.CurrentUser.UserID.ToString();
+            lblInputUserName.Text= clsGlobal.CurrentUser.UserName.ToString();
+            lblInputIsActive.Text = (clsGlobal.CurrentUser.IsActive) ? "Yes" : "No";
         }
         private void frmUserInfo_Load(object sender, EventArgs e)
         {
-            clsPerson Person=clsPerson.FindPersonByID(_CurrentUser.PersonID);
+            clsPerson Person=clsPerson.FindPersonByID(clsGlobal.CurrentUser.PersonID);
             ucPersonDetails.LoadPerson(Person);
             loaduser();
         }

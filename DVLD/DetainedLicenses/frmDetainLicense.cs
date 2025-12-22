@@ -13,19 +13,17 @@ namespace DVLD
 {
     public partial class frmDetainLicense : Form
     {
-        private clsUser _CurrentUser;
         private clsDetainedLicenses _DetainedLicenses;
         private clsLicenses _license;
-        public frmDetainLicense(clsUser user)
+        public frmDetainLicense()
         {
             InitializeComponent();
-            _CurrentUser = user;
         }
 
         private void frmDetainLicense_Load(object sender, EventArgs e)
         {
             lblinputDetainDate.Text = DateTime.Now.ToString();
-            lblinputCreatedBy.Text = _CurrentUser.UserName;
+            lblinputCreatedBy.Text = clsGlobal.CurrentUser.UserName;
             btnDetain.Enabled = false;
             linklblShowLicenseHistory.Enabled = false;
             linklblShowLicenseInfo.Enabled = false;
@@ -91,7 +89,7 @@ namespace DVLD
         private void btnDetain_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("Are you sure you want to detain this Driving License?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) { return; }
-            _DetainedLicenses = clsDetainedLicenses.CreateDetainedLicense(_license, _CurrentUser, tbFineFees.Text);
+            _DetainedLicenses = clsDetainedLicenses.CreateDetainedLicense(_license, clsGlobal.CurrentUser, tbFineFees.Text);
             if (_DetainedLicenses != null)
             {
                 MessageBox.Show($"License Detained Successfully With ID={_DetainedLicenses.DetainID}", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);

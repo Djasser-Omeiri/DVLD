@@ -13,13 +13,11 @@ namespace DVLD
 {
     public partial class frmIDLA : Form
     {
-        private clsUser _CurrentUser;
         private clsInternationalLicenses _InternationalLicenses;
         private clsLicenses _license;
-        public frmIDLA(clsUser CurrentUser)
+        public frmIDLA()
         {
             InitializeComponent();
-            _CurrentUser = CurrentUser;
         }
 
         private void bntSearch_Click(object sender, EventArgs e)
@@ -56,7 +54,7 @@ namespace DVLD
             lblinputIssueDate.Text = DateTime.Now.ToString();
             lblinputExpirationDate.Text = DateTime.Now.AddYears(1).ToString();
             lblInputFees.Text = clsApplicationTypes.GetApplicationTypeByID((int)eApplicationType.NewInternational).ApplicationFees.ToString();
-            lblinputCreatedBy.Text = _CurrentUser.UserName;
+            lblinputCreatedBy.Text = clsGlobal.CurrentUser.UserName;
             btnIssue.Enabled = false;
             linklblShowLicenseHistory.Enabled = false;
             linklblShowLicenseInfo.Enabled = false;
@@ -71,7 +69,7 @@ namespace DVLD
         {
             if (MessageBox.Show("Are you sure you want to issue this International Driving License?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) { return; }
 
-            _InternationalLicenses = clsInternationalLicenses.CreateNewIDLA(_license, _CurrentUser);
+            _InternationalLicenses = clsInternationalLicenses.CreateNewIDLA(_license, clsGlobal.CurrentUser);
             if (_InternationalLicenses != null)
             {
                 MessageBox.Show($"International Driving License Issued Successfully With ID={_InternationalLicenses.InternationalLicenseID}", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);

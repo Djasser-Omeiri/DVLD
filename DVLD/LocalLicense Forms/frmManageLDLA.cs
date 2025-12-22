@@ -13,11 +13,9 @@ namespace DVLD.LocalLicense_Forms
 {
     public partial class frmManageLDLA : Form
     {
-        private clsUser _CurrentUser;
-        public frmManageLDLA(clsUser currentUser)
+        public frmManageLDLA()
         {
             InitializeComponent();
-            _CurrentUser = currentUser;
         }
         private void _refreshLDLAList()
         {
@@ -33,7 +31,7 @@ namespace DVLD.LocalLicense_Forms
 
         private void btnAddLDLA_Click(object sender, EventArgs e)
         {
-            new frmLocalLicenseInfo(_CurrentUser).ShowDialog();
+            new frmLocalLicenseInfo().ShowDialog();
             _refreshLDLAList();
         }
         private string GetColumnName(string selected)
@@ -83,19 +81,19 @@ namespace DVLD.LocalLicense_Forms
 
         private void scheduleVisionTestToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new frmTest(Convert.ToInt32(dgvLDLA.CurrentRow.Cells["L.D.L.AppID"].Value), _CurrentUser.UserID, eTest.Vision).ShowDialog();
+            new frmTest(Convert.ToInt32(dgvLDLA.CurrentRow.Cells["L.D.L.AppID"].Value), eTest.Vision).ShowDialog();
             _refreshLDLAList();
         }
 
         private void scheduleWrittenTestToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new frmTest(Convert.ToInt32(dgvLDLA.CurrentRow.Cells["L.D.L.AppID"].Value), _CurrentUser.UserID, eTest.Written).ShowDialog();
+            new frmTest(Convert.ToInt32(dgvLDLA.CurrentRow.Cells["L.D.L.AppID"].Value), eTest.Written).ShowDialog();
             _refreshLDLAList();
         }
 
         private void ScheduleStreetTestToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new frmTest(Convert.ToInt32(dgvLDLA.CurrentRow.Cells["L.D.L.AppID"].Value), _CurrentUser.UserID, eTest.Street).ShowDialog();
+            new frmTest(Convert.ToInt32(dgvLDLA.CurrentRow.Cells["L.D.L.AppID"].Value), eTest.Street).ShowDialog();
             _refreshLDLAList();
         }
 
@@ -145,7 +143,7 @@ namespace DVLD.LocalLicense_Forms
 
         private void issueDrivingLicenseFirstTimeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new frmDrivingLicense(Convert.ToInt32(dgvLDLA.CurrentRow.Cells["L.D.L.AppID"].Value), _CurrentUser).ShowDialog();
+            new frmDrivingLicense(Convert.ToInt32(dgvLDLA.CurrentRow.Cells["L.D.L.AppID"].Value)).ShowDialog();
             _refreshLDLAList();
         }
 

@@ -15,18 +15,16 @@ namespace DVLD
     {
         private clsApplicationDetails _applicationDetails;
         private clsTestAppointments _testAppointment;
-        private int _UserID;
         private int _TestAppointmentID;
         private bool? _isLocked;
         private clsApplications _application;
         public enum enMode { AddNew = 0, Update = 1, Retake = 2 };
         private enMode _Mode;
         private eTest _Test;
-        public frmScheduleTest(clsApplicationDetails ApplicationDetails, int UserID, int testAppointmentID, eTest test ,bool isLocked = false, bool isRetake = false)
+        public frmScheduleTest(clsApplicationDetails ApplicationDetails, int testAppointmentID, eTest test ,bool isLocked = false, bool isRetake = false)
         {
             InitializeComponent();
             _applicationDetails = ApplicationDetails;
-            _UserID = UserID;
             _TestAppointmentID = testAppointmentID;
             _Test= test;
             if (isRetake)
@@ -116,7 +114,7 @@ namespace DVLD
                 _testAppointment.LocalDrivingLicenseApplicationID = _applicationDetails.LocalDrivingLicenseApplicationID;
                 _testAppointment.TestTypeID =(int)_Test;
                 _testAppointment.PaidFees = decimal.Parse(lblInputTfees.Text);
-                _testAppointment.CreatedByUserID = _UserID;
+                _testAppointment.CreatedByUserID = clsGlobal.CurrentUser.UserID;
                 _testAppointment.IsLocked = false;
                 _testAppointment.RetakeTestApplicationID = null;
             }
@@ -131,7 +129,7 @@ namespace DVLD
                 _application.ApplicationStatus = 1;
                 _application.LastStatutDate = DateTime.Now;
                 _application.PaidFees = clsApplicationTypes.GetApplicationTypeByID((int)eApplicationType.RetakeTest).ApplicationFees;
-                _application.CreatedByUserID = _UserID;
+                _application.CreatedByUserID = clsGlobal.CurrentUser.UserID;
                 if (!_application.Save())
                 {
                     MessageBox.Show("Failed to create retake application.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);

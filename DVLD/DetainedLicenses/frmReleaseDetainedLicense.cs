@@ -13,16 +13,14 @@ namespace DVLD
 {
     public partial class frmReleaseDetainedLicense : Form
     {
-        private clsUser _CurrentUser;
         private clsDetainedLicenses _DetainedLicenses;
         private clsApplications _RelApp;
         private clsLicenses _license;
         private int? _licenseID = null;
         private Decimal _AppFees = clsApplicationTypes.GetApplicationTypeByID((int)eApplicationType.ReleaseDetained).ApplicationFees;
-        public frmReleaseDetainedLicense(clsUser User, int? LicenseID = null)
+        public frmReleaseDetainedLicense( int? LicenseID = null)
         {
             InitializeComponent();
-            _CurrentUser = User;
             if (LicenseID.HasValue)
             {
                 _licenseID = LicenseID;
@@ -106,7 +104,7 @@ namespace DVLD
         private void btnRelease_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("Are you sure you want to release this detained Driving License?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) { return; }
-            _RelApp = clsDetainedLicenses.ReleaseLicense(_license, _CurrentUser);
+            _RelApp = clsDetainedLicenses.ReleaseLicense(_license, clsGlobal.CurrentUser);
             if (_RelApp != null)
             {
                 MessageBox.Show($"Detained License Released Successfully With ID={_RelApp.ApplicationID}", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);

@@ -22,8 +22,6 @@ namespace DVLD
 
         int _PersonID;
         clsPerson _Person;
-        private string _OldImagePath = null;
-        private string _TempImagePath = null;
         public frmPersonInfo(int PersonID)
         {
             InitializeComponent();
@@ -38,12 +36,50 @@ namespace DVLD
             }
 
         }
-        private Image LoadImage(string path)
+        private bool _HandlePersonImage()
         {
-            using (var fs = new FileStream(path, FileMode.Open, FileAccess.Read))
+
+            //this procedure will handle the person image,
+            //it will take care of deleting the old image from the folder
+            //in case the image changed. and it will rename the new image with guid and 
+            // place it in the images folder.
+
+            if (_Person.ImagePath != PicturePerson.ImageLocation)
             {
-                return Image.FromStream(fs);
+                if (_Person.ImagePath != "")
+                {
+                    //first we delete the old image from the folder in case there is any.
+
+                    try
+                    {
+                        File.Delete(_Person.ImagePath);
+                    }
+                    catch (IOException)
+                    {
+                        // We could not delete the file.
+                        //log it later   
+                    }
+                }
+
+                if (PicturePerson.ImageLocation != null)
+                {
+                    //then we copy the new image to the image folder after we rename it
+                    string SourceImageFile = PicturePerson.ImageLocation.ToString();
+
+                    if (clsUtil.CopyImageToProjectImagesFolder(ref SourceImageFile))
+                    {
+                        PicturePerson.ImageLocation = SourceImageFile;
+                        return true;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Error Copying Image File", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return false;
+                    }
+                }
+
             }
+            return true;
         }
 
 
@@ -76,10 +112,9 @@ namespace DVLD
             tbAddress.Text = _Person.Address;
             dtpDate.Value = _Person.DateOfBirth;
             cbCountry.SelectedIndex = _Person.NationalityCountryID;
-            _OldImagePath = _Person.ImagePath;
             if (_Person.ImagePath != "")
             {
-                PicturePerson.Image = Image.FromFile(_Person.ImagePath);
+                PicturePerson.ImageLocation = _Person.ImagePath;
                 UpdateRemovebtnVisibility();
             }
 
@@ -184,10 +219,7 @@ namespace DVLD
 
 
         private void lblRemove_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            _OldImagePath = _Person.ImagePath;
-            _TempImagePath = null; 
-
+        {                 
             PicturePerson.Image = rbMale.Checked
                 ? Properties.Resources.Male_512
                 : Properties.Resources.Female_512;
@@ -197,35 +229,22 @@ namespace DVLD
 
             UpdateRemovebtnVisibility();
         }
-        
+
 
 
 
 
         private void lblImage_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            string imagesFolder = @"C:\PersonsImages\";
-
-            if (!Directory.Exists(imagesFolder))
-                Directory.CreateDirectory(imagesFolder);
-
             using (OpenFileDialog ofd = new OpenFileDialog())
             {
                 ofd.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp";
+                ofd.RestoreDirectory = true;
                 if (ofd.ShowDialog() == DialogResult.OK)
                 {
-                    _OldImagePath = _Person.ImagePath;
-
-                    string newFileName = Guid.NewGuid().ToString() + Path.GetExtension(ofd.FileName);
-                    string destPath = Path.Combine(imagesFolder, newFileName);
-
-                    File.Copy(ofd.FileName, destPath, true);
-
-                    PicturePerson.Image = LoadImage(destPath);
-                    PicturePerson.ImageLocation = destPath;
-                    _TempImagePath = destPath;   
+                    string selectedFilePath = ofd.FileName;
+                    PicturePerson.Load(selectedFilePath);
                     PicturePerson.Tag = 1;
-
                     UpdateRemovebtnVisibility();
                 }
             }
@@ -295,6 +314,9 @@ namespace DVLD
                 return;
             }
 
+            if (!_HandlePersonImage())
+                return;
+
             _Person.FirstName = tbFirstName.Text;
             _Person.SecondName = tbSecondName.Text;
             _Person.ThirdName = tbThirdName.Text;
@@ -306,18 +328,14 @@ namespace DVLD
             _Person.DateOfBirth = dtpDate.Value;
             _Person.Phone = tbPhone.Text;
             _Person.NationalityCountryID = cbCountry.SelectedIndex;
-
-            if (_OldImagePath != null && _OldImagePath != _TempImagePath)
-            {
-                DeletePersonImage(_OldImagePath);
-            }
-
-            _Person.ImagePath = _TempImagePath;
+            if (PicturePerson.ImageLocation != null)
+                _Person.ImagePath = PicturePerson.ImageLocation;
+            else
+                _Person.ImagePath = "";
 
             if (_Person.Save())
             {
                 MessageBox.Show("Data Saved Successfully.");
-                _OldImagePath = _Person.ImagePath; 
             }
             else
             {

@@ -16,14 +16,12 @@ namespace DVLD
     {
         private int _LDLAID;
         private clsApplicationDetails _clsApplicationDetails;
-        private int _UserID;
         private eTest _Test;
         
-        public frmTest(int LDLAID, int UserID, eTest test)
+        public frmTest(int LDLAID, eTest test)
         {
             InitializeComponent();
             _LDLAID = LDLAID;
-            _UserID = UserID;
             _Test = test;
         }
         private void frmVisionTest_Load(object sender, EventArgs e)
@@ -64,11 +62,11 @@ namespace DVLD
             }
             if(dgvAppointments.Rows.Count== 0)
             {
-                new frmScheduleTest(_clsApplicationDetails, _UserID, -1, _Test).ShowDialog();
+                new frmScheduleTest(_clsApplicationDetails, -1, _Test).ShowDialog();
             }
             else if (!clsTest.FindTestByAppointmentID(Convert.ToInt32(dgvAppointments.Rows[dgvAppointments.Rows.Count-1].Cells["TestAppointmentID"].Value)).TestResult)
             {
-                new frmScheduleTest(_clsApplicationDetails, _UserID, Convert.ToInt32(dgvAppointments.Rows[dgvAppointments.Rows.Count - 1].Cells["TestAppointmentID"].Value), _Test, false,true).ShowDialog(); 
+                new frmScheduleTest(_clsApplicationDetails, Convert.ToInt32(dgvAppointments.Rows[dgvAppointments.Rows.Count - 1].Cells["TestAppointmentID"].Value), _Test, false,true).ShowDialog(); 
             }
             else if (clsTest.FindTestByAppointmentID(Convert.ToInt32(dgvAppointments.Rows[dgvAppointments.Rows.Count - 1].Cells["TestAppointmentID"].Value)).TestResult)
             {
@@ -80,13 +78,13 @@ namespace DVLD
 
         private void takeTestToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new frmTakeTest(Convert.ToInt32(dgvAppointments.CurrentRow.Cells["TestAppointmentID"].Value), _clsApplicationDetails, _UserID,_Test).ShowDialog();
+            new frmTakeTest(Convert.ToInt32(dgvAppointments.CurrentRow.Cells["TestAppointmentID"].Value), _clsApplicationDetails,_Test).ShowDialog();
             _refresh();
         }
 
         private void editToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new frmScheduleTest(_clsApplicationDetails, _UserID, Convert.ToInt32(dgvAppointments.CurrentRow.Cells["TestAppointmentID"].Value), _Test, Convert.ToBoolean(dgvAppointments.CurrentRow.Cells["IsLocked"].Value)).ShowDialog();
+            new frmScheduleTest(_clsApplicationDetails, Convert.ToInt32(dgvAppointments.CurrentRow.Cells["TestAppointmentID"].Value), _Test, Convert.ToBoolean(dgvAppointments.CurrentRow.Cells["IsLocked"].Value)).ShowDialog();
             _refresh();
         }
     }

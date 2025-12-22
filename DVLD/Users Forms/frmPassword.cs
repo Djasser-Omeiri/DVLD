@@ -13,22 +13,17 @@ namespace DVLD.Users_Forms
 {
     public partial class frmPassword : Form
     {
-        private clsUser _User;
-        public frmPassword(clsUser User)
+        public frmPassword()
         {
             InitializeComponent();
-            _User = User;
         }
         private void _loadfrm()
         {
-            if (_User != null)
-            {
-                clsPerson Person = clsPerson.FindPersonByID(_User.PersonID);
+                clsPerson Person = clsPerson.FindPersonByID(clsGlobal.CurrentUser.PersonID);
                 ucPersonDetails.LoadPerson(Person);
-                lblInputUserID.Text = _User.UserID.ToString();
-                lblInputUserName.Text = _User.UserName;
-                lblInputIsActive.Text = (_User.IsActive) ? "Yes" : "No";
-            }
+                lblInputUserID.Text = clsGlobal.CurrentUser.UserID.ToString();
+                lblInputUserName.Text = clsGlobal.CurrentUser.UserName;
+                lblInputIsActive.Text = (clsGlobal.CurrentUser.IsActive) ? "Yes" : "No";
         }
 
         private void tbPassword_Validating(object sender, CancelEventArgs e)
@@ -37,7 +32,7 @@ namespace DVLD.Users_Forms
             {
                 errorProvider1.SetError(tbPassword, "This cannot be empty");
             }
-            else if (tbPassword.Text != _User.Password)
+            else if (tbPassword.Text != clsGlobal.CurrentUser.Password)
             {
                 errorProvider1.SetError(tbPassword, "Password is wrong");
             }
@@ -94,8 +89,8 @@ namespace DVLD.Users_Forms
                 MessageBox.Show("Please fix validation errors before saving.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            _User.Password = tbNewPassword.Text;
-            if (_User.UpdateUserPassword())
+            clsGlobal.CurrentUser.Password = tbNewPassword.Text;
+            if (clsGlobal.CurrentUser.UpdateUserPassword())
             {
                 MessageBox.Show("User Password Saved Successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 

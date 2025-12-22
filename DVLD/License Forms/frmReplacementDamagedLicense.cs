@@ -13,14 +13,12 @@ namespace DVLD
 {
     public partial class frmReplacementDamagedLicense : Form
     {
-        private clsUser _CurrentUser;
         private clsLicenses _license;
         private clsLicenses _newlicense;
         private eApplicationType _applicationType = eApplicationType.Damaged;
-        public frmReplacementDamagedLicense(clsUser CurrentUser)
+        public frmReplacementDamagedLicense()
         {
             InitializeComponent();
-            _CurrentUser = CurrentUser;
         }
 
         private void txtLicenseID_KeyPress(object sender, KeyPressEventArgs e)
@@ -52,7 +50,7 @@ namespace DVLD
         {
             if (MessageBox.Show("Are you sure you want to replace this Driving License?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) { return; }
             ;
-            _newlicense = clsLicenses.ReplaceLicense(_license, _CurrentUser, (rbDamaged.Checked) ? eApplicationType.Damaged : eApplicationType.Lost);
+            _newlicense = clsLicenses.ReplaceLicense(_license, clsGlobal.CurrentUser, (rbDamaged.Checked) ? eApplicationType.Damaged : eApplicationType.Lost);
             if (_newlicense != null)
             {
                 MessageBox.Show($"License Replaced Successfully With ID={_newlicense.LicenseID}", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -74,7 +72,7 @@ namespace DVLD
         {
             lblinputApplicationDate.Text = DateTime.Now.ToString();
             lblinputAppFees.Text = clsApplicationTypes.GetApplicationTypeByID((int)_applicationType).ApplicationFees.ToString();
-            lblinputCreatedBy.Text = _CurrentUser.UserName;
+            lblinputCreatedBy.Text = clsGlobal.CurrentUser.UserName;
             btnIssue.Enabled = false;
             linklblShowLicenseHistory.Enabled = false;
             linklblShowNewLicenseInfo.Enabled = false;

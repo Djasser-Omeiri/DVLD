@@ -47,6 +47,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Global Classes\clsGlobal.cs" />
+    <Compile Include="Global Classes\clsUtil.cs" />
     <Compile Include="DetainedLicenses\frmManageDetainedLicenses.cs">
       <SubType>Form</SubType>
     </Compile>

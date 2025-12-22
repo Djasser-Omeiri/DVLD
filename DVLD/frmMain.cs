@@ -17,17 +17,12 @@ namespace DVLD
 {
     public partial class frmMain : Form
     {
-        private clsUser _Currentuser;
         private bool _isLogout = false;
 
-        public frmMain(clsUser user)
+        public frmMain()
         {
             InitializeComponent();
-            _Currentuser = user;
         }
-
-
-
         private void peopleToolStripMenuItem_Click(object sender, EventArgs e)
         {
             new frmManagePeople().ShowDialog();
@@ -46,7 +41,7 @@ namespace DVLD
 
         private void currentUserInfoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new frmUserDetails(_Currentuser).ShowDialog();
+            new frmUserDetails().ShowDialog();
         }
 
         private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
@@ -58,7 +53,7 @@ namespace DVLD
 
         private void changePasswordToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new frmPassword(_Currentuser).ShowDialog();
+            new frmPassword().ShowDialog();
         }
 
         private void manageApplicationTypesToolStripMenuItem_Click(object sender, EventArgs e)
@@ -73,12 +68,12 @@ namespace DVLD
 
         private void localLicenseToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new frmLocalLicenseInfo(_Currentuser).ShowDialog();
+            new frmLocalLicenseInfo().ShowDialog();
         }
 
         private void localDdrivingToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new frmManageLDLA(_Currentuser).ShowDialog();
+            new frmManageLDLA().ShowDialog();
         }
 
         private void driversToolStripMenuItem_Click(object sender, EventArgs e)
@@ -93,43 +88,42 @@ namespace DVLD
 
         private void internationalLicenseToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new frmIDLA(_Currentuser).ShowDialog();
+            new frmIDLA().ShowDialog();
         }
 
         private void renewDrivingToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new frmRenewLicense(_Currentuser).ShowDialog();
+            new frmRenewLicense().ShowDialog();
         }
 
         private void replacementOfToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new frmReplacementDamagedLicense(_Currentuser).ShowDialog();
+            new frmReplacementDamagedLicense().ShowDialog();
         }
 
         private void detainLicenseToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new frmDetainLicense(_Currentuser).ShowDialog();
+            new frmDetainLicense().ShowDialog();
         }
 
         private void releaseDetainedLicenseToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new frmReleaseDetainedLicense(_Currentuser).ShowDialog();
+            new frmReleaseDetainedLicense().ShowDialog();
         }
 
         private void manageDetainedLicensesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new frmManageDetainedLicenses(_Currentuser).ShowDialog();
+            new frmManageDetainedLicenses().ShowDialog();
         }
 
         private void releaseDetainedDrivingLicenseToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new frmReleaseDetainedLicense(_Currentuser).ShowDialog();
+            new frmReleaseDetainedLicense().ShowDialog();
         }
 
         private void retakeTestToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new frmManageLDLA(_Currentuser).ShowDialog();
+            new frmManageLDLA().ShowDialog();
         }
-
     }
 }

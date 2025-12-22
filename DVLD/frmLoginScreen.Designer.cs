@@ -159,6 +159,7 @@
             this.Controls.Add(this.lblUsername);
             this.Name = "frmLoginScreen";
             this.Text = "Login Screen";
+            this.Load += new System.EventHandler(this.frmLoginScreen_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).EndInit();

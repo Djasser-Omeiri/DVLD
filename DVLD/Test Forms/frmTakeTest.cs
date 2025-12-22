@@ -17,14 +17,12 @@ namespace DVLD
         private clsTestAppointments _clsTestAppointments;
         private clsApplicationDetails _clsApplicationDetails;
         private clsTest _clsTest;
-        private int _UserID;
         private eTest _Test;
-        public frmTakeTest(int TestAppointmentID, clsApplicationDetails clsApplicationDetails, int UserID, eTest test)
+        public frmTakeTest(int TestAppointmentID, clsApplicationDetails clsApplicationDetails, eTest test)
         {
             InitializeComponent();
             _TestAppointmentID = TestAppointmentID;
             _clsApplicationDetails = clsApplicationDetails;
-            _UserID = UserID;
             _Test = test;
         }
 
@@ -74,7 +72,7 @@ namespace DVLD
             _clsTest.TestAppointmentID = _TestAppointmentID;
             _clsTest.TestResult = rbPass.Checked;
             _clsTest.Notes = tbNotes.Text == string.Empty ? "" : tbNotes.Text;
-            _clsTest.CreatedByUserID = _UserID;
+            _clsTest.CreatedByUserID = clsGlobal.CurrentUser.UserID;
             MessageBox.Show(_clsTest.AddTest() ? "Test Result Saved Successfully." : "Failed to Save Test Result.", "Result", MessageBoxButtons.OK, MessageBoxIcon.Information);
             lblinputTestID.Text = _clsTest.TestID.ToString();
         }

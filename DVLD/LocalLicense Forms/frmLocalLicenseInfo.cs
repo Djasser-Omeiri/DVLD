@@ -13,13 +13,11 @@ namespace DVLD
 {
     public partial class frmLocalLicenseInfo : Form
     {
-        public frmLocalLicenseInfo(clsUser user)
+        public frmLocalLicenseInfo()
         {
             InitializeComponent();
-            _User = user;
         }
         private clsPerson _Person;
-        private clsUser _User;
         private clsLocalDrivingLicenseApplications _LocalDrivingLicenseApplications;
         private void frmLocalLicenseInfo_Load(object sender, EventArgs e)
         {
@@ -94,7 +92,7 @@ namespace DVLD
             lblinputApplicationDate.Text = DateTime.Now.ToString("yyyy-MM-dd");
             _filllicenseclassesincb();
             cbLicenseClasses.SelectedIndex = 0;
-            lblinputcreator.Text = _User.UserName;
+            lblinputcreator.Text = clsGlobal.CurrentUser.UserName;
             lblinputFees.Text = clsApplicationTypes.GetApplicationTypeByID((int)eApplicationType.New).ApplicationFees.ToString();
             _LocalDrivingLicenseApplications = new clsLocalDrivingLicenseApplications();
         }
@@ -124,7 +122,7 @@ namespace DVLD
             _LocalDrivingLicenseApplications.ApplicationInfo.ApplicationStatus = 1;
             _LocalDrivingLicenseApplications.ApplicationInfo.LastStatutDate = DateTime.Now;
             _LocalDrivingLicenseApplications.ApplicationInfo.PaidFees = Convert.ToDecimal(lblinputFees.Text);
-            _LocalDrivingLicenseApplications.ApplicationInfo.CreatedByUserID = _User.UserID;
+            _LocalDrivingLicenseApplications.ApplicationInfo.CreatedByUserID = clsGlobal.CurrentUser.UserID;
             _LocalDrivingLicenseApplications.LicenseClassID = cbLicenseClasses.SelectedIndex;
             if (_LocalDrivingLicenseApplications.Save())
             {

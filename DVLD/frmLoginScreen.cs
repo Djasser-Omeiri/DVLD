@@ -35,6 +35,14 @@ namespace DVLD
                                 "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+            if (cbRememberMe.Checked)
+            {
+                clsGlobal.RememberUsernameAndPassword(tbUsername.Text.Trim(), tbPassword.Text.Trim());
+            }
+            else
+            {
+                clsGlobal.RememberUsernameAndPassword("", "");
+            }
 
             if (!loggedUser.IsActive)
             {
@@ -42,9 +50,10 @@ namespace DVLD
                                 "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+            clsGlobal.CurrentUser = loggedUser;
 
             this.Hide();
-            using (var mainForm = new frmMain(loggedUser))
+            using (var mainForm = new frmMain())
             {
                 mainForm.ShowDialog();
             }
@@ -55,5 +64,18 @@ namespace DVLD
             tbUsername.Focus();
         }
 
+        private void frmLoginScreen_Load(object sender, EventArgs e)
+        {
+            string UserName = "", Password = "";
+
+            if (clsGlobal.GetStoredCredential(ref UserName, ref Password))
+            {
+                tbUsername.Text = UserName;
+                tbPassword.Text = Password;
+                cbRememberMe.Checked = true;
+            }
+            else
+                cbRememberMe.Checked = false;
+        }
     }
 }

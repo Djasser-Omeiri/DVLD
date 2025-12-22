@@ -13,11 +13,9 @@ namespace DVLD
 {
     public partial class frmManageDetainedLicenses : Form
     {
-        private clsUser _CurrrentUser;
-        public frmManageDetainedLicenses(clsUser CurrentUser)
+        public frmManageDetainedLicenses()
         {
             InitializeComponent();
-            _CurrrentUser = CurrentUser;
         }
         private void _refreshDetainedList()
         {
@@ -84,7 +82,7 @@ namespace DVLD
 
         private void releaseDetainedLicenseToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new frmReleaseDetainedLicense(_CurrrentUser, Convert.ToInt32(dgvDetained.CurrentRow.Cells["L.ID"].Value)).ShowDialog();
+            new frmReleaseDetainedLicense( Convert.ToInt32(dgvDetained.CurrentRow.Cells["L.ID"].Value)).ShowDialog();
         }
 
         private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
@@ -101,12 +99,12 @@ namespace DVLD
 
         private void btnDetain_Click(object sender, EventArgs e)
         {
-            new frmDetainLicense(_CurrrentUser).ShowDialog();
+            new frmDetainLicense().ShowDialog();
         }
 
         private void btnRelease_Click(object sender, EventArgs e)
         {
-            new frmReleaseDetainedLicense(_CurrrentUser).ShowDialog();
+            new frmReleaseDetainedLicense().ShowDialog();
         }
     }
 }

@@ -13,13 +13,11 @@ namespace DVLD
 {
     public partial class frmRenewLicense : Form
     {
-        private clsUser _CurrentUser;
         private clsLicenses _license;
         private clsLicenses _newlicense;
-        public frmRenewLicense(clsUser CurrentUser)
+        public frmRenewLicense()
         {
             InitializeComponent();
-            _CurrentUser=CurrentUser;
         }
 
         private void txtLicenseID_KeyPress(object sender, KeyPressEventArgs e)
@@ -52,7 +50,7 @@ namespace DVLD
             lblInputApplicationDate.Text = DateTime.Now.ToString();
             lblinputIssueDate.Text = DateTime.Now.ToString();
             lblinputAFees.Text = clsApplicationTypes.GetApplicationTypeByID((int)eApplicationType.Renew).ApplicationFees.ToString();
-            lblinputCreatedBy.Text = _CurrentUser.UserName;
+            lblinputCreatedBy.Text = clsGlobal.CurrentUser.UserName;
             btnRenew.Enabled = false;
             linklblShowLicenseHistory.Enabled = false;
             linklblShowLicenseInfo.Enabled = false;
@@ -104,7 +102,7 @@ namespace DVLD
         private void btnRenew_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("Are you sure you want to renew this Driving License?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) { return; };
-            _newlicense = clsLicenses.RenewLicense(_license, _CurrentUser, tbNotes.Text);
+            _newlicense = clsLicenses.RenewLicense(_license, clsGlobal.CurrentUser, tbNotes.Text);
             if (_newlicense != null)
             {
                 MessageBox.Show($"License Renewed Successfully With ID={_newlicense.LicenseID}", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);

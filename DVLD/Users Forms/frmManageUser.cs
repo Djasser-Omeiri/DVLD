@@ -145,12 +145,12 @@ namespace DVLD
 
         private void MenuShowDetails_Click(object sender, EventArgs e)
         {
-            new frmUserDetails(clsUser.GetUserByID(Convert.ToInt32(dgvUsers.CurrentRow.Cells["UserID"].Value))).ShowDialog();
+            new frmUserDetails().ShowDialog();
         }
 
         private void MenuChangePassword_Click(object sender, EventArgs e)
         {
-            new frmPassword(clsUser.GetUserByID(Convert.ToInt32(dgvUsers.CurrentRow.Cells["UserID"].Value))).ShowDialog();
+            new frmPassword().ShowDialog();
         }
     }
 }
