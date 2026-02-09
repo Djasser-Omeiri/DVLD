@@ -156,9 +156,16 @@ namespace DVLD.LocalLicense_Forms
         {
             if (MessageBox.Show("Are you sure you want to delete this application? This action cannot be undone.", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
             {
-                clsLocalDrivingLicenseApplications.DeleteLDLA(Convert.ToInt32(dgvLDLA.CurrentRow.Cells["L.D.L.AppID"].Value));
+                if (clsLocalDrivingLicenseApplications.DeleteLDLA(Convert.ToInt32(dgvLDLA.CurrentRow.Cells["L.D.L.AppID"].Value)))
+                {
+                    MessageBox.Show("Application Deleted Successfully.", "Deleted", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    _refreshLDLAList();
+                }
+                else
+                    MessageBox.Show("Could not delete applicatoin, other data depends on it.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            _refreshLDLAList();
+
+
         }
 
         private void showPersonLicenseHistoryToolStripMenuItem_Click(object sender, EventArgs e)

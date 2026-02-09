@@ -33,7 +33,7 @@ namespace DVLD
             lblinputid.Text = _clsApplicationDetails.LocalDrivingLicenseApplicationID.ToString();
             lblinputClass.Text = _clsApplicationDetails.ClassName;
             lblinputName.Text = _clsApplicationDetails.FullName;
-            lblinputTrial.Text = "0";//////Create method to get trial count
+            lblinputTrial.Text = clsLocalDrivingLicenseApplications.TotalTrialsPerTest(_clsApplicationDetails.LocalDrivingLicenseApplicationID, _Test).ToString();
             lblinputFees.Text = clsTestTypes.GetTestTypeByID(_clsTestAppointments.TestTypeID).TestTypeFees.ToString();
             lblinputTestID.Text = "Not Taken";
             lblinputDate.Text = _clsTestAppointments.AppointmentDate.ToString();

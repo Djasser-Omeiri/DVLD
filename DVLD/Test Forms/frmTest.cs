@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace DVLD
 {
-    public enum eTest { Vision=1, Written=2, Street=3 };
+    
     public partial class frmTest : Form
     {
         private int _LDLAID;

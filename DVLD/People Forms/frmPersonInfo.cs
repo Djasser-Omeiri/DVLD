@@ -190,34 +190,6 @@ namespace DVLD
                 errorProvider1.SetError(tbAddress, "This Field is required");
             else errorProvider1.SetError(tbAddress, "");
         }
-        private void DeletePersonImage(string imagePath)
-        {
-            if (string.IsNullOrEmpty(imagePath) || !File.Exists(imagePath))
-                return;
-
-            try
-            {
-                if (PicturePerson.ImageLocation == imagePath)
-                {
-                    PicturePerson.Image.Dispose();
-                    PicturePerson.Image = null;
-                    PicturePerson.ImageLocation = null;
-                }
-                using (FileStream fs = new FileStream(imagePath, FileMode.Open, FileAccess.Read, FileShare.None))
-                {
-                    // just open & close
-                }
-                File.Delete(imagePath);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Could not delete image: " + ex.Message,
-                    "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-        }
-
-
-
         private void lblRemove_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {                 
             PicturePerson.Image = rbMale.Checked

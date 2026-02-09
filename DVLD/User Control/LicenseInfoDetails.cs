@@ -1,9 +1,11 @@
 ﻿using BusinessAccessLayer;
+using DVLD.Properties;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +15,7 @@ namespace DVLD.User_Control
 {
     public partial class LicenseInfoDetails : UserControl
     {
+        private clsPerson _Person;
         public LicenseInfoDetails()
         {
             InitializeComponent();
@@ -22,6 +25,7 @@ namespace DVLD.User_Control
         {
             if (licenseDetails == null)
                 return;
+            _Person=clsPerson.FindPersonByID(clsDrivers.GetDriverByID(licenseDetails.DriverID).PersonID);
             lblInputClass.Text = licenseDetails.ClassName;
             lblinputName.Text = licenseDetails.FullName;
             lblInputLicenseID.Text = licenseDetails.LicenseID.ToString();
@@ -38,6 +42,23 @@ namespace DVLD.User_Control
             lblinputDriverID.Text = licenseDetails.DriverID.ToString();
             lblInputExpirationDate.Text = licenseDetails.ExpirationDate.ToShortDateString();
             lblInputIsDetained.Text = (licenseDetails.IsDetained==true)? "Yes":"No";
+            _LoadPersonImage();
+        }
+
+        private void _LoadPersonImage()
+        {
+            if (!_Person.Gendor)
+                PicturePerson.Image = Resources.Male_512;
+            else
+                PicturePerson.Image = Resources.Female_512;
+
+            string ImagePath = _Person.ImagePath;
+            if (ImagePath != "")
+                if (File.Exists(ImagePath))
+                    PicturePerson.ImageLocation = ImagePath;
+                else
+                    MessageBox.Show("Could not find this image: = " + ImagePath, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
         }
     }
 }

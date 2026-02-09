@@ -117,6 +117,11 @@ namespace BusinessAccessLayer
         {
             return LocalDrivingLicenseApplicationsData.IsPersonLinkedWithSameClass(PersonID, LicenseClassID);
         }
+        public static byte TotalTrialsPerTest(int LocalDrivingLicenseApplicationID, eTest TestTypeID)
+
+        {
+            return LocalDrivingLicenseApplicationsData.TotalTrialsPerTest(LocalDrivingLicenseApplicationID, (int)TestTypeID);
+        }
     }
 
 }

@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace BusinessAccessLayer
 {
+    public enum eTest { Vision = 1, Written = 2, Street = 3 };
     public class clsTestTypes
     {
         public int TestTypeID { get; set; }

@@ -15,6 +15,7 @@ namespace DVLD.User_Control
 {
     public partial class IDLAinfoDetails : UserControl
     {
+        private clsPerson _Person;
         public IDLAinfoDetails()
         {
             InitializeComponent();
@@ -23,6 +24,7 @@ namespace DVLD.User_Control
         {
             if (IDLDetails == null)
                 return;
+            _Person = clsPerson.FindPersonByID(clsDrivers.GetDriverByID(IDLDetails.DriverID).PersonID);
             lblInputName.Text = IDLDetails.FullName;
             lblinputIntLicense.Text = IDLDetails.InternationalLicenseID.ToString();
             lblInputLicenseID.Text = IDLDetails.IssuedUsingLocalLicenseID.ToString();
@@ -34,6 +36,23 @@ namespace DVLD.User_Control
             lblinputDateOfBirth.Text = IDLDetails.DateOfBirth.ToShortDateString();
             lblinputDriverID.Text = IDLDetails.DriverID.ToString();
             lblInputExpirationDate.Text = IDLDetails.ExpirationDate.ToShortDateString();
+            _LoadPersonImage();
+        }
+
+        private void _LoadPersonImage()
+        {
+            if (!_Person.Gendor)
+                PicturePerson.Image = Resources.Male_512;
+            else
+                PicturePerson.Image = Resources.Female_512;
+
+            string ImagePath = _Person.ImagePath;
+            if (ImagePath != "")
+                if (File.Exists(ImagePath))
+                    PicturePerson.ImageLocation = ImagePath;
+                else
+                    MessageBox.Show("Could not find this image: = " + ImagePath, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
         }
     }
 }

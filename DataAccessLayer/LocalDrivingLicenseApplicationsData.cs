@@ -174,7 +174,7 @@ namespace DataAccessLayer
             finally { connection.Close(); }
             return IsFound;
         }
-        public static bool getAllInfos(int LocalDrivingLicenseApplicationID, ref string ClassName, ref int PassedTestCount, ref int ApplicationID, ref string Status, ref decimal PaidFees, ref string ApplicationTypeTitle, ref string FullName, ref DateTime ApplicationDate, ref DateTime LastStatusDate, ref string UserName,ref int ApplicantPersonID)
+        public static bool getAllInfos(int LocalDrivingLicenseApplicationID, ref string ClassName, ref int PassedTestCount, ref int ApplicationID, ref string Status, ref decimal PaidFees, ref string ApplicationTypeTitle, ref string FullName, ref DateTime ApplicationDate, ref DateTime LastStatusDate, ref string UserName, ref int ApplicantPersonID)
         {
             bool isFound = false;
             SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
@@ -198,11 +198,11 @@ namespace DataAccessLayer
                     ApplicationID = (int)reader["ApplicationID"];
                     Status = reader["Status"].ToString();
                     PaidFees = (decimal)reader["PaidFees"];
-                    ApplicationTypeTitle =reader["ApplicationTypeTitle"].ToString();
+                    ApplicationTypeTitle = reader["ApplicationTypeTitle"].ToString();
                     FullName = reader["FullName"].ToString();
                     ApplicationDate = (DateTime)reader["ApplicationDate"];
                     LastStatusDate = (DateTime)reader["LastStatusDate"];
-                    UserName =reader["UserName"].ToString();
+                    UserName = reader["UserName"].ToString();
                     ApplicantPersonID = (int)reader["ApplicantPersonID"];
                 }
                 else
@@ -243,6 +243,53 @@ namespace DataAccessLayer
             catch (Exception ex) { Console.WriteLine(ex.Message); }
             finally { connection.Close(); }
             return isFound;
+        }
+
+        public static byte TotalTrialsPerTest(int LocalDrivingLicenseApplicationID, int TestTypeID)
+
+        {
+            byte TotalTrialsPerTest = 0;
+
+            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
+
+            string query = @" SELECT TotalTrialsPerTest = count(TestID)
+                            FROM LocalDrivingLicenseApplications INNER JOIN
+                                 TestAppointments ON LocalDrivingLicenseApplications.LocalDrivingLicenseApplicationID = TestAppointments.LocalDrivingLicenseApplicationID INNER JOIN
+                                 Tests ON TestAppointments.TestAppointmentID = Tests.TestAppointmentID
+                            WHERE
+                            (LocalDrivingLicenseApplications.LocalDrivingLicenseApplicationID = @LocalDrivingLicenseApplicationID) 
+                            AND(TestAppointments.TestTypeID = @TestTypeID)
+                       ";
+
+            SqlCommand command = new SqlCommand(query, connection);
+
+            command.Parameters.AddWithValue("@LocalDrivingLicenseApplicationID", LocalDrivingLicenseApplicationID);
+            command.Parameters.AddWithValue("@TestTypeID", TestTypeID);
+
+            try
+            {
+                connection.Open();
+
+                object result = command.ExecuteScalar();
+
+                if (result != null && byte.TryParse(result.ToString(), out byte Trials))
+                {
+                    TotalTrialsPerTest = Trials;
+                }
+            }
+
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error: " + ex.Message);
+            }
+
+            finally
+            {
+                connection.Close();
+            }
+
+            return TotalTrialsPerTest;
+
         }
 
     }

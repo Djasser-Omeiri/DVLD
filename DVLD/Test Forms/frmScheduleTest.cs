@@ -68,7 +68,7 @@ namespace DVLD
             lblinputid.Text = _applicationDetails.LocalDrivingLicenseApplicationID.ToString();
             lblinputClass.Text = _applicationDetails.ClassName;
             lblinputName.Text = _applicationDetails.FullName;
-            lblinputTrial.Text = "0"; // Implement a function
+            lblinputTrial.Text = clsLocalDrivingLicenseApplications.TotalTrialsPerTest(_applicationDetails.LocalDrivingLicenseApplicationID, _Test).ToString();
             lblinputFees.Text = clsTestTypes.GetTestTypeByID((int)_Test).TestTypeFees.ToString();
             lblInputTfees.Text = lblinputFees.Text;
             lblinputRFees.Text = "0";
